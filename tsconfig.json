@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "lib": [
+      "esnext"
+    ],
+    "target": "es6",
+    "declaration": true,
+    "strict": true,
+    "strictNullChecks": false,
+    "esModuleInterop": true
+  },
+  "include": [
+    "src/**/*.ts"
+  ]
+}
