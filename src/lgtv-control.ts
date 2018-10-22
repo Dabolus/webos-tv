@@ -105,19 +105,24 @@ export class LGTV {
    * @param {string} [clientKey] The client key to send to the LGTV to authenticate your app. Leave empty if it is your first connection
    * @return {Promise<string | Error>} A promise that returns an auth key when resolved, or an error when rejected. Remember to store the auth key somewhere to use it again next time
    */
-  public authenticate(clientKey?: string) {
+  public async authenticate(clientKey?: string) {
     if (!this.connection) {
-      return Promise.reject(new Error('Connection to the LGTV not opened.'));
+      throw new Error('Connection to the LGTV not opened.');
     }
-    return this.send('register', undefined, {
+    const payload = await this.send('register', undefined, {
       ...defaultConfig,
       'client-key': clientKey,
     });
+    return payload['client-key'];
   }
 
   private handleMessage(message: string) {
-    const { id, payload } = JSON.parse(message);
-    if (!id || !payload || !this.callbacks[id]) {
+    const { id, payload = {} } = JSON.parse(message);
+    if (payload.pairingType === 'PROMPT' && payload.returnValue) {
+      // TODO: maybe emit some kind of event
+      return;
+    }
+    if (!id || !this.callbacks[id]) {
       this.callbacks[id].reject(new Error());
       return;
     }
