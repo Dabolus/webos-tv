@@ -127,7 +127,7 @@ export class LGTV {
       return;
     }
     if (payload.subscribed) {
-      console.log('subscribed');
+      // TODO: do something
     }
     this.callbacks[id].resolve(payload);
   }
