@@ -60,7 +60,7 @@ export class LGTV {
   /**
    * Connects to an LG TV to the given hostname.
    * @param {string} hostname The hostname of the LG TV to connect to
-   * @param {object} config Other configuration options
+   * @param {*} config Other configuration options
    * @param {string} [config.appName='LGTV Control'] The app name to send to the LGTV. Defaults to 'LGTV Control'
    * @param {string} [config.vendorName='Node.js®'] The vendor name to send to the LGTV. Defaults to 'Node.js®'
    * @constructor
@@ -84,8 +84,8 @@ export class LGTV {
   /**
    * @param {string} type
    * @param {string} uri
-   * @param {object} payload
-   * @return {Promise<object>} The response
+   * @param {*} payload
+   * @return {Promise<*>} The response
    */
   public async send(type: string, uri: string, payload: any): Promise<any> {
     await this.connectionOpened;
@@ -103,7 +103,7 @@ export class LGTV {
 
   /**
    * @param {string} [clientKey] The client key to send to the LGTV to authenticate your app. Leave empty if it is your first connection
-   * @return {Promise<string | Error>} A promise that returns an auth key when resolved, or an error when rejected. Remember to store the auth key somewhere to use it again next time
+   * @return {Promise<string>} A promise that resolves to an auth key. Remember to store the auth key somewhere to use it again next time
    */
   public async authenticate(clientKey?: string) {
     if (!this.connection) {
