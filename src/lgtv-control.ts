@@ -106,9 +106,7 @@ export class LGTV {
    * @return {Promise<string>} A promise that resolves to an auth key. Remember to store the auth key somewhere to use it again next time
    */
   public async authenticate(clientKey?: string) {
-    if (!this.connection) {
-      throw new Error('Connection to the LGTV not opened.');
-    }
+    await this.connectionOpened;
     const payload = await this.send('register', undefined, {
       ...defaultConfig,
       'client-key': clientKey,
