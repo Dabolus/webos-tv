@@ -114,6 +114,24 @@ export class LGTV {
     return payload['client-key'];
   }
 
+  /**
+   * @param {string} uri
+   * @param {*} [payload]
+   * @return {Promise<*>}
+   */
+  public request(uri: string, payload?: any): Promise<any> {
+    return this.send('request', uri, payload);
+  }
+
+  /**
+   * @param {string} uri
+   * @param {*} [payload]
+   * @return {Promise<*>}
+   */
+  public subscribe(uri: string, payload?: any) {
+    return this.send('subscribe', uri, payload);
+  }
+
   private handleMessage(message: string) {
     const { id, payload = {} } = JSON.parse(message);
     if (payload.pairingType === 'PROMPT' && payload.returnValue) {
