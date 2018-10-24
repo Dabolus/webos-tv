@@ -168,7 +168,7 @@ export class LGTV {
   /**
    * Increases the LGTV volume by the specified delta.
    * @param {number | string} deltaVolume The volume to add to the LGTV
-   * @return {Promise<number>} A promise that returns the new volume of the LGTV when resolved, or an error when rejected
+   * @return {Promise<number>} A promise that resolves to the new volume of the LGTV
    */
   public async increaseVolume(deltaVolume: number | string): Promise<number> {
     const oldVolume = await this.getVolume();
@@ -178,7 +178,7 @@ export class LGTV {
   /**
    * Decreases the LGTV volume by the specified delta.
    * @param {number | string} deltaVolume The volume to remove from the LGTV
-   * @return {Promise<number>} A promise that returns the new volume of the LGTV when resolved, or an error when rejected
+   * @return {Promise<number>} A promise that resolves to the new volume of the LGTV
    */
   public async decreaseVolume(deltaVolume: number | string): Promise<number> {
     const oldVolume = await this.getVolume();
@@ -187,18 +187,18 @@ export class LGTV {
 
   /**
    * Sends a volume up signal to the LGTV.
-   * @return {Promise<number>} A promise that returns the new volume of the LGTV when resolved, or an error when rejected
+   * @return {Promise<number>} A promise that resolves to the new volume of the LGTV
    */
-  public async volumeUp() {
+  public async volumeUp(): Promise<number> {
     await this.request('ssap://audio/volumeUp');
     return this.getVolume();
   }
 
   /**
    * Sends a volume down signal to the LGTV.
-   * @return {Promise<number>} A promise that returns the new volume of the LGTV when resolved, or an error when rejected
+   * @return {Promise<number>} A promise that resolves to the new volume of the LGTV
    */
-  public async volumeDown() {
+  public async volumeDown(): Promise<number> {
     await this.request('ssap://audio/volumeDown');
     return this.getVolume();
   }
