@@ -1,11 +1,11 @@
 {
-  "name": "lgtv-control",
+  "name": "webos-tv",
   "version": "0.0.1",
-  "description": "A promise-based package to control LGTVs with Node.js.",
-  "main": "lib/lgtv-control.js",
-  "browser": "lib/lgtv-control.umd.js",
-  "module": "lib/lgtv-control.esm.js",
-  "types": "lib/lgtv-control.d.ts",
+  "description": "A promise-based package to control WebOS based TVs with JavaScript.",
+  "main": "lib/webos-tv.js",
+  "browser": "lib/webos-tv.umd.js",
+  "module": "lib/webos-tv.esm.js",
+  "types": "lib/webos-tv.d.ts",
   "scripts": {
     "start": "rollup -w -c rollup.config.js",
     "build": "rollup -c rollup.config.js",
@@ -36,12 +36,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Dabolus/lgtv-control.git"
+    "url": "git+https://github.com/Dabolus/webos-tv.git"
   },
   "author": "Giorgio Garasto <giorgio@garasto.it>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Dabolus/lgtv-control/issues"
+    "url": "https://github.com/Dabolus/webos-tv/issues"
   },
-  "homepage": "https://github.com/Dabolus/lgtv-control#readme"
+  "homepage": "https://github.com/Dabolus/webos-tv#readme"
 }

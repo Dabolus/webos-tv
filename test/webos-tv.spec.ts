@@ -1,4 +1,4 @@
-describe('LGTV Control', () => {
+describe('webOS TV', () => {
   describe('TV Connection', () => {
     it('should be true', async () => {
       expect.assertions(1);

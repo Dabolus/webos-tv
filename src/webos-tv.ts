@@ -12,19 +12,19 @@ export enum Button {
   THREED_MODE = '3D_MODE',
 }
 
-export interface ILGTVConnectOptions {
+export interface ITVConnectOptions {
   appName?: string;
   vendorName?: string;
 }
 
 /**
- * LGTV Control - A promise-based package to control LGTVs with Node.js.
+ * A promise-based package to control WebOS based TVs with JavaScript.
  * @author Giorgio Garasto <giorgio@garasto.it>
- * @link https://github.com/Dabolus/lgtv-control
+ * @link https://github.com/Dabolus/webos-tv
  * @license MIT
  * @class
  */
-export class LGTV {
+export class TV {
 
   private get nextId(): string {
     return (++this.currId).toString();
@@ -58,21 +58,21 @@ export class LGTV {
   } = {};
 
   /**
-   * Connects to an LG TV to the given hostname.
-   * @param {string} hostname The hostname of the LG TV to connect to
+   * Connects to a webOS TV to the given hostname.
+   * @param {string} hostname The hostname of the webOS TV to connect to
    * @param {*} config Other configuration options
-   * @param {string} [config.appName='LGTV Control'] The app name to send to the LGTV. Defaults to 'LGTV Control'
-   * @param {string} [config.vendorName='Node.js®'] The vendor name to send to the LGTV. Defaults to 'Node.js®'
+   * @param {string} [config.appName='WebOS TV Control'] The app name to send to the webOS TV. Defaults to 'WebOS TV Control'
+   * @param {string} [config.vendorName='Node.js®'] The vendor name to send to the webOS TV. Defaults to 'JavaScript'
    * @constructor
    */
-  public constructor(hostname: string, config: ILGTVConnectOptions = {
-    appName: 'LGTV Control',
-    vendorName: 'Node.js®',
+  public constructor(hostname: string, config: ITVConnectOptions = {
+    appName: 'WebOS TV Control',
+    vendorName: 'JavaScript',
   }) {
     this.config = defaultConfig;
     this.config.manifest.signed.localizedAppNames[''] = config.appName;
     this.config.manifest.signed.localizedVendorNames[''] = config.vendorName;
-    const { origin } = LGTV.getTVURL(hostname);
+    const { origin } = TV.getTVURL(hostname);
     this.connection = new WebSocket(origin);
     this.connection.on('message', this.handleMessage.bind(this));
     this.connectionOpened = new Promise((resolve, reject) => {
@@ -102,7 +102,7 @@ export class LGTV {
   }
 
   /**
-   * @param {string} [clientKey] The client key to send to the LGTV to authenticate your app. Leave empty if it is your first connection
+   * @param {string} [clientKey] The client key to send to the webOS TV to authenticate your app. Leave empty if it is your first connection
    * @return {Promise<string>} A promise that resolves to an auth key. Remember to store the auth key somewhere to use it again next time
    */
   public async authenticate(clientKey?: string) {
@@ -133,8 +133,8 @@ export class LGTV {
   }
 
   /**
-   * Gets the current volume of the LGTV.
-   * @return {Promise<number>} A promise that resolves to the current volume of the LGTV
+   * Gets the current volume of the webOS TV.
+   * @return {Promise<number>} A promise that resolves to the current volume of the webOS TV
    */
   public async getVolume(): Promise<number> {
     const { volume } = await this.request('ssap://audio/getVolume');
@@ -142,9 +142,9 @@ export class LGTV {
   }
 
   /**
-   * Sets the volume on the LGTV.
+   * Sets the volume on the webOS TV.
    * @param {number | string} volumeToSet The new volume. It can either be a number, or 'max' or 'min'
-   * @return {Promise<number>} A promise that resolves to the new volume of the LGTV
+   * @return {Promise<number>} A promise that resolves to the new volume of the webOS TV
    */
   public async setVolume(volumeToSet: number | string): Promise<number> {
     let volume = 0;
@@ -166,9 +166,9 @@ export class LGTV {
   }
 
   /**
-   * Increases the LGTV volume by the specified delta.
-   * @param {number | string} deltaVolume The volume to add to the LGTV
-   * @return {Promise<number>} A promise that resolves to the new volume of the LGTV
+   * Increases the webOS TV volume by the specified delta.
+   * @param {number | string} deltaVolume The volume to add to the webOS TV
+   * @return {Promise<number>} A promise that resolves to the new volume of the webOS TV
    */
   public async increaseVolume(deltaVolume: number | string): Promise<number> {
     const oldVolume = await this.getVolume();
@@ -176,9 +176,9 @@ export class LGTV {
   }
 
   /**
-   * Decreases the LGTV volume by the specified delta.
-   * @param {number | string} deltaVolume The volume to remove from the LGTV
-   * @return {Promise<number>} A promise that resolves to the new volume of the LGTV
+   * Decreases the webOS TV volume by the specified delta.
+   * @param {number | string} deltaVolume The volume to remove from the webOS TV
+   * @return {Promise<number>} A promise that resolves to the new volume of the webOS TV
    */
   public async decreaseVolume(deltaVolume: number | string): Promise<number> {
     const oldVolume = await this.getVolume();
@@ -186,8 +186,8 @@ export class LGTV {
   }
 
   /**
-   * Sends a volume up signal to the LGTV.
-   * @return {Promise<number>} A promise that resolves to the new volume of the LGTV
+   * Sends a volume up signal to the webOS TV.
+   * @return {Promise<number>} A promise that resolves to the new volume of the webOS TV
    */
   public async volumeUp(): Promise<number> {
     await this.request('ssap://audio/volumeUp');
@@ -195,8 +195,8 @@ export class LGTV {
   }
 
   /**
-   * Sends a volume down signal to the LGTV.
-   * @return {Promise<number>} A promise that resolves to the new volume of the LGTV
+   * Sends a volume down signal to the webOS TV.
+   * @return {Promise<number>} A promise that resolves to the new volume of the webOS TV
    */
   public async volumeDown(): Promise<number> {
     await this.request('ssap://audio/volumeDown');
@@ -204,8 +204,8 @@ export class LGTV {
   }
 
   /**
-   * Checks whether the LGTV is currently muted or not.
-   * @return {Promise<boolean>} A promise that resolves to the current mute state of the LGTV
+   * Checks whether the webOS TV is currently muted or not.
+   * @return {Promise<boolean>} A promise that resolves to the current mute state of the webOS TV
    */
   public async isMuted(): Promise<boolean> {
     const { mute } = await this.request('ssap://audio/getStatus');
@@ -213,8 +213,8 @@ export class LGTV {
   }
 
   /**
-   * Mutes the LGTV.
-   * @return {Promise<boolean>} A promise that resolves to the new mute state of the LGTV (always true)
+   * Mutes the webOS TV.
+   * @return {Promise<boolean>} A promise that resolves to the new mute state of the webOS TV (always true)
    */
   public async mute(): Promise<true> {
     await this.request('ssap://audio/setMute', { mute: true });
@@ -222,8 +222,8 @@ export class LGTV {
   }
 
   /**
-   * Unmutes the LGTV.
-   * @return {Promise<boolean>} A promise that resolves to the new mute state of the LGTV (always false)
+   * Unmutes the webOS TV.
+   * @return {Promise<boolean>} A promise that resolves to the new mute state of the webOS TV (always false)
    */
   public async unmute(): Promise<false> {
     await this.request('ssap://audio/setMute', { mute: false });
@@ -231,12 +231,117 @@ export class LGTV {
   }
 
   /**
-   * Toggles the mute state of the LGTV.
-   * @return {Promise<boolean>} A promise that resolves to the new mute state of the LGTV (always the opposite of the old state)
+   * Toggles the mute state of the webOS TV.
+   * @return {Promise<boolean>} A promise that resolves to the new mute state of the webOS TV (always the opposite of the old state)
    */
   public async toggleMute(): Promise<boolean> {
     const muted = await this.isMuted();
     return muted ? this.unmute() : this.mute();
+  }
+
+  public async foregroundAppInfo(): Promise<{
+    appId: string;
+    windowId: string;
+    processId: string;
+  }> {
+    const { appId, windowId, processId } =
+      await this.request('ssap://com.webos.applicationManager/getForegroundAppInfo');
+    return { appId, windowId, processId };
+  }
+
+  public appStatus() {
+    return this.request('ssap://com.webos.service.appstatus/getAppStatus');
+  }
+
+  public appState() {
+    return this.request('ssap://system.launcher/getAppState');
+  }
+
+  appList() {
+    return this.request('ssap://com.webos.applicationManager/listApps');
+  }
+
+  launch() {
+    return this.request('');
+  }
+
+  enable3D() {
+    return new Promise((resolve, reject) => {
+      this.request('ssap://com.webos.service.tv.display/set3DOn')
+        .then(() => resolve(true))
+        .catch(reject);
+    });
+  }
+
+  disable3D() {
+    return new Promise((resolve, reject) => {
+      this.request('ssap://com.webos.service.tv.display//set3DOff')
+        .then(() => resolve(false))
+        .catch(reject);
+    });
+  }
+
+  check3DEnabled() {
+    return new Promise((resolve, reject) => {
+      this.check3DStatus()
+        .then((val) => val.status)
+        .catch(reject);
+    });
+  }
+
+  check3DStatus() {
+    return this.request('ssap://com.webos.service.tv.display/get3DStatus');
+  }
+
+  getSocket(uri) {
+    return new Promise((resolve, reject) => {
+      this._lgtv2.getSocket(uri, (err, sock) => {
+        if (err)
+          reject(err);
+        resolve(sock);
+      });
+    });
+  }
+
+  getPointerInputSocket() {
+    return new Promise((resolve, reject) => {
+      this.getSocket('ssap://com.webos.service.networkinput/getPointerInputSocket')
+        .then((sock) => {
+          sock.click = () => sock.send('click');
+          sock.press = (button) => sock.send('button', { name: button });
+          sock.move = (dx, dy, pressing) => sock.send('move', {
+            dx: dx,
+            dy: dy,
+            down: pressing ? 1 : 0,
+          });
+          sock.scroll = (dx, dy) => sock.send('scroll', {
+            dx: dx,
+            dy: dy,
+          });
+          resolve(sock);
+        }).catch(reject);
+    });
+  }
+
+  registerRemoteKeyboard() {
+    return this.getSocket('ssap://com.webos.service.ime/registerRemoteKeyboard');
+  }
+
+  writeText(text, replace) {
+    return this.request('ssap://com.webos.service.ime/insertText', {
+      text: text,
+      replace: replace ? 1 : 0,
+    });
+  }
+
+  deleteText(count) {
+    return this.request('ssap://com.webos.service.ime/deleteCharacters', {
+      count: count,
+    });
+  }
+
+  sendEnter() {
+    return this.request('ssap://com.webos.service.ime/sendEnterKey');
   }
 
   private handleMessage(message: string) {

@@ -2,9 +2,9 @@ import typescript from 'rollup-plugin-typescript2';
 import pkg from './package.json';
 
 export default {
-  input: 'src/lgtv-control.ts',
+  input: 'src/webos-tv.ts',
   output: [{
-    name: 'LGTVControl',
+    name: 'webOS',
     file: pkg.browser,
     format: 'umd',
   }, {

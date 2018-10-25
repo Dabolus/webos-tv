@@ -1,2 +1,2 @@
-# LGTV Control
-A promise-based package to control LGTVs with Node.js.
+# WebOS TV
+A promise-based package to control WebOS based TVs with JavaScript.
