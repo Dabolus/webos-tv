@@ -203,6 +203,42 @@ export class LGTV {
     return this.getVolume();
   }
 
+  /**
+   * Checks whether the LGTV is currently muted or not.
+   * @return {Promise<boolean>} A promise that resolves to the current mute state of the LGTV
+   */
+  public async isMuted(): Promise<boolean> {
+    const { mute } = await this.request('ssap://audio/getStatus');
+    return mute;
+  }
+
+  /**
+   * Mutes the LGTV.
+   * @return {Promise<boolean>} A promise that resolves to the new mute state of the LGTV (always true)
+   */
+  public async mute(): Promise<true> {
+    await this.request('ssap://audio/setMute', { mute: true });
+    return true;
+  }
+
+  /**
+   * Unmutes the LGTV.
+   * @return {Promise<boolean>} A promise that resolves to the new mute state of the LGTV (always false)
+   */
+  public async unmute(): Promise<false> {
+    await this.request('ssap://audio/setMute', { mute: false });
+    return false;
+  }
+
+  /**
+   * Toggles the mute state of the LGTV.
+   * @return {Promise<boolean>} A promise that resolves to the new mute state of the LGTV (always the opposite of the old state)
+   */
+  public async toggleMute(): Promise<boolean> {
+    const muted = await this.isMuted();
+    return muted ? this.unmute() : this.mute();
+  }
+
   private handleMessage(message: string) {
     const { id, payload = {} } = JSON.parse(message);
     if (payload.pairingType === 'PROMPT' && payload.returnValue) {
