@@ -239,6 +239,10 @@ export class TV {
     return muted ? this.unmute() : this.mute();
   }
 
+  /**
+   * Gets info about the foreground app.
+   * @return {Promise<{ appId: string, windowId: string, processId: string }>} A promise that resolves to the info of the foreground app.
+   */
   public async foregroundAppInfo(): Promise<{
     appId: string;
     windowId: string;
@@ -249,99 +253,37 @@ export class TV {
     return { appId, windowId, processId };
   }
 
+  /**
+   * Gets the app status.
+   * @return {Promise<any>} The app status
+   */
   public appStatus() {
     return this.request('ssap://com.webos.service.appstatus/getAppStatus');
   }
 
+  /**
+   * Gets the app state.
+   * @return {Promise<any>} The app state
+   */
   public appState() {
     return this.request('ssap://system.launcher/getAppState');
   }
 
-  appList() {
+  /**
+   * Gets the list of the available apps.
+   * @return {Promise<any>} A promise that resolves to the list of the available apps.
+   */
+  public appList() {
     return this.request('ssap://com.webos.applicationManager/listApps');
   }
 
-  launch() {
-    return this.request('');
-  }
-
-  enable3D() {
-    return new Promise((resolve, reject) => {
-      this.request('ssap://com.webos.service.tv.display/set3DOn')
-        .then(() => resolve(true))
-        .catch(reject);
-    });
-  }
-
-  disable3D() {
-    return new Promise((resolve, reject) => {
-      this.request('ssap://com.webos.service.tv.display//set3DOff')
-        .then(() => resolve(false))
-        .catch(reject);
-    });
-  }
-
-  check3DEnabled() {
-    return new Promise((resolve, reject) => {
-      this.check3DStatus()
-        .then((val) => val.status)
-        .catch(reject);
-    });
-  }
-
-  check3DStatus() {
-    return this.request('ssap://com.webos.service.tv.display/get3DStatus');
-  }
-
-  getSocket(uri) {
-    return new Promise((resolve, reject) => {
-      this._lgtv2.getSocket(uri, (err, sock) => {
-        if (err)
-          reject(err);
-        resolve(sock);
-      });
-    });
-  }
-
-  getPointerInputSocket() {
-    return new Promise((resolve, reject) => {
-      this.getSocket('ssap://com.webos.service.networkinput/getPointerInputSocket')
-        .then((sock) => {
-          sock.click = () => sock.send('click');
-          sock.press = (button) => sock.send('button', { name: button });
-          sock.move = (dx, dy, pressing) => sock.send('move', {
-            dx: dx,
-            dy: dy,
-            down: pressing ? 1 : 0,
-          });
-          sock.scroll = (dx, dy) => sock.send('scroll', {
-            dx: dx,
-            dy: dy,
-          });
-          resolve(sock);
-        }).catch(reject);
-    });
-  }
-
-  registerRemoteKeyboard() {
-    return this.getSocket('ssap://com.webos.service.ime/registerRemoteKeyboard');
-  }
-
-  writeText(text, replace) {
-    return this.request('ssap://com.webos.service.ime/insertText', {
-      text: text,
-      replace: replace ? 1 : 0,
-    });
-  }
-
-  deleteText(count) {
-    return this.request('ssap://com.webos.service.ime/deleteCharacters', {
-      count: count,
-    });
-  }
-
-  sendEnter() {
-    return this.request('ssap://com.webos.service.ime/sendEnterKey');
+  /**
+   * Launches the app with the specified ID.
+   * @param {string} id The ID of the app to launch
+   * @return {Promise<any>}
+   */
+  public launch(id: string) {
+    return this.request('ssap://system.launcher/launch', { id });
   }
 
   private handleMessage(message: string) {
