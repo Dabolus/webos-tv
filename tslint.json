@@ -20,6 +20,7 @@
       }
     ],
     "object-literal-sort-keys": false,
-    "typedef": true
+    "typedef": true,
+    "max-classes-per-file": false
   }
 }

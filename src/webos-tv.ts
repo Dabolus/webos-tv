@@ -1,6 +1,7 @@
 import WebSocket from 'isomorphic-ws';
 import { URL } from 'url';
 import defaultConfig from './default-config';
+import { PointerInputSocket, RemoteKeyboardSocket, SpecializedWebSocket } from './sockets';
 
 export enum Button {
   HOME = 'HOME',
@@ -50,6 +51,9 @@ export class TV {
       resolve: (val: any) => void;
       reject: (err: Error) => void;
     };
+  } = {};
+  private specializedSockets: {
+    [key: string]: SpecializedWebSocket;
   } = {};
 
   /**
@@ -377,6 +381,24 @@ export class TV {
   }> {
     const { status3D } = await this.request('ssap://com.webos.service.tv.display/get3DStatus');
     return status3D;
+  }
+
+  public async getSocket(uri: string, SocketClass: typeof SpecializedWebSocket): Promise<SpecializedWebSocket> {
+    if (this.specializedSockets[uri]) {
+      return this.specializedSockets[uri];
+    }
+    const { socketPath } = await this.request(uri);
+    this.specializedSockets[uri] = new SocketClass(socketPath);
+    this.specializedSockets[uri].on('close', () => delete this.specializedSockets[uri]);
+    return this.specializedSockets[uri];
+  }
+
+  public async getPointerInputSocket() {
+    return this.getSocket('ssap://com.webos.service.networkinput/getPointerInputSocket', PointerInputSocket);
+  }
+
+  public async getRemoteKeyboardSocket() {
+    return this.getSocket('ssap://com.webos.service.ime/registerRemoteKeyboard', RemoteKeyboardSocket);
   }
 
   private handleMessage(message: string) {
