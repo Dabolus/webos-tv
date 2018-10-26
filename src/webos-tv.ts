@@ -12,11 +12,6 @@ export enum Button {
   THREED_MODE = '3D_MODE',
 }
 
-export interface ITVConnectOptions {
-  appName?: string;
-  vendorName?: string;
-}
-
 /**
  * A promise-based package to control WebOS based TVs with JavaScript.
  * @author Giorgio Garasto <giorgio@garasto.it>
@@ -65,7 +60,10 @@ export class TV {
    * @param {string} [config.vendorName='Node.js®'] The vendor name to send to the webOS TV. Defaults to 'JavaScript'
    * @constructor
    */
-  public constructor(hostname: string, config: ITVConnectOptions = {
+  public constructor(hostname: string, config: {
+    appName?: string;
+    vendorName?: string;
+  } = {
     appName: 'WebOS TV Control',
     vendorName: 'JavaScript',
   }) {
@@ -257,7 +255,7 @@ export class TV {
    * Gets the app status.
    * @return {Promise<any>} The app status
    */
-  public appStatus() {
+  public async appStatus() {
     return this.request('ssap://com.webos.service.appstatus/getAppStatus');
   }
 
@@ -265,7 +263,7 @@ export class TV {
    * Gets the app state.
    * @return {Promise<any>} The app state
    */
-  public appState() {
+  public async appState() {
     return this.request('ssap://system.launcher/getAppState');
   }
 
@@ -273,8 +271,16 @@ export class TV {
    * Gets the list of the available apps.
    * @return {Promise<any>} A promise that resolves to the list of the available apps.
    */
-  public appList() {
+  public async appList() {
     return this.request('ssap://com.webos.applicationManager/listApps');
+  }
+
+  /**
+   * Lists the launch points of the webOS TV.
+   * @return {Promise<any>} The list of the available launch points
+   */
+  public async launchPoints() {
+    return this.request('ssap://com.webos.applicationManager/listLaunchPoints');
   }
 
   /**
@@ -282,8 +288,95 @@ export class TV {
    * @param {string} id The ID of the app to launch
    * @return {Promise<any>}
    */
-  public launch(id: string) {
+  public async launch(id: string) {
     return this.request('ssap://system.launcher/launch', { id });
+  }
+
+  /**
+   * Gets the list of the channels on the webOS TV.
+   * @return {Promise<Array<{ channelId: string, programId: string, signalChannelId: string, chanCode: string, channelMode: string, channelModeId: number, channelType: string, channelTypeId: number, channelNumber: string, majorNumber: number, minorNumber: number, channelName: string, skipped: boolean, locked: boolean, descrambled: boolean, scrambled: boolean, serviceType: number, favoriteGroup: any[], imgUrl: string, display: number, satelliteName: string, fineTuned: boolean, Frequency: number, shortCut: number, Bandwidth: number, HDTV: boolean, Invisible: boolean, TV: boolean, DTV: boolean, ATV: boolean, Data: boolean, Radio: boolean, Numeric: boolean, PrimaryCh: boolean, specialService: boolean, CASystemIDList: any, CASystemIDListCount: number, groupIdList: any[][], channelGenreCode: string, favoriteIdxA: number, favoriteIdxB: number, favoriteIdxC: number, favoriteIdxD: number, imgUrl2: string, channelLogoSize: string, ipChanServerUrl: string, payChan: boolean, IPChannelCode: string, ipCallNumber: string, otuFlag: boolean }>>} The list of the channels on the webOS TV
+   */
+  public async channelList(): Promise<Array<{
+    channelId: string;
+    programId: string;
+    signalChannelId: string;
+    chanCode: string;
+    channelMode: string;
+    channelModeId: number;
+    channelType: string;
+    channelTypeId: number;
+    channelNumber: string;
+    majorNumber: number;
+    minorNumber: number;
+    channelName: string;
+    skipped: boolean;
+    locked: boolean;
+    descrambled: boolean;
+    scrambled: boolean;
+    serviceType: number;
+    favoriteGroup: any[];
+    imgUrl: string;
+    display: number;
+    satelliteName: string;
+    fineTuned: boolean;
+    Frequency: number;
+    shortCut: number;
+    Bandwidth: number;
+    HDTV: boolean;
+    Invisible: boolean;
+    TV: boolean;
+    DTV: boolean;
+    ATV: boolean;
+    Data: boolean;
+    Radio: boolean;
+    Numeric: boolean;
+    PrimaryCh: boolean;
+    specialService: boolean;
+    CASystemIDList: any;
+    CASystemIDListCount: number;
+    groupIdList: any[][];
+    channelGenreCode: string;
+    favoriteIdxA: number;
+    favoriteIdxB: number;
+    favoriteIdxC: number;
+    favoriteIdxD: number;
+    imgUrl2: string;
+    channelLogoSize: string;
+    ipChanServerUrl: string;
+    payChan: boolean;
+    IPChannelCode: string;
+    ipCallNumber: string;
+    otuFlag: boolean;
+  }>> {
+    return this.request('ssap://tv/getChannelList');
+  }
+
+  /**
+   * Enables 3D on the webOS TV.
+   * @return {Promise<boolean>} A promise that resolves to the new state of the 3D of the webOS TV (always true)
+   */
+  public async enable3D() {
+    return this.request('ssap://com.webos.service.tv.display/set3DOn');
+  }
+
+  /**
+   * Disables 3D on the webOS TV.
+   * @return {Promise<boolean>} A promise that resolves to the new state of the 3D of the webOS TV (always false)
+   */
+  public disable3D() {
+    return this.request('ssap://com.webos.service.tv.display/set3DOff');
+  }
+
+  /**
+   * Checks whether the 3D is currently enabled or not on the webOS TV.
+   * @return {Promise<{ status: boolean, pattern: '2d' | '2dto3d' | 'side_side_half' | 'top_bottom' }>}
+   */
+  public async check3DStatus(): Promise<{
+    status: boolean;
+    pattern: '2d' | '2dto3d' | 'side_side_half' | 'top_bottom';
+  }> {
+    const { status3D } = await this.request('ssap://com.webos.service.tv.display/get3DStatus');
+    return status3D;
   }
 
   private handleMessage(message: string) {
