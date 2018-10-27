@@ -4,7 +4,7 @@
   "description": "A promise-based package to control WebOS based TVs with JavaScript.",
   "main": "lib/webos-tv.js",
   "browser": "lib/webos-tv.umd.js",
-  "module": "lib/webos-tv.esm.js",
+  "module": "lib/webos-tv.mjs",
   "types": "lib/webos-tv.d.ts",
   "scripts": {
     "start": "rollup -w -c rollup.config.js",
@@ -29,6 +29,8 @@
     "codecov": "^3.1.0",
     "jest": "^23.6.0",
     "rollup": "^0.66.6",
+    "rollup-plugin-commonjs": "^9.2.0",
+    "rollup-plugin-node-globals": "^1.4.0",
     "rollup-plugin-typescript2": "^0.17.1",
     "ts-jest": "^23.10.4",
     "tslint": "^5.11.0",

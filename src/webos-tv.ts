@@ -76,10 +76,10 @@ export class TV {
     this.config.manifest.signed.localizedVendorNames[''] = config.vendorName;
     const { origin } = TV.getTVURL(hostname);
     this.connection = new WebSocket(origin);
-    this.connection.on('message', this.handleMessage.bind(this));
+    this.connection.addEventListener('message', this.handleMessage.bind(this));
     this.connectionOpened = new Promise((resolve, reject) => {
-      this.connection.on('open', resolve);
-      this.connection.on('error', reject);
+      this.connection.addEventListener('open', resolve);
+      this.connection.addEventListener('error', reject);
     });
   }
 
@@ -443,7 +443,7 @@ export class TV {
     }
     const { socketPath } = await this.request(uri);
     this.specializedSockets[uri] = new SocketClass(socketPath);
-    this.specializedSockets[uri].on('close', () => delete this.specializedSockets[uri]);
+    this.specializedSockets[uri].addEventListener('close', () => delete this.specializedSockets[uri]);
     return this.specializedSockets[uri];
   }
 
