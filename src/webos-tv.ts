@@ -383,6 +383,14 @@ export class TV {
     return status3D;
   }
 
+  /**
+   * Shows a toast notification on the webOS TV.
+   * @param {string} message The message to show in the toast
+   */
+  public async showNotification(message: string) {
+    return this.request('ssap://system.notifications/createToast', { message });
+  }
+
   public async getSocket(uri: string, SocketClass: typeof SpecializedWebSocket): Promise<SpecializedWebSocket> {
     if (this.specializedSockets[uri]) {
       return this.specializedSockets[uri];
