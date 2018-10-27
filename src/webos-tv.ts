@@ -356,6 +356,40 @@ export class TV {
   }
 
   /**
+   * Gets the current channel from the webOS TV.
+   * @returns A promise that resolves to the currently active channel on the webOS TV
+   */
+  public async currentChannel(): Promise<{
+    returnValue: boolean;
+    channelId: string;
+    signalChannelId: string;
+    channelModeId: number;
+    channelModeName: string;
+    channelTypeId: number;
+    channelTypeName: string;
+    channelNumber: string;
+    channelName: string;
+    physicalNumber: number;
+    isSkipped: boolean;
+    isLocked: boolean;
+    isDescrambled: boolean;
+    isScrambled: boolean;
+    isFineTuned: boolean;
+    isInvisible: boolean;
+    isHEVCChannel: boolean;
+    favoriteGroup: any;
+    hybridtvType: any;
+    dualChannel: {
+      dualChannelId: any;
+      dualChannelTypeId: any;
+      dualChannelTypeName: any;
+      dualChannelNumber: any;
+    };
+  }> {
+    return this.request('ssap://tv/getCurrentChannel');
+  }
+
+  /**
    * Enables 3D on the webOS TV.
    * @return {Promise<boolean>} A promise that resolves to the new state of the 3D of the webOS TV (always true)
    */
