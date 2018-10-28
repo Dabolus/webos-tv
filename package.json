@@ -16,7 +16,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "rm -rf docs && typedoc src --out docs --mode file --name 'webOS TV'",
+      "pre-commit": "rm -rf docs && typedoc src --out docs --mode file --name 'webOS TV' && git add docs/",
       "pre-push": "npm test"
     }
   },
