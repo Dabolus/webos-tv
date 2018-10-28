@@ -76,7 +76,7 @@ export class TV {
     this.config.manifest.signed.localizedVendorNames[''] = config.vendorName;
     const { origin } = TV.getTVURL(hostname);
     this.connection = new WebSocket(origin);
-    this.connection.addEventListener('message', this.handleMessage.bind(this));
+    this.connection.addEventListener('message', ({ data }) => this.handleMessage(data));
     this.connectionOpened = new Promise((resolve, reject) => {
       this.connection.addEventListener('open', resolve);
       this.connection.addEventListener('error', reject);
