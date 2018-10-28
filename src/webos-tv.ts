@@ -426,10 +426,11 @@ export class TV {
   /**
    * Shows a toast notification on the webOS TV.
    * @param message - The message to show in the toast
-   * @returns A promise
+   * @returns A promise that resolves to the ID of the shown toast notification.
    */
-  public async showNotification(message: string) {
-    return this.request('ssap://system.notifications/createToast', { message });
+  public async showNotification(message: string): Promise<string> {
+    const { toastId } = await this.request('ssap://system.notifications/createToast', { message });
+    return toastId;
   }
 
   /**
