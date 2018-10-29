@@ -298,7 +298,7 @@ export class TV {
    * @param id - The ID of the app to launch
    * @returns A promise
    */
-  public async launch(id: string) {
+  public async launchApp(id: string) {
     return this.request('ssap://system.launcher/launch', { id });
   }
 
