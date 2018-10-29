@@ -295,7 +295,7 @@ export class TV {
 
   /**
    * Launches the app with the specified ID.
-   * @param {string} id The ID of the app to launch
+   * @param id - The ID of the app to launch
    * @returns A promise
    */
   public async launch(id: string) {
