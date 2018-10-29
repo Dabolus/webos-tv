@@ -483,6 +483,19 @@ export class TV {
     return this.getSocket('ssap://com.webos.service.ime/registerRemoteKeyboard', RemoteKeyboardSocket) as Promise<RemoteKeyboardSocket>;
   }
 
+  /**
+   * Writes the given text on the webOS TV.
+   * @param text - The text to write on the webOS TV
+   * @param replace - Whether to replace the text or to append to it. Defaults to false
+   * @returns A promise
+   */
+  public async writeText(text: string, replace: boolean = false): Promise<any> {
+    return this.request('ssap://com.webos.service.ime/insertText', {
+      text,
+      replace: replace ? 1 : 0,
+    });
+  }
+
   private handleMessage(message: string) {
     const { id, payload = {} } = JSON.parse(message);
     if (payload.pairingType === 'PROMPT' && payload.returnValue) {
