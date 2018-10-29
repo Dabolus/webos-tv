@@ -303,6 +303,25 @@ export class TV {
   }
 
   /**
+   * Closes the app with the specified ID.
+   * @param id - The ID of the app to close
+   * @returns A promise
+   */
+  public async closeApp(id: string) {
+    return this.request('ssap://system.launcher/close', { id });
+  }
+
+  /**
+   * Opens the webOS TV browser at the specified URL. Will open a new tab if the browser is already opened.
+   * @param target - The target URL to open
+   * @returns A promise that resolves to the session ID of the tab opened in the browser
+   */
+  public async openURL(target: string): Promise<string> {
+    const { sessionId } = await this.request('ssap://system.launcher/open', { target });
+    return sessionId;
+  }
+
+  /**
    * Gets the list of the channels on the webOS TV.
    * @returns The list of the channels on the webOS TV
    */
