@@ -141,6 +141,14 @@ export class TV {
   }
 
   /**
+   * Turns off the webOS TV.
+   * @returns A promise
+   */
+  public async turnOff() {
+    return this.request('ssap://system/turnOff');
+  }
+
+  /**
    * Gets the current volume of the webOS TV.
    * @returns A promise that resolves to the current volume of the webOS TV
    */
