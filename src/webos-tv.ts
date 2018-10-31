@@ -504,6 +504,23 @@ export class TV {
     });
   }
 
+  /**
+   * Deletes the given number of characters on the webOS TV.
+   * @param count The number of characters to delete
+   * @returns A promise
+   */
+  public async deleteText(count: number): Promise<any> {
+    return this.request('ssap://com.webos.service.ime/deleteCharacters', { count });
+  }
+
+  /**
+   * Sends an enter key to the webOS TV.
+   * @returns A promise
+   */
+  public async sendEnter() {
+    return this.request('ssap://com.webos.service.ime/sendEnterKey');
+  }
+
   private handleMessage(message: string) {
     const { id, payload = {} } = JSON.parse(message);
     if (payload.pairingType === 'PROMPT' && payload.returnValue) {
