@@ -528,6 +528,9 @@ export class TV {
       return;
     }
     if (!id || !this.callbacks[id]) {
+      throw new Error();
+    }
+    if (!payload.returnValue) {
       this.callbacks[id].reject(new Error());
       return;
     }
