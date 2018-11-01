@@ -469,6 +469,14 @@ export class TV {
   }
 
   /**
+   * Gets the current SW information
+   * @returns A promise
+   */
+  public async getCurrentSWInformation() {
+    return this.request('com.webos.service.update/getCurrentSWInformation');
+  }
+
+  /**
    * Requests a specialized socket to the webOS TV.
    * @param uri The URI of the action to ask the specialized socket for
    * @param SocketClass - The class of the specialized socket to instantiate. It should be a SpecializedWebSocket or a class that extends it.
