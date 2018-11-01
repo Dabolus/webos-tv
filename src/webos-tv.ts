@@ -538,10 +538,6 @@ export class TV {
     if (!id || !this.callbacks[id]) {
       throw new Error();
     }
-    if (!payload.returnValue) {
-      this.callbacks[id].reject(new Error());
-      return;
-    }
     if (payload.subscribed) {
       // TODO: do something
     }
