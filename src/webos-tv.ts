@@ -149,6 +149,14 @@ export class TV {
   }
 
   /**
+   * Gets the service list from the webOS TV.
+   * @returns A promise
+   */
+  public async getServiceList() {
+    return this.request('ssap://api/getServiceList');
+  }
+
+  /**
    * Gets the current volume of the webOS TV.
    * @returns A promise that resolves to the current volume of the webOS TV
    */
