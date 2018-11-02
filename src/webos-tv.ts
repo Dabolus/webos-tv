@@ -157,6 +157,24 @@ export class TV {
   }
 
   /**
+   * Sends a channel up signal to the webOS TV.
+   * @returns A promise that resolves to the new channel of the webOS TV
+   */
+  public async channelUp() {
+    await this.request('ssap://tv/channelUp');
+    return this.currentChannel();
+  }
+
+  /**
+   * Sends a channel down signal to the webOS TV.
+   * @returns A promise that resolves to the new channel of the webOS TV
+   */
+  public async channelDown() {
+    await this.request('ssap://tv/channelDown');
+    return this.currentChannel();
+  }
+
+  /**
    * Gets the current volume of the webOS TV.
    * @returns A promise that resolves to the current volume of the webOS TV
    */
