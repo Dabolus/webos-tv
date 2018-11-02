@@ -304,6 +304,14 @@ export class TV {
   }
 
   /**
+   * Closes the media viewer.
+   * @returns A promise
+   */
+  public async closeMediaViewer() {
+    return this.request('ssap://media.viewer/close');
+  }
+
+  /**
    * Gets info about the foreground app.
    * @returns A promise that resolves to the info of the foreground app
    */
