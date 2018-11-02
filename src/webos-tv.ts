@@ -264,6 +264,46 @@ export class TV {
   }
 
   /**
+   * Sends the play command to the webOS TV.
+   * @returns A promise
+   */
+  public async play() {
+    return this.request('ssap://media.controls/play');
+  }
+
+  /**
+   * Sends the stop command to the webOS TV.
+   * @returns A promise
+   */
+  public async stop() {
+    return this.request('ssap://media.controls/stop');
+  }
+
+  /**
+   * Sends the pause command to the webOS TV.
+   * @returns A promise
+   */
+  public async pause() {
+    return this.request('ssap://media.controls/pause');
+  }
+
+  /**
+   * Sends the rewind command to the webOS TV.
+   * @returns A promise
+   */
+  public async rewind() {
+    return this.request('ssap://media.controls/rewind');
+  }
+
+  /**
+   * Sends the fast forward command to the webOS TV.
+   * @returns A promise
+   */
+  public async fastForward() {
+    return this.request('ssap://media.controls/fastForward');
+  }
+
+  /**
    * Gets info about the foreground app.
    * @returns A promise that resolves to the info of the foreground app
    */
