@@ -36,6 +36,7 @@
     "ts-jest": "^23.10.5",
     "tslint": "^5.12.1",
     "typedoc": "^0.14.2",
+    "typedoc-plugin-markdown": "^1.1.22",
     "typescript": "^3.2.4"
   },
   "repository": {
