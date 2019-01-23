@@ -4,3 +4,4 @@ lib/
 coverage/
 .rpt2_cache/
 *.log
+api/
