@@ -12,7 +12,8 @@
     "lint": "tslint -p .",
     "format": "tslint -p . --fix",
     "test": "jest",
-    "posttest": "codecov"
+    "posttest": "codecov",
+    "generate-docs": "typedoc src --out api --mode file --name 'Assistant SDK for Node.js' --theme markdown --mdHideSources"
   },
   "dependencies": {
     "isomorphic-ws": "^4.0.1",
