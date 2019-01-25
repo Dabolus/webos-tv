@@ -1,5 +1,5 @@
-import WebSocket from 'isomorphic-ws';
 import { URL } from 'url';
+import WebSocket from 'ws';
 import defaultConfig from './default-config';
 import { PointerInputSocket, RemoteKeyboardSocket, SpecializedWebSocket } from './sockets';
 

@@ -1,4 +1,4 @@
-import WebSocket from 'isomorphic-ws';
+import WebSocket from 'ws';
 
 export class SpecializedWebSocket extends WebSocket {
   constructor(address: string, options?: WebSocket.ClientOptions) {
