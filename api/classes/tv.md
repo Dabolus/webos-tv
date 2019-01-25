@@ -355,7 +355,7 @@ ___
 
 ###  decreaseVolume
 
-▸ **decreaseVolume**(deltaVolume: *`number` | `string`*): `Promise`<`number`>
+▸ **decreaseVolume**(deltaVolume: *`number` \| `string`*): `Promise`<`number`>
 
 Decreases the webOS TV volume by the specified delta.
 
@@ -363,7 +363,7 @@ Decreases the webOS TV volume by the specified delta.
 
 | Name | Type | Description |
 | ------ | ------ | ------ |
-| deltaVolume | `number` | `string` |  The volume to remove from the webOS TV |
+| deltaVolume | `number` \| `string` |  The volume to remove from the webOS TV |
 
 **Returns:** `Promise`<`number`>
 A promise that resolves to the new volume of the webOS TV
@@ -532,7 +532,7 @@ ___
 
 ###  increaseVolume
 
-▸ **increaseVolume**(deltaVolume: *`number` | `string`*): `Promise`<`number`>
+▸ **increaseVolume**(deltaVolume: *`number` \| `string`*): `Promise`<`number`>
 
 Increases the webOS TV volume by the specified delta.
 
@@ -540,7 +540,7 @@ Increases the webOS TV volume by the specified delta.
 
 | Name | Type | Description |
 | ------ | ------ | ------ |
-| deltaVolume | `number` | `string` |  The volume to add to the webOS TV |
+| deltaVolume | `number` \| `string` |  The volume to add to the webOS TV |
 
 **Returns:** `Promise`<`number`>
 A promise that resolves to the new volume of the webOS TV
@@ -709,7 +709,7 @@ ___
 
 ###  setVolume
 
-▸ **setVolume**(volumeToSet: *`number` | `string`*): `Promise`<`number`>
+▸ **setVolume**(volumeToSet: *`number` \| `string`*): `Promise`<`number`>
 
 Sets the volume on the webOS TV.
 
@@ -717,7 +717,7 @@ Sets the volume on the webOS TV.
 
 | Name | Type | Description |
 | ------ | ------ | ------ |
-| volumeToSet | `number` | `string` |  The new volume. It can either be a number, or 'max' or 'min' |
+| volumeToSet | `number` \| `string` |  The new volume. It can either be a number, or 'max' or 'min' |
 
 **Returns:** `Promise`<`number`>
 A promise that resolves to the new volume of the webOS TV

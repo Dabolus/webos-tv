@@ -79,7 +79,7 @@ ___
 
 ### `<Optional>` perMessageDeflate
 
-**● perMessageDeflate**: *`boolean` | `PerMessageDeflateOptions`*
+**● perMessageDeflate**: *`boolean` \| `PerMessageDeflateOptions`*
 
 ___
 <a id="port"></a>
@@ -93,14 +93,14 @@ ___
 
 ### `<Optional>` server
 
-**● server**: *`Server` | `Server`*
+**● server**: *`Server` \| `Server`*
 
 ___
 <a id="verifyclient"></a>
 
 ### `<Optional>` verifyClient
 
-**● verifyClient**: *[VerifyClientCallbackAsync](../classes/specializedwebsocket.md#verifyclientcallbackasync) | [VerifyClientCallbackSync](../classes/specializedwebsocket.md#verifyclientcallbacksync)*
+**● verifyClient**: *[VerifyClientCallbackAsync](../classes/specializedwebsocket.md#verifyclientcallbackasync) \| [VerifyClientCallbackSync](../classes/specializedwebsocket.md#verifyclientcallbacksync)*
 
 ___
 

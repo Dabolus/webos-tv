@@ -136,14 +136,14 @@ ___
 
 ### `<Optional>` perMessageDeflate
 
-**● perMessageDeflate**: *`boolean` | `PerMessageDeflateOptions`*
+**● perMessageDeflate**: *`boolean` \| `PerMessageDeflateOptions`*
 
 ___
 <a id="pfx"></a>
 
 ### `<Optional>` pfx
 
-**● pfx**: *`string` | `Buffer`*
+**● pfx**: *`string` \| `Buffer`*
 
 ___
 <a id="protocol"></a>

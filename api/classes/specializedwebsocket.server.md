@@ -108,7 +108,7 @@ ___
 
 ▸ **addListener**(event: *"listening"*, cb: *`function`*): `this`
 
-▸ **addListener**(event: *`string` | `symbol`*, listener: *`function`*): `this`
+▸ **addListener**(event: *`string` \| `symbol`*, listener: *`function`*): `this`
 
 **Parameters:**
 
@@ -150,7 +150,7 @@ ___
 
 | Name | Type |
 | ------ | ------ |
-| event | `string` | `symbol` |
+| event | `string` \| `symbol` |
 | listener | `function` |
 
 **Returns:** `this`
@@ -160,9 +160,9 @@ ___
 
 ###  address
 
-▸ **address**(): `AddressInfo` | `string`
+▸ **address**(): `AddressInfo` \| `string`
 
-**Returns:** `AddressInfo` | `string`
+**Returns:** `AddressInfo` \| `string`
 
 ___
 <a id="close"></a>
@@ -184,13 +184,13 @@ ___
 
 ###  emit
 
-▸ **emit**(event: *`string` | `symbol`*, ...args: *`any`[]*): `boolean`
+▸ **emit**(event: *`string` \| `symbol`*, ...args: *`any`[]*): `boolean`
 
 **Parameters:**
 
 | Name | Type |
 | ------ | ------ |
-| event | `string` | `symbol` |
+| event | `string` \| `symbol` |
 | `Rest` args | `any`[] |
 
 **Returns:** `boolean`
@@ -200,9 +200,9 @@ ___
 
 ###  eventNames
 
-▸ **eventNames**(): `Array`<`string` | `symbol`>
+▸ **eventNames**(): `Array`<`string` \| `symbol`>
 
-**Returns:** `Array`<`string` | `symbol`>
+**Returns:** `Array`<`string` \| `symbol`>
 
 ___
 <a id="getmaxlisteners"></a>
@@ -236,13 +236,13 @@ ___
 
 ###  listenerCount
 
-▸ **listenerCount**(type: *`string` | `symbol`*): `number`
+▸ **listenerCount**(type: *`string` \| `symbol`*): `number`
 
 **Parameters:**
 
 | Name | Type |
 | ------ | ------ |
-| type | `string` | `symbol` |
+| type | `string` \| `symbol` |
 
 **Returns:** `number`
 
@@ -251,13 +251,13 @@ ___
 
 ###  listeners
 
-▸ **listeners**(event: *`string` | `symbol`*): `Function`[]
+▸ **listeners**(event: *`string` \| `symbol`*): `Function`[]
 
 **Parameters:**
 
 | Name | Type |
 | ------ | ------ |
-| event | `string` | `symbol` |
+| event | `string` \| `symbol` |
 
 **Returns:** `Function`[]
 
@@ -266,13 +266,13 @@ ___
 
 ###  off
 
-▸ **off**(event: *`string` | `symbol`*, listener: *`function`*): `this`
+▸ **off**(event: *`string` \| `symbol`*, listener: *`function`*): `this`
 
 **Parameters:**
 
 | Name | Type |
 | ------ | ------ |
-| event | `string` | `symbol` |
+| event | `string` \| `symbol` |
 | listener | `function` |
 
 **Returns:** `this`
@@ -290,7 +290,7 @@ ___
 
 ▸ **on**(event: *"listening"*, cb: *`function`*): `this`
 
-▸ **on**(event: *`string` | `symbol`*, listener: *`function`*): `this`
+▸ **on**(event: *`string` \| `symbol`*, listener: *`function`*): `this`
 
 **Parameters:**
 
@@ -332,7 +332,7 @@ ___
 
 | Name | Type |
 | ------ | ------ |
-| event | `string` | `symbol` |
+| event | `string` \| `symbol` |
 | listener | `function` |
 
 **Returns:** `this`
@@ -342,13 +342,13 @@ ___
 
 ###  once
 
-▸ **once**(event: *`string` | `symbol`*, listener: *`function`*): `this`
+▸ **once**(event: *`string` \| `symbol`*, listener: *`function`*): `this`
 
 **Parameters:**
 
 | Name | Type |
 | ------ | ------ |
-| event | `string` | `symbol` |
+| event | `string` \| `symbol` |
 | listener | `function` |
 
 **Returns:** `this`
@@ -358,13 +358,13 @@ ___
 
 ###  prependListener
 
-▸ **prependListener**(event: *`string` | `symbol`*, listener: *`function`*): `this`
+▸ **prependListener**(event: *`string` \| `symbol`*, listener: *`function`*): `this`
 
 **Parameters:**
 
 | Name | Type |
 | ------ | ------ |
-| event | `string` | `symbol` |
+| event | `string` \| `symbol` |
 | listener | `function` |
 
 **Returns:** `this`
@@ -374,13 +374,13 @@ ___
 
 ###  prependOnceListener
 
-▸ **prependOnceListener**(event: *`string` | `symbol`*, listener: *`function`*): `this`
+▸ **prependOnceListener**(event: *`string` \| `symbol`*, listener: *`function`*): `this`
 
 **Parameters:**
 
 | Name | Type |
 | ------ | ------ |
-| event | `string` | `symbol` |
+| event | `string` \| `symbol` |
 | listener | `function` |
 
 **Returns:** `this`
@@ -390,13 +390,13 @@ ___
 
 ###  rawListeners
 
-▸ **rawListeners**(event: *`string` | `symbol`*): `Function`[]
+▸ **rawListeners**(event: *`string` \| `symbol`*): `Function`[]
 
 **Parameters:**
 
 | Name | Type |
 | ------ | ------ |
-| event | `string` | `symbol` |
+| event | `string` \| `symbol` |
 
 **Returns:** `Function`[]
 
@@ -405,13 +405,13 @@ ___
 
 ###  removeAllListeners
 
-▸ **removeAllListeners**(event?: *`string` | `symbol`*): `this`
+▸ **removeAllListeners**(event?: *`string` \| `symbol`*): `this`
 
 **Parameters:**
 
 | Name | Type |
 | ------ | ------ |
-| `Optional` event | `string` | `symbol` |
+| `Optional` event | `string` \| `symbol` |
 
 **Returns:** `this`
 
@@ -420,13 +420,13 @@ ___
 
 ###  removeListener
 
-▸ **removeListener**(event: *`string` | `symbol`*, listener: *`function`*): `this`
+▸ **removeListener**(event: *`string` \| `symbol`*, listener: *`function`*): `this`
 
 **Parameters:**
 
 | Name | Type |
 | ------ | ------ |
-| event | `string` | `symbol` |
+| event | `string` \| `symbol` |
 | listener | `function` |
 
 **Returns:** `this`
@@ -466,7 +466,7 @@ ___
 
 ### `<Static>` listenerCount
 
-▸ **listenerCount**(emitter: *`EventEmitter`*, event: *`string` | `symbol`*): `number`
+▸ **listenerCount**(emitter: *`EventEmitter`*, event: *`string` \| `symbol`*): `number`
 
 *__deprecated__*: since v4.0.0
 
@@ -475,7 +475,7 @@ ___
 | Name | Type |
 | ------ | ------ |
 | emitter | `EventEmitter` |
-| event | `string` | `symbol` |
+| event | `string` \| `symbol` |
 
 **Returns:** `number`
 

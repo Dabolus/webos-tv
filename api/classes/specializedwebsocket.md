@@ -92,7 +92,7 @@
 
 ### `<Static>` CertMeta
 
-**Ƭ CertMeta**: *`string` | `string`[] | `Buffer` | `Buffer`[]*
+**Ƭ CertMeta**: *`string` \| `string`[] \| `Buffer` \| `Buffer`[]*
 
 CertMeta represents the accepted types for certificate & key data.
 
@@ -101,7 +101,7 @@ ___
 
 ### `<Static>` Data
 
-**Ƭ Data**: *`string` | `Buffer` | `ArrayBuffer` | `Buffer`[]*
+**Ƭ Data**: *`string` \| `Buffer` \| `ArrayBuffer` \| `Buffer`[]*
 
 Data represents the message payload received over the WebSocket.
 
@@ -448,11 +448,11 @@ ___
 
 ▸ **addListener**(event: *"open"*, listener: *`function`*): `this`
 
-▸ **addListener**(event: *"ping" | "pong"*, listener: *`function`*): `this`
+▸ **addListener**(event: *"ping" \| "pong"*, listener: *`function`*): `this`
 
 ▸ **addListener**(event: *"unexpected-response"*, listener: *`function`*): `this`
 
-▸ **addListener**(event: *`string` | `symbol`*, listener: *`function`*): `this`
+▸ **addListener**(event: *`string` \| `symbol`*, listener: *`function`*): `this`
 
 **Parameters:**
 
@@ -503,7 +503,7 @@ ___
 
 | Name | Type |
 | ------ | ------ |
-| event | "ping" | "pong" |
+| event | "ping" \| "pong" |
 | listener | `function` |
 
 **Returns:** `this`
@@ -521,7 +521,7 @@ ___
 
 | Name | Type |
 | ------ | ------ |
-| event | `string` | `symbol` |
+| event | `string` \| `symbol` |
 | listener | `function` |
 
 **Returns:** `this`
@@ -547,13 +547,13 @@ ___
 
 ###  emit
 
-▸ **emit**(event: *`string` | `symbol`*, ...args: *`any`[]*): `boolean`
+▸ **emit**(event: *`string` \| `symbol`*, ...args: *`any`[]*): `boolean`
 
 **Parameters:**
 
 | Name | Type |
 | ------ | ------ |
-| event | `string` | `symbol` |
+| event | `string` \| `symbol` |
 | `Rest` args | `any`[] |
 
 **Returns:** `boolean`
@@ -563,9 +563,9 @@ ___
 
 ###  eventNames
 
-▸ **eventNames**(): `Array`<`string` | `symbol`>
+▸ **eventNames**(): `Array`<`string` \| `symbol`>
 
-**Returns:** `Array`<`string` | `symbol`>
+**Returns:** `Array`<`string` \| `symbol`>
 
 ___
 <a id="getmaxlisteners"></a>
@@ -581,13 +581,13 @@ ___
 
 ###  listenerCount
 
-▸ **listenerCount**(type: *`string` | `symbol`*): `number`
+▸ **listenerCount**(type: *`string` \| `symbol`*): `number`
 
 **Parameters:**
 
 | Name | Type |
 | ------ | ------ |
-| type | `string` | `symbol` |
+| type | `string` \| `symbol` |
 
 **Returns:** `number`
 
@@ -596,13 +596,13 @@ ___
 
 ###  listeners
 
-▸ **listeners**(event: *`string` | `symbol`*): `Function`[]
+▸ **listeners**(event: *`string` \| `symbol`*): `Function`[]
 
 **Parameters:**
 
 | Name | Type |
 | ------ | ------ |
-| event | `string` | `symbol` |
+| event | `string` \| `symbol` |
 
 **Returns:** `Function`[]
 
@@ -611,13 +611,13 @@ ___
 
 ###  off
 
-▸ **off**(event: *`string` | `symbol`*, listener: *`function`*): `this`
+▸ **off**(event: *`string` \| `symbol`*, listener: *`function`*): `this`
 
 **Parameters:**
 
 | Name | Type |
 | ------ | ------ |
-| event | `string` | `symbol` |
+| event | `string` \| `symbol` |
 | listener | `function` |
 
 **Returns:** `this`
@@ -637,11 +637,11 @@ ___
 
 ▸ **on**(event: *"open"*, listener: *`function`*): `this`
 
-▸ **on**(event: *"ping" | "pong"*, listener: *`function`*): `this`
+▸ **on**(event: *"ping" \| "pong"*, listener: *`function`*): `this`
 
 ▸ **on**(event: *"unexpected-response"*, listener: *`function`*): `this`
 
-▸ **on**(event: *`string` | `symbol`*, listener: *`function`*): `this`
+▸ **on**(event: *`string` \| `symbol`*, listener: *`function`*): `this`
 
 **Parameters:**
 
@@ -692,7 +692,7 @@ ___
 
 | Name | Type |
 | ------ | ------ |
-| event | "ping" | "pong" |
+| event | "ping" \| "pong" |
 | listener | `function` |
 
 **Returns:** `this`
@@ -710,7 +710,7 @@ ___
 
 | Name | Type |
 | ------ | ------ |
-| event | `string` | `symbol` |
+| event | `string` \| `symbol` |
 | listener | `function` |
 
 **Returns:** `this`
@@ -720,13 +720,13 @@ ___
 
 ###  once
 
-▸ **once**(event: *`string` | `symbol`*, listener: *`function`*): `this`
+▸ **once**(event: *`string` \| `symbol`*, listener: *`function`*): `this`
 
 **Parameters:**
 
 | Name | Type |
 | ------ | ------ |
-| event | `string` | `symbol` |
+| event | `string` \| `symbol` |
 | listener | `function` |
 
 **Returns:** `this`
@@ -770,13 +770,13 @@ ___
 
 ###  prependListener
 
-▸ **prependListener**(event: *`string` | `symbol`*, listener: *`function`*): `this`
+▸ **prependListener**(event: *`string` \| `symbol`*, listener: *`function`*): `this`
 
 **Parameters:**
 
 | Name | Type |
 | ------ | ------ |
-| event | `string` | `symbol` |
+| event | `string` \| `symbol` |
 | listener | `function` |
 
 **Returns:** `this`
@@ -786,13 +786,13 @@ ___
 
 ###  prependOnceListener
 
-▸ **prependOnceListener**(event: *`string` | `symbol`*, listener: *`function`*): `this`
+▸ **prependOnceListener**(event: *`string` \| `symbol`*, listener: *`function`*): `this`
 
 **Parameters:**
 
 | Name | Type |
 | ------ | ------ |
-| event | `string` | `symbol` |
+| event | `string` \| `symbol` |
 | listener | `function` |
 
 **Returns:** `this`
@@ -802,13 +802,13 @@ ___
 
 ###  rawListeners
 
-▸ **rawListeners**(event: *`string` | `symbol`*): `Function`[]
+▸ **rawListeners**(event: *`string` \| `symbol`*): `Function`[]
 
 **Parameters:**
 
 | Name | Type |
 | ------ | ------ |
-| event | `string` | `symbol` |
+| event | `string` \| `symbol` |
 
 **Returns:** `Function`[]
 
@@ -817,13 +817,13 @@ ___
 
 ###  removeAllListeners
 
-▸ **removeAllListeners**(event?: *`string` | `symbol`*): `this`
+▸ **removeAllListeners**(event?: *`string` \| `symbol`*): `this`
 
 **Parameters:**
 
 | Name | Type |
 | ------ | ------ |
-| `Optional` event | `string` | `symbol` |
+| `Optional` event | `string` \| `symbol` |
 
 **Returns:** `this`
 
@@ -902,11 +902,11 @@ ___
 
 ▸ **removeListener**(event: *"open"*, listener: *`function`*): `this`
 
-▸ **removeListener**(event: *"ping" | "pong"*, listener: *`function`*): `this`
+▸ **removeListener**(event: *"ping" \| "pong"*, listener: *`function`*): `this`
 
 ▸ **removeListener**(event: *"unexpected-response"*, listener: *`function`*): `this`
 
-▸ **removeListener**(event: *`string` | `symbol`*, listener: *`function`*): `this`
+▸ **removeListener**(event: *`string` \| `symbol`*, listener: *`function`*): `this`
 
 **Parameters:**
 
@@ -957,7 +957,7 @@ ___
 
 | Name | Type |
 | ------ | ------ |
-| event | "ping" | "pong" |
+| event | "ping" \| "pong" |
 | listener | `function` |
 
 **Returns:** `this`
@@ -975,7 +975,7 @@ ___
 
 | Name | Type |
 | ------ | ------ |
-| event | `string` | `symbol` |
+| event | `string` \| `symbol` |
 | listener | `function` |
 
 **Returns:** `this`
@@ -1025,7 +1025,7 @@ ___
 
 ### `<Static>` listenerCount
 
-▸ **listenerCount**(emitter: *`EventEmitter`*, event: *`string` | `symbol`*): `number`
+▸ **listenerCount**(emitter: *`EventEmitter`*, event: *`string` \| `symbol`*): `number`
 
 *__deprecated__*: since v4.0.0
 
@@ -1034,7 +1034,7 @@ ___
 | Name | Type |
 | ------ | ------ |
 | emitter | `EventEmitter` |
-| event | `string` | `symbol` |
+| event | `string` \| `symbol` |
 
 **Returns:** `number`
 

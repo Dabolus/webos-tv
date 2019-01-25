@@ -74,7 +74,7 @@ ___
 
 `Optional`  chunkSize: `number`
 
-`Optional`  dictionary: `Buffer` | `Buffer`[] | `DataView`
+`Optional`  dictionary: `Buffer` \| `Buffer`[] \| `DataView`
 
 `Optional`  finishFlush: `number`
 
