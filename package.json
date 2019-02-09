@@ -1,6 +1,6 @@
 {
   "name": "webos-tv",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "description": "A promise-based package to control WebOS based TVs with JavaScript.",
   "main": "lib/webos-tv.js",
   "browser": "lib/webos-tv.iife.js",
@@ -13,7 +13,7 @@
     "format": "tslint -p . --fix",
     "test": "jest",
     "posttest": "codecov",
-    "generate-docs": "typedoc src --out api --mode file --name 'Assistant SDK for Node.js' --theme markdown --mdHideSources",
+    "generate-docs": "typedoc src --out api --mode file --name 'webOS' --theme markdown --mdHideSources",
     "prepublishOnly": "yarn build"
   },
   "dependencies": {
