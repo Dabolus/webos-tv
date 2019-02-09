@@ -3,7 +3,7 @@
     "lib": [
       "esnext"
     ],
-    "target": "es6",
+    "target": "es2018",
     "declaration": true,
     "strict": true,
     "strictNullChecks": false,
