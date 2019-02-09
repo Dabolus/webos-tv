@@ -1,0 +1,9 @@
+src/
+test/
+node_modules/
+yarn.lock
+CODE_OF_CONDUCT.md
+jest.config.js
+rollup.config.js
+*.json
+.*
