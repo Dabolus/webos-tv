@@ -10,7 +10,7 @@ const browserConfig = {
   output: [{
     name: 'webOS',
     file: pkg.browser,
-    format: 'umd',
+    format: 'iife',
     globals: {
       ws: 'WebSocket',
       url: 'window',
