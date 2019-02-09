@@ -13,7 +13,8 @@
     "format": "tslint -p . --fix",
     "test": "jest",
     "posttest": "codecov",
-    "generate-docs": "typedoc src --out api --mode file --name 'Assistant SDK for Node.js' --theme markdown --mdHideSources"
+    "generate-docs": "typedoc src --out api --mode file --name 'Assistant SDK for Node.js' --theme markdown --mdHideSources",
+    "prepublishOnly": "yarn build"
   },
   "dependencies": {
     "ws": "^6.1.3"
