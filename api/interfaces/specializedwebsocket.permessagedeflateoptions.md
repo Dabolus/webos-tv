@@ -1,4 +1,4 @@
-[Assistant SDK for Node.js](../README.md) > [SpecializedWebSocket](../classes/specializedwebsocket.md) > [PerMessageDeflateOptions](../interfaces/specializedwebsocket.permessagedeflateoptions.md)
+[webOS](../README.md) > [SpecializedWebSocket](../classes/specializedwebsocket.md) > [PerMessageDeflateOptions](../interfaces/specializedwebsocket.permessagedeflateoptions.md)
 
 # Interface: PerMessageDeflateOptions
 

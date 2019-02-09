@@ -1,4 +1,4 @@
-[Assistant SDK for Node.js](../README.md) > [SpecializedWebSocket](../classes/specializedwebsocket.md) > [AddressInfo](../interfaces/specializedwebsocket.addressinfo.md)
+[webOS](../README.md) > [SpecializedWebSocket](../classes/specializedwebsocket.md) > [AddressInfo](../interfaces/specializedwebsocket.addressinfo.md)
 
 # Interface: AddressInfo
 

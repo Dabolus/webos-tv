@@ -1,4 +1,4 @@
-[Assistant SDK for Node.js](../README.md) > [PointerInputSocket](../classes/pointerinputsocket.md)
+[webOS](../README.md) > [PointerInputSocket](../classes/pointerinputsocket.md)
 
 # Class: PointerInputSocket
 

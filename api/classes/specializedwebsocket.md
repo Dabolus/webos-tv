@@ -1,4 +1,4 @@
-[Assistant SDK for Node.js](../README.md) > [SpecializedWebSocket](../classes/specializedwebsocket.md)
+[webOS](../README.md) > [SpecializedWebSocket](../classes/specializedwebsocket.md)
 
 # Class: SpecializedWebSocket
 

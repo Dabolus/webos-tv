@@ -1,4 +1,4 @@
-[Assistant SDK for Node.js](../README.md) > [TV](../classes/tv.md)
+[webOS](../README.md) > [TV](../classes/tv.md)
 
 # Class: TV
 

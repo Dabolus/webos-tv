@@ -1,4 +1,4 @@
-[Assistant SDK for Node.js](../README.md) > [RemoteKeyboardSocket](../classes/remotekeyboardsocket.md)
+[webOS](../README.md) > [RemoteKeyboardSocket](../classes/remotekeyboardsocket.md)
 
 # Class: RemoteKeyboardSocket
 

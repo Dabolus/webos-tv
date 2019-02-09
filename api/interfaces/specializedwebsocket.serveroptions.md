@@ -1,4 +1,4 @@
-[Assistant SDK for Node.js](../README.md) > [SpecializedWebSocket](../classes/specializedwebsocket.md) > [ServerOptions](../interfaces/specializedwebsocket.serveroptions.md)
+[webOS](../README.md) > [SpecializedWebSocket](../classes/specializedwebsocket.md) > [ServerOptions](../interfaces/specializedwebsocket.serveroptions.md)
 
 # Interface: ServerOptions
 
