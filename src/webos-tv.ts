@@ -213,6 +213,16 @@ export class TV {
   }
 
   /**
+   * Sends an open channel signal to the webOS TV.
+   * @param channelId - The channel to open. It has to be a string representing the unique identifier of the channel
+   * @returns A promise that resolves to the new channel of the webOS TV
+   */
+  public async openChannel(channelId: string) {
+    await this.request('ssap://tv/openChannel', { channelId });
+    return this.currentChannel();
+  }
+
+  /**
    * Gets the current volume of the webOS TV.
    * @returns A promise that resolves to the current volume of the webOS TV
    */
