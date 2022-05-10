@@ -48,3 +48,6 @@ jobs:
           git commit -am "docs: automatic generation"
           echo "Pushing to gh-pages branch..."
           git push -q origin gh-pages
+        env:
+          GH_NAME: ${{ secrets.GH_NAME }}
+          GH_EMAIL: ${{ secrets.GH_EMAIL }}
