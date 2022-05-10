@@ -6,6 +6,7 @@ import {
   RemoteKeyboardSocket,
   SpecializedWebSocket,
 } from './sockets';
+import { wake } from './wol';
 
 export enum Button {
   HOME = 'HOME',
@@ -42,6 +43,17 @@ export class TV {
       throw new Error('Invalid hostname.');
     }
     return new URL(`ws://${host}:${port || 3000}`);
+  }
+
+  /**
+   * Turns on the specified webOS TV.
+   * @param hostname - The hostname of the webOS TV to wake. It can also be a broadcast address
+   * @param mac - The MAC address of the webOS TV to wake
+   * @returns A promise that resolves with the magic packet sent to the webOS TV
+   */
+  public static turnOn(hostname: string, mac: string): Promise<Buffer> {
+    const { hostname: address, port } = TV.getTVURL(hostname);
+    return wake(mac, { address, port: Number(port) });
   }
 
   private readonly connection: WebSocket;
