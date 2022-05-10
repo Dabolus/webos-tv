@@ -92,6 +92,17 @@ export class TV {
   }
 
   /**
+   * Disconnects from the webOS TV.
+   * @returns A promise that resolves when the connection is closed
+   */
+  public async disconnect() {
+    return new Promise((resolve) => {
+      this.connection.addEventListener('close', resolve);
+      this.connection.close();
+    });
+  }
+
+  /**
    * Sends the action of the specified type and URI and with the specified payload to the webOS TV.
    * @param type The type of the action
    * @param uri The URI of the action
