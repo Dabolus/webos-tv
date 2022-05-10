@@ -628,7 +628,7 @@ export class TV {
    * @param replace - Whether to replace the text or to append to it. Defaults to false
    * @returns A promise
    */
-  public async writeText(text: string, replace: boolean = false): Promise<any> {
+  public async writeText(text: string, replace = false): Promise<any> {
     return this.request('ssap://com.webos.service.ime/insertText', {
       text,
       replace: replace ? 1 : 0,
