@@ -1,7 +1,11 @@
 import { URL } from 'url';
 import WebSocket from 'ws';
 import defaultConfig from './default-config';
-import { PointerInputSocket, RemoteKeyboardSocket, SpecializedWebSocket } from './sockets';
+import {
+  PointerInputSocket,
+  RemoteKeyboardSocket,
+  SpecializedWebSocket,
+} from './sockets';
 
 export enum Button {
   HOME = 'HOME',
@@ -21,7 +25,6 @@ export enum Button {
  * @class
  */
 export class TV {
-
   private get nextId(): string {
     return (++this.currId).toString();
   }
@@ -64,19 +67,24 @@ export class TV {
    * @param config.vendorName - The vendor name to send to the webOS TV. Defaults to 'JavaScript'
    * @constructor
    */
-  public constructor(hostname: string, config: {
-    appName?: string;
-    vendorName?: string;
-  } = {
-    appName: 'WebOS TV Control',
-    vendorName: 'JavaScript',
-  }) {
+  public constructor(
+    hostname: string,
+    config: {
+      appName?: string;
+      vendorName?: string;
+    } = {
+      appName: 'WebOS TV Control',
+      vendorName: 'JavaScript',
+    },
+  ) {
     this.config = defaultConfig;
     this.config.manifest.signed.localizedAppNames[''] = config.appName;
     this.config.manifest.signed.localizedVendorNames[''] = config.vendorName;
     const { origin } = TV.getTVURL(hostname);
     this.connection = new WebSocket(origin);
-    this.connection.addEventListener('message', ({ data }) => this.handleMessage(data));
+    this.connection.addEventListener('message', ({ data }) =>
+      this.handleMessage(data),
+    );
     this.connectionOpened = new Promise((resolve, reject) => {
       this.connection.addEventListener('open', resolve);
       this.connection.addEventListener('error', reject);
@@ -90,17 +98,24 @@ export class TV {
    * @param payload The optional payload of the action
    * @returns A promise that resolves to the response from the webOS TV
    */
-  public async send(type: string, uri: string, payload: { [key: string]: any } = {}): Promise<any> {
+  public async send(
+    type: string,
+    uri: string,
+    payload: { [key: string]: any } = {},
+  ): Promise<any> {
     await this.connectionOpened;
     return new Promise((resolve, reject) => {
       const id = this.nextId;
       this.callbacks[id] = { resolve, reject };
-      this.connection.send(JSON.stringify({
-        id,
-        type,
-        uri,
-        payload,
-      }), (err) => err && reject(err));
+      this.connection.send(
+        JSON.stringify({
+          id,
+          type,
+          uri,
+          payload,
+        }),
+        (err) => err && reject(err),
+      );
     });
   }
 
@@ -199,7 +214,9 @@ export class TV {
         100,
         Math.max(
           0,
-          (typeof volumeToSet === 'string' ? parseFloat(volumeToSet) : volumeToSet) || 0,
+          (typeof volumeToSet === 'string'
+            ? parseFloat(volumeToSet)
+            : volumeToSet) || 0,
         ),
       );
     }
@@ -214,7 +231,12 @@ export class TV {
    */
   public async increaseVolume(deltaVolume: number | string): Promise<number> {
     const oldVolume = await this.getVolume();
-    return this.setVolume(oldVolume + (typeof deltaVolume === 'string' ? parseFloat(deltaVolume) : deltaVolume));
+    return this.setVolume(
+      oldVolume +
+        (typeof deltaVolume === 'string'
+          ? parseFloat(deltaVolume)
+          : deltaVolume),
+    );
   }
 
   /**
@@ -224,7 +246,12 @@ export class TV {
    */
   public async decreaseVolume(deltaVolume: number | string): Promise<number> {
     const oldVolume = await this.getVolume();
-    return this.setVolume(oldVolume - (typeof deltaVolume === 'string' ? parseFloat(deltaVolume) : deltaVolume));
+    return this.setVolume(
+      oldVolume -
+        (typeof deltaVolume === 'string'
+          ? parseFloat(deltaVolume)
+          : deltaVolume),
+    );
   }
 
   /**
@@ -338,8 +365,9 @@ export class TV {
     windowId: string;
     processId: string;
   }> {
-    const { appId, windowId, processId } =
-      await this.request('ssap://com.webos.applicationManager/getForegroundAppInfo');
+    const { appId, windowId, processId } = await this.request(
+      'ssap://com.webos.applicationManager/getForegroundAppInfo',
+    );
     return { appId, windowId, processId };
   }
 
@@ -399,7 +427,9 @@ export class TV {
    * @returns A promise that resolves to the session ID of the tab opened in the browser
    */
   public async openURL(target: string): Promise<string> {
-    const { sessionId } = await this.request('ssap://system.launcher/open', { target });
+    const { sessionId } = await this.request('ssap://system.launcher/open', {
+      target,
+    });
     return sessionId;
   }
 
@@ -407,58 +437,60 @@ export class TV {
    * Gets the list of the channels on the webOS TV.
    * @returns The list of the channels on the webOS TV
    */
-  public async channelList(): Promise<Array<{
-    channelId: string;
-    programId: string;
-    signalChannelId: string;
-    chanCode: string;
-    channelMode: string;
-    channelModeId: number;
-    channelType: string;
-    channelTypeId: number;
-    channelNumber: string;
-    majorNumber: number;
-    minorNumber: number;
-    channelName: string;
-    skipped: boolean;
-    locked: boolean;
-    descrambled: boolean;
-    scrambled: boolean;
-    serviceType: number;
-    favoriteGroup: any[];
-    imgUrl: string;
-    display: number;
-    satelliteName: string;
-    fineTuned: boolean;
-    Frequency: number;
-    shortCut: number;
-    Bandwidth: number;
-    HDTV: boolean;
-    Invisible: boolean;
-    TV: boolean;
-    DTV: boolean;
-    ATV: boolean;
-    Data: boolean;
-    Radio: boolean;
-    Numeric: boolean;
-    PrimaryCh: boolean;
-    specialService: boolean;
-    CASystemIDList: any;
-    CASystemIDListCount: number;
-    groupIdList: any[][];
-    channelGenreCode: string;
-    favoriteIdxA: number;
-    favoriteIdxB: number;
-    favoriteIdxC: number;
-    favoriteIdxD: number;
-    imgUrl2: string;
-    channelLogoSize: string;
-    ipChanServerUrl: string;
-    payChan: boolean;
-    IPChannelCode: string;
-    ipCallNumber: string;
-    otuFlag: boolean;
-  }>> {
+  public async channelList(): Promise<
+    Array<{
+      channelId: string;
+      programId: string;
+      signalChannelId: string;
+      chanCode: string;
+      channelMode: string;
+      channelModeId: number;
+      channelType: string;
+      channelTypeId: number;
+      channelNumber: string;
+      majorNumber: number;
+      minorNumber: number;
+      channelName: string;
+      skipped: boolean;
+      locked: boolean;
+      descrambled: boolean;
+      scrambled: boolean;
+      serviceType: number;
+      favoriteGroup: any[];
+      imgUrl: string;
+      display: number;
+      satelliteName: string;
+      fineTuned: boolean;
+      Frequency: number;
+      shortCut: number;
+      Bandwidth: number;
+      HDTV: boolean;
+      Invisible: boolean;
+      TV: boolean;
+      DTV: boolean;
+      ATV: boolean;
+      Data: boolean;
+      Radio: boolean;
+      Numeric: boolean;
+      PrimaryCh: boolean;
+      specialService: boolean;
+      CASystemIDList: any;
+      CASystemIDListCount: number;
+      groupIdList: any[][];
+      channelGenreCode: string;
+      favoriteIdxA: number;
+      favoriteIdxB: number;
+      favoriteIdxC: number;
+      favoriteIdxD: number;
+      imgUrl2: string;
+      channelLogoSize: string;
+      ipChanServerUrl: string;
+      payChan: boolean;
+      IPChannelCode: string;
+      ipCallNumber: string;
+      otuFlag: boolean;
+    }>
+  > {
     return this.request('ssap://tv/getChannelList');
   }
 
@@ -520,7 +552,9 @@ export class TV {
     status: boolean;
     pattern: '2d' | '2dto3d' | 'side_side_half' | 'top_bottom';
   }> {
-    const { status3D } = await this.request('ssap://com.webos.service.tv.display/get3DStatus');
+    const { status3D } = await this.request(
+      'ssap://com.webos.service.tv.display/get3DStatus',
+    );
     return status3D;
   }
 
@@ -530,7 +564,10 @@ export class TV {
    * @returns A promise that resolves to the ID of the shown toast notification.
    */
   public async showNotification(message: string): Promise<string> {
-    const { toastId } = await this.request('ssap://system.notifications/createToast', { message });
+    const { toastId } = await this.request(
+      'ssap://system.notifications/createToast',
+      { message },
+    );
     return toastId;
   }
 
@@ -547,13 +584,19 @@ export class TV {
    * @param uri The URI of the action to ask the specialized socket for
    * @param SocketClass - The class of the specialized socket to instantiate. It should be a SpecializedWebSocket or a class that extends it.
    */
-  public async getSocket(uri: string, SocketClass: typeof SpecializedWebSocket): Promise<SpecializedWebSocket> {
+  public async getSocket(
+    uri: string,
+    SocketClass: typeof SpecializedWebSocket,
+  ): Promise<SpecializedWebSocket> {
     if (this.specializedSockets[uri]) {
       return this.specializedSockets[uri];
     }
     const { socketPath } = await this.request(uri);
     this.specializedSockets[uri] = new SocketClass(socketPath);
-    this.specializedSockets[uri].addEventListener('close', () => delete this.specializedSockets[uri]);
+    this.specializedSockets[uri].addEventListener(
+      'close',
+      () => delete this.specializedSockets[uri],
+    );
     return this.specializedSockets[uri];
   }
 
@@ -562,7 +605,10 @@ export class TV {
    * @returns A promise that resolves to a specialized pointer input socket
    */
   public async getPointerInputSocket(): Promise<PointerInputSocket> {
-    return this.getSocket('ssap://com.webos.service.networkinput/getPointerInputSocket', PointerInputSocket) as Promise<PointerInputSocket>;
+    return this.getSocket(
+      'ssap://com.webos.service.networkinput/getPointerInputSocket',
+      PointerInputSocket,
+    ) as Promise<PointerInputSocket>;
   }
 
   /**
@@ -570,7 +616,10 @@ export class TV {
    * @returns A promise that resolves to a specialized remote keyboard socket
    */
   public async getRemoteKeyboardSocket(): Promise<RemoteKeyboardSocket> {
-    return this.getSocket('ssap://com.webos.service.ime/registerRemoteKeyboard', RemoteKeyboardSocket) as Promise<RemoteKeyboardSocket>;
+    return this.getSocket(
+      'ssap://com.webos.service.ime/registerRemoteKeyboard',
+      RemoteKeyboardSocket,
+    ) as Promise<RemoteKeyboardSocket>;
   }
 
   /**
@@ -592,7 +641,9 @@ export class TV {
    * @returns A promise
    */
   public async deleteText(count: number): Promise<any> {
-    return this.request('ssap://com.webos.service.ime/deleteCharacters', { count });
+    return this.request('ssap://com.webos.service.ime/deleteCharacters', {
+      count,
+    });
   }
 
   /**

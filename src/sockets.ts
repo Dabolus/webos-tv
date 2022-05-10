@@ -7,8 +7,10 @@ export class SpecializedWebSocket extends WebSocket {
 
   public send(type: string, payload: any = {}): void {
     super.send(
-      Object.entries(payload).reduce((str, [key, val]) =>
-        `${str}\n${key}: ${val}`, `type: ${type}`),
+      Object.entries(payload).reduce(
+        (str, [key, val]) => `${str}\n${key}: ${val}`,
+        `type: ${type}`,
+      ),
     );
   }
 }
