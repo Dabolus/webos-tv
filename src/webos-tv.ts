@@ -46,7 +46,7 @@ export class TV {
 
   private readonly connection: WebSocket;
   private config: any;
-  private readonly connectionOpened: Promise<void>;
+  private readonly connectionOpened: Promise<WebSocket.Event>;
 
   private currId = 0;
   private callbacks: {
@@ -654,8 +654,8 @@ export class TV {
     return this.request('ssap://com.webos.service.ime/sendEnterKey');
   }
 
-  private handleMessage(message: string) {
-    const { id, payload = {} } = JSON.parse(message);
+  private handleMessage(message: WebSocket.Data) {
+    const { id, payload = {} } = JSON.parse(message.toString());
     if (payload.pairingType === 'PROMPT' && payload.returnValue) {
       // TODO: maybe emit some kind of event
       return;
