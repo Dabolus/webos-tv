@@ -1,4 +1,27 @@
-export default {
+export interface Config {
+  forcePairing: boolean;
+  pairingType: string;
+  manifest: {
+    manifestVersion: number;
+    appVersion: string;
+    signed: {
+      created: string;
+      appId: string;
+      vendorId: string;
+      localizedAppNames: Record<string, string>;
+      localizedVendorNames: Record<string, string>;
+      permissions: string[];
+      serial: string;
+    };
+    permissions: string[];
+    signatures: {
+      signatureVersion: number;
+      signature: string;
+    }[];
+  };
+}
+
+const defaultConfig: Config = {
   forcePairing: false,
   pairingType: 'PROMPT',
   manifest: {
@@ -63,3 +86,5 @@ export default {
     ],
   },
 };
+
+export default defaultConfig;

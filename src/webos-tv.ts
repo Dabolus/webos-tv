@@ -1,6 +1,6 @@
 import { URL } from 'url';
 import WebSocket from 'ws';
-import defaultConfig from './default-config';
+import defaultConfig, { Config } from './default-config';
 import {
   PointerInputSocket,
   RemoteKeyboardSocket,
@@ -57,7 +57,7 @@ export class TV {
   }
 
   private readonly connection: WebSocket;
-  private config: any;
+  private config: Config;
   private readonly connectionOpened: Promise<WebSocket.Event>;
 
   private currId = 0;
