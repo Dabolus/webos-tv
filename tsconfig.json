@@ -6,7 +6,11 @@
     "strict": true,
     "strictNullChecks": false,
     "esModuleInterop": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "rootDir": "src",
+    "outDir": "lib",
+    "declarationDir": "."
   },
-  "include": ["src", "test"]
+  "include": ["src"],
+  "exclude": ["lib", "node_modules"]
 }
