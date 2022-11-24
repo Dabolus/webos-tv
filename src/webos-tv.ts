@@ -558,8 +558,10 @@ export class TV {
    * Disables 3D on the webOS TV.
    * @returns A promise that resolves to the new state of the 3D of the webOS TV (always false)
    */
-  public async disable3D() {
-    await this.request('ssap://com.webos.service.tv.display/set3DOff');
+  public async disable3D(): Promise<Model.Disable3DResult> {
+    await this.request<Model.Disable3DTVResponse>(
+      'ssap://com.webos.service.tv.display/set3DOff',
+    );
     return false;
   }
 
@@ -641,10 +643,13 @@ export class TV {
    * @returns A promise that resolves when the request is fulfilled
    */
   public async writeText(text: string, replace = false): Promise<void> {
-    return this.request('ssap://com.webos.service.ime/insertText', {
-      text,
-      replace: replace ? 1 : 0,
-    });
+    await this.request<Model.BaseTVResponse>(
+      'ssap://com.webos.service.ime/insertText',
+      {
+        text,
+        replace: replace ? 1 : 0,
+      },
+    );
   }
 
   /**
@@ -653,9 +658,12 @@ export class TV {
    * @returns A promise
    */
   public async deleteText(count: number): Promise<void> {
-    return this.request('ssap://com.webos.service.ime/deleteCharacters', {
-      count,
-    });
+    await this.request<Model.BaseTVResponse>(
+      'ssap://com.webos.service.ime/deleteCharacters',
+      {
+        count,
+      },
+    );
   }
 
   /**
@@ -663,7 +671,9 @@ export class TV {
    * @returns A promise
    */
   public async sendEnter(): Promise<void> {
-    return this.request('ssap://com.webos.service.ime/sendEnterKey');
+    await this.request<Model.BaseTVResponse>(
+      'ssap://com.webos.service.ime/sendEnterKey',
+    );
   }
 
   private handleMessage(message: WebSocket.Data) {
