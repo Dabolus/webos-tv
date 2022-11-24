@@ -483,28 +483,33 @@ export class TV {
   // }
 
   /**
-   * Gets the list of the available apps.
-   * @returns A promise that resolves to the list of the available apps
-   */
-  // public async appList() {
-  //   return this.request('ssap://com.webos.applicationManager/listApps');
-  // }
-
-  /**
-   * Lists the launch points of the webOS TV.
-   * @returns A promise that resolves to the list of the available launch points
-   */
-  // public async launchPoints() {
-  //   return this.request('ssap://com.webos.applicationManager/listLaunchPoints');
-  // }
-
-  /**
    * Gets the current SW information
    * @returns A promise
    */
   //  public async getCurrentSWInformation() {
   //   return this.request('com.webos.service.update/getCurrentSWInformation');
   // }
+
+  /**
+   * Gets the list of the available apps.
+   * @returns A promise that resolves to the list of the available apps
+   */
+  public async appList(): Promise<Model.AppListResult> {
+    const { apps } = await this.request<Model.AppListTVResponse>(
+      'ssap://com.webos.applicationManager/listApps',
+    );
+    return apps;
+  }
+
+  /**
+   * Lists the launch points of the webOS TV.
+   * @returns A promise that resolves to the list of the available launch points
+   */
+  public async launchPoints(): Promise<Model.LaunchPointsResult> {
+    return this.request<Model.LaunchPointsTVResponse>(
+      'ssap://com.webos.applicationManager/listLaunchPoints',
+    );
+  }
 
   /**
    * Launches the app with the specified ID.

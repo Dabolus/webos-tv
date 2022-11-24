@@ -253,3 +253,86 @@ export type ShowNotificationResult = string;
 export interface InputSocketTVResponse extends BaseTVResponse {
   socketPath: string;
 }
+
+export interface TVAppInfo {
+  defaultWindowType: string;
+  installedTime: number;
+  bgImage: string;
+  version: string;
+  systemApp: boolean;
+  vendor: string;
+  miniicon: string;
+  hasPromotion: boolean;
+  requestedWindowOrientation: string;
+  extraLargeIcon: string;
+  largeIcon: string;
+  lockable: boolean;
+  transparent: boolean;
+  icon: string;
+  checkUpdateOnLaunch: boolean;
+  category: string;
+  launchinnewgroup: boolean;
+  handlesRelaunch: boolean;
+  id: string;
+  noSplashOnLaunch: boolean;
+  inAppSetting: boolean;
+  privilegedJail: boolean;
+  trustLevel: string;
+  mediumLargeIcon: string;
+  splashBackground: string;
+  binId: number;
+  title: string;
+  resolution: string;
+  hardwareFeaturesNeeded: any[];
+  visible: boolean;
+  deeplinkingParams: string;
+  noWindow: boolean;
+  requiredEULA: string;
+  inspectable: boolean;
+  folderPath: string;
+  age: number;
+  main: string;
+  type: string;
+  iconColor: string;
+  disableBackHistoryAPI: boolean;
+  removable: boolean;
+  appsize: number;
+}
+
+export interface AppListTVResponse extends BaseTVResponse {
+  apps: TVAppInfo[];
+}
+
+export type AppListResult = TVAppInfo[];
+
+export interface TVLaunchPoint {
+  systemApp: boolean;
+  removable: boolean;
+  relaunch: boolean;
+  largeIcon: string;
+  id: string;
+  title: string;
+  bgColor: string;
+  iconColor: string;
+  appDescription: string;
+  lptype: string;
+  params: Record<string, unknown>;
+  bgImage: string;
+  icon: string;
+  launchPointId: string;
+  favicon: string;
+  imageForRecents: string;
+}
+
+export interface LaunchPointsTVResponse extends BaseTVResponse {
+  subscribed: boolean;
+  launchPoints: TVLaunchPoint[];
+  caseDetail: {
+    serviceCountryCode: string;
+    localeCode: string;
+    change: any[];
+    broadcastCountryCode: string;
+  };
+}
+
+export type LaunchPointsResult = LaunchPointsTVResponse;
