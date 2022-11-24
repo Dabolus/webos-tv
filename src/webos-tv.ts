@@ -1,22 +1,13 @@
 import { URL } from 'url';
 import WebSocket from 'ws';
-import defaultConfig, { Config } from './default-config';
+import defaultConfig from './default-config';
 import {
   PointerInputSocket,
   RemoteKeyboardSocket,
   SpecializedWebSocket,
 } from './sockets';
 import { wake } from './wol';
-
-export enum Button {
-  HOME = 'HOME',
-  BACK = 'BACK',
-  UP = 'UP',
-  DOWN = 'DOWN',
-  LEFT = 'LEFT',
-  RIGHT = 'RIGHT',
-  THREED_MODE = '3D_MODE',
-}
+import * as Model from './model';
 
 /**
  * A promise-based package to control WebOS based TVs with JavaScript.
@@ -37,7 +28,7 @@ export class TV {
    */
   public static getTVURL(hostname: string): URL {
     const [, host, port] = hostname.match(
-      /^(?:(?:http[s]?|ftp|ws|ssap):\/)?\/?([^:/?#\s]+):?([0-9]*)?/i,
+      /^(?:(?:http[s]?|ftp|ws|ssap):\/)?\/?([^:/?#\s]+):?(\d*)?/i,
     );
     if (!host) {
       throw new Error('Invalid hostname.');
@@ -57,47 +48,43 @@ export class TV {
   }
 
   private readonly connection: WebSocket;
-  private config: Config;
+  private config: Model.Config;
   private readonly connectionOpened: Promise<WebSocket.Event>;
 
   private currId = 0;
-  private callbacks: {
-    [key: string]: {
+  private callbacks: Record<
+    string,
+    {
       resolve: (val: any) => void;
       reject: (err: Error) => void;
-    };
-  } = {};
-  private specializedSockets: {
-    [key: string]: SpecializedWebSocket;
-  } = {};
+    }
+  > = {};
+  private specializedSockets: Record<string, SpecializedWebSocket> = {};
 
   /**
    * Connects to a webOS TV to the given hostname.
    * @param hostname - The hostname of the webOS TV to connect to
    * @param config - Other configuration options
-   * @param config.appName - The app name to send to the webOS TV. Defaults to 'WebOS TV Control'
+   * @param config.appName - The app name to send to the webOS TV. Defaults to 'webOS TV Control'
    * @param config.vendorName - The vendor name to send to the webOS TV. Defaults to 'JavaScript'
    * @constructor
    */
   public constructor(
     hostname: string,
-    config: {
-      appName?: string;
-      vendorName?: string;
-    } = {
-      appName: 'WebOS TV Control',
-      vendorName: 'JavaScript',
-    },
+    {
+      appName = 'webOS TV Control',
+      vendorName = 'JavaScript',
+    }: Model.TVOptions = {},
   ) {
     this.config = defaultConfig;
-    this.config.manifest.signed.localizedAppNames[''] = config.appName;
-    this.config.manifest.signed.localizedVendorNames[''] = config.vendorName;
+    this.config.manifest.signed.localizedAppNames[''] = appName;
+    this.config.manifest.signed.localizedVendorNames[''] = vendorName;
     const { origin } = TV.getTVURL(hostname);
     this.connection = new WebSocket(origin);
     this.connection.addEventListener('message', ({ data }) =>
       this.handleMessage(data),
     );
-    this.connectionOpened = new Promise((resolve, reject) => {
+    this.connectionOpened = new Promise<WebSocket.Event>((resolve, reject) => {
       this.connection.addEventListener('open', resolve);
       this.connection.addEventListener('error', reject);
     });
@@ -105,10 +92,10 @@ export class TV {
 
   /**
    * Disconnects from the webOS TV.
-   * @returns A promise that resolves when the connection is closed
+   * @returns A promise that resolves to the connection close event when the connection is closed
    */
-  public async disconnect() {
-    return new Promise((resolve) => {
+  public async disconnect(): Promise<WebSocket.CloseEvent> {
+    return new Promise<WebSocket.CloseEvent>((resolve) => {
       this.connection.addEventListener('close', resolve);
       this.connection.close();
     });
@@ -121,13 +108,13 @@ export class TV {
    * @param payload The optional payload of the action
    * @returns A promise that resolves to the response from the webOS TV
    */
-  public async send(
+  public async send<T = unknown>(
     type: string,
     uri: string,
-    payload: { [key: string]: any } = {},
-  ): Promise<any> {
+    payload: Record<string, unknown> = {},
+  ): Promise<T> {
     await this.connectionOpened;
-    return new Promise((resolve, reject) => {
+    return new Promise<T>((resolve, reject) => {
       const id = this.nextId;
       this.callbacks[id] = { resolve, reject };
       this.connection.send(
@@ -147,12 +134,18 @@ export class TV {
    * @param clientKey - The client key to send to the webOS TV to authenticate your app. Leave empty if it is your first connection
    * @returns A promise that resolves to an auth key. Remember to store the auth key somewhere to use it again next time
    */
-  public async authenticate(clientKey?: string) {
+  public async authenticate(
+    clientKey?: string,
+  ): Promise<Model.AuthenticateResult> {
     await this.connectionOpened;
-    const payload = await this.send('register', undefined, {
-      ...defaultConfig,
-      'client-key': clientKey,
-    });
+    const payload = await this.send<Model.AuthenticationTVResponse>(
+      'register',
+      undefined,
+      {
+        ...defaultConfig,
+        'client-key': clientKey,
+      },
+    );
     return payload['client-key'];
   }
 
@@ -163,8 +156,11 @@ export class TV {
    * @param payload The optional payload of the action
    * @returns A promise that resolves to the response from the webOS TV
    */
-  public request(uri: string, payload?: any): Promise<any> {
-    return this.send('request', uri, payload);
+  public request<T = unknown>(
+    uri: string,
+    payload?: Record<string, unknown>,
+  ): Promise<T> {
+    return this.send<T>('request', uri, payload);
   }
 
   /**
@@ -174,42 +170,71 @@ export class TV {
    * @param payload The optional payload of the action
    * @returns A promise that resolves to the response from the webOS TV
    */
-  public subscribe(uri: string, payload?: any) {
-    return this.send('subscribe', uri, payload);
+  public subscribe<T = unknown>(
+    uri: string,
+    payload?: Record<string, unknown>,
+  ): Promise<T> {
+    return this.send<T>('subscribe', uri, payload);
   }
 
   /**
    * Turns off the webOS TV.
-   * @returns A promise
+   * @returns A promise that resolves to the return value of the TV (`true`/`false`)
    */
-  public async turnOff() {
-    return this.request('ssap://system/turnOff');
+  public async turnOff(): Promise<Model.TurnOffResult> {
+    const { returnValue } = await this.request<Model.TurnOffTVResponse>(
+      'ssap://system/turnOff',
+    );
+    return returnValue;
   }
 
   /**
    * Gets the service list from the webOS TV.
-   * @returns A promise
+   * @returns A promise that resolves to the list of services of the webOS TV
    */
-  public async getServiceList() {
-    return this.request('ssap://api/getServiceList');
+  public async getServiceList(): Promise<Model.GetServiceListResult> {
+    const { services } = await this.request<Model.GetServiceListTVResponse>(
+      'ssap://api/getServiceList',
+    );
+    return services;
+  }
+
+  /**
+   * Gets the list of the channels on the webOS TV.
+   * @returns The list of the channels on the webOS TV
+   */
+  public async getChannelList(): Promise<Model.GetChannelListResult> {
+    return this.request<Model.GetChannelListTVResponse>(
+      'ssap://tv/getChannelList',
+    );
+  }
+
+  /**
+   * Gets the current channel from the webOS TV.
+   * @returns A promise that resolves to the currently active channel on the webOS TV
+   */
+  public async getCurrentChannel(): Promise<Model.GetCurrentChannelResult> {
+    return this.request<Model.GetCurrentChannelTVResponse>(
+      'ssap://tv/getCurrentChannel',
+    );
   }
 
   /**
    * Sends a channel up signal to the webOS TV.
    * @returns A promise that resolves to the new channel of the webOS TV
    */
-  public async channelUp() {
-    await this.request('ssap://tv/channelUp');
-    return this.currentChannel();
+  public async channelUp(): Promise<Model.ChannelUpResult> {
+    await this.request<Model.ChannelUpTVResponse>('ssap://tv/channelUp');
+    return this.getCurrentChannel();
   }
 
   /**
    * Sends a channel down signal to the webOS TV.
    * @returns A promise that resolves to the new channel of the webOS TV
    */
-  public async channelDown() {
-    await this.request('ssap://tv/channelDown');
-    return this.currentChannel();
+  public async channelDown(): Promise<Model.ChannelDownResult> {
+    await this.request<Model.ChannelDownTVResponse>('ssap://tv/channelDown');
+    return this.getCurrentChannel();
   }
 
   /**
@@ -219,24 +244,53 @@ export class TV {
    */
   public async openChannel(channelId: string) {
     await this.request('ssap://tv/openChannel', { channelId });
-    return this.currentChannel();
+    return this.getCurrentChannel();
   }
 
   /**
-   * Gets the current volume of the webOS TV.
-   * @returns A promise that resolves to the current volume of the webOS TV
+   * Sends an open channel signal to the webOS TV for the specified channel number.
+   * @param channelNumber - The channel number to open. If the TV has multiple channels with the same number, the first match will be opened.
+   * @returns A promise that resolves to the new channel of the webOS TV
    */
-  public async getVolume(): Promise<number> {
-    const { volume } = await this.request('ssap://audio/getVolume');
-    return parseFloat(volume);
+  public async openChannelByNumber(channelNumber: string | number) {
+    const { channelList } = await this.getChannelList();
+    const channel = channelList.find(
+      (c) => c.channelNumber === channelNumber.toString(),
+    );
+    return channel
+      ? this.openChannel(channel.channelId)
+      : this.getCurrentChannel();
+  }
+
+  /**
+   * Sends an open channel signal to the webOS TV for the specified channel name.
+   * @param channelName - The channel name to open. If the TV has multiple channels with the same name, the first match will be opened.
+   * @returns A promise that resolves to the new channel of the webOS TV
+   */
+  public async openChannelByName(channelName: string | number) {
+    const { channelList } = await this.getChannelList();
+    const channel = channelList.find((c) => c.channelName === channelName);
+    return channel
+      ? this.openChannel(channel.channelId)
+      : this.getCurrentChannel();
+  }
+
+  /**
+   * Gets the current volume information from the webOS TV.
+   * @returns A promise that resolves to the current volume information of the webOS TV
+   */
+  public async getVolume(): Promise<Model.GetVolumeResult> {
+    return this.request<Model.GetVolumeTVResponse>('ssap://audio/getVolume');
   }
 
   /**
    * Sets the volume on the webOS TV.
-   * @param volumeToSet - The new volume. It can either be a number, or 'max' or 'min'
+   * @param volumeToSet - The new volume. It can either be a number, or the literal strings 'max' or 'min'
    * @returns A promise that resolves to the new volume of the webOS TV
    */
-  public async setVolume(volumeToSet: number | string): Promise<number> {
+  public async setVolume(
+    volumeToSet: number | string,
+  ): Promise<Model.SetVolumeResult> {
     let volume = 0;
     if (volumeToSet === 'max') {
       volume = 100;
@@ -262,8 +316,10 @@ export class TV {
    * @param deltaVolume - The volume to add to the webOS TV
    * @returns A promise that resolves to the new volume of the webOS TV
    */
-  public async increaseVolume(deltaVolume: number | string): Promise<number> {
-    const oldVolume = await this.getVolume();
+  public async increaseVolume(
+    deltaVolume: number | string,
+  ): Promise<Model.IncreaseVolumeResult> {
+    const { volume: oldVolume } = await this.getVolume();
     return this.setVolume(
       oldVolume +
         (typeof deltaVolume === 'string'
@@ -277,8 +333,10 @@ export class TV {
    * @param deltaVolume - The volume to remove from the webOS TV
    * @returns A promise that resolves to the new volume of the webOS TV
    */
-  public async decreaseVolume(deltaVolume: number | string): Promise<number> {
-    const oldVolume = await this.getVolume();
+  public async decreaseVolume(
+    deltaVolume: number | string,
+  ): Promise<Model.DecreaseVolumeResult> {
+    const { volume: oldVolume } = await this.getVolume();
     return this.setVolume(
       oldVolume -
         (typeof deltaVolume === 'string'
@@ -291,7 +349,7 @@ export class TV {
    * Sends a volume up signal to the webOS TV.
    * @returns A promise that resolves to the new volume of the webOS TV
    */
-  public async volumeUp(): Promise<number> {
+  public async volumeUp(): Promise<Model.VolumeUpResult> {
     await this.request('ssap://audio/volumeUp');
     return this.getVolume();
   }
@@ -300,17 +358,38 @@ export class TV {
    * Sends a volume down signal to the webOS TV.
    * @returns A promise that resolves to the new volume of the webOS TV
    */
-  public async volumeDown(): Promise<number> {
+  public async volumeDown(): Promise<Model.VolumeDownResult> {
     await this.request('ssap://audio/volumeDown');
     return this.getVolume();
   }
 
   /**
-   * Checks whether the webOS TV is currently muted or not.
-   * @returns A promise that resolves to the current mute state of the webOS TV
+   * Checks the current status of the audio of the webOS TV.
+   * @returns A promise that resolves to the current audio status of the webOS TV
    */
-  public async isMuted(): Promise<boolean> {
-    const { mute } = await this.request('ssap://audio/getStatus');
+  public async getAudioStatus(): Promise<Model.GetAudioStatusResult> {
+    return this.request<Model.GetAudioStatusTVResponse>(
+      'ssap://audio/getStatus',
+    );
+  }
+
+  /**
+   * Checks whether the webOS TV is currently muted or not.
+   * @returns A promise that resolves to the current mute status of the webOS TV
+   */
+  public async isMuted(): Promise<Model.IsMutedResult> {
+    const { mute } = await this.getAudioStatus();
+    return mute;
+  }
+
+  /**
+   * Sets the mute status of the webOS TV.
+   * @returns A promise that resolves to the new mute status of the webOS TV
+   */
+  public async setMute(mute: boolean): Promise<Model.SetMuteResult> {
+    await this.request<Model.SetMuteTVResponse>('ssap://audio/setMute', {
+      mute,
+    });
     return mute;
   }
 
@@ -318,42 +397,40 @@ export class TV {
    * Mutes the webOS TV.
    * @returns A promise that resolves to the new mute state of the webOS TV (always true)
    */
-  public async mute(): Promise<true> {
-    await this.request('ssap://audio/setMute', { mute: true });
-    return true;
+  public async mute(): Promise<Model.MuteResult> {
+    return this.setMute(true);
   }
 
   /**
    * Unmutes the webOS TV.
    * @returns A promise that resolves to the new mute state of the webOS TV (always false)
    */
-  public async unmute(): Promise<false> {
-    await this.request('ssap://audio/setMute', { mute: false });
-    return false;
+  public async unmute(): Promise<Model.UnmuteResult> {
+    return this.setMute(false);
   }
 
   /**
    * Toggles the mute state of the webOS TV.
-   * @returns A promise that resolves to the new mute state of the webOS TV (always the opposite of the old state)
+   * @returns A promise that resolves to the new mute state of the webOS TV (always the opposite of the previous state)
    */
-  public async toggleMute(): Promise<boolean> {
+  public async toggleMute(): Promise<Model.ToggleMuteResult> {
     const muted = await this.isMuted();
-    return muted ? this.unmute() : this.mute();
+    return this.setMute(!muted);
   }
 
   /**
    * Sends the play command to the webOS TV.
    * @returns A promise
    */
-  public async play() {
-    return this.request('ssap://media.controls/play');
+  public async play(): Promise<void> {
+    await this.request('ssap://media.controls/play');
   }
 
   /**
    * Sends the stop command to the webOS TV.
    * @returns A promise
    */
-  public async stop() {
+  public async stop(): Promise<void> {
     return this.request('ssap://media.controls/stop');
   }
 
@@ -361,7 +438,7 @@ export class TV {
    * Sends the pause command to the webOS TV.
    * @returns A promise
    */
-  public async pause() {
+  public async pause(): Promise<void> {
     return this.request('ssap://media.controls/pause');
   }
 
@@ -369,7 +446,7 @@ export class TV {
    * Sends the rewind command to the webOS TV.
    * @returns A promise
    */
-  public async rewind() {
+  public async rewind(): Promise<void> {
     return this.request('ssap://media.controls/rewind');
   }
 
@@ -377,7 +454,7 @@ export class TV {
    * Sends the fast forward command to the webOS TV.
    * @returns A promise
    */
-  public async fastForward() {
+  public async fastForward(): Promise<void> {
     return this.request('ssap://media.controls/fastForward');
   }
 
@@ -385,7 +462,7 @@ export class TV {
    * Closes the media viewer.
    * @returns A promise
    */
-  public async closeMediaViewer() {
+  public async closeMediaViewer(): Promise<void> {
     return this.request('ssap://media.viewer/close');
   }
 
@@ -393,48 +470,52 @@ export class TV {
    * Gets info about the foreground app.
    * @returns A promise that resolves to the info of the foreground app
    */
-  public async foregroundAppInfo(): Promise<{
-    appId: string;
-    windowId: string;
-    processId: string;
-  }> {
-    const { appId, windowId, processId } = await this.request(
+  public async foregroundAppInfo(): Promise<Model.ForegroundAppInfoResult> {
+    return this.request<Model.ForegroundAppInfoTVResponse>(
       'ssap://com.webos.applicationManager/getForegroundAppInfo',
     );
-    return { appId, windowId, processId };
   }
 
+  // TODO: re-enable these methods once they get fixed
   /**
    * Gets the app status.
    * @returns The app status
    */
-  public async appStatus() {
-    return this.request('ssap://com.webos.service.appstatus/getAppStatus');
-  }
+  // public async appStatus() {
+  //   return this.request('ssap://com.webos.service.appstatus/getAppStatus');
+  // }
 
   /**
    * Gets the app state.
    * @returns The app state
    */
-  public async appState() {
-    return this.request('ssap://system.launcher/getAppState');
-  }
+  // public async appState() {
+  //   return this.request('ssap://system.launcher/getAppState');
+  // }
 
   /**
    * Gets the list of the available apps.
    * @returns A promise that resolves to the list of the available apps
    */
-  public async appList() {
-    return this.request('ssap://com.webos.applicationManager/listApps');
-  }
+  // public async appList() {
+  //   return this.request('ssap://com.webos.applicationManager/listApps');
+  // }
 
   /**
    * Lists the launch points of the webOS TV.
    * @returns A promise that resolves to the list of the available launch points
    */
-  public async launchPoints() {
-    return this.request('ssap://com.webos.applicationManager/listLaunchPoints');
-  }
+  // public async launchPoints() {
+  //   return this.request('ssap://com.webos.applicationManager/listLaunchPoints');
+  // }
+
+  /**
+   * Gets the current SW information
+   * @returns A promise
+   */
+  //  public async getCurrentSWInformation() {
+  //   return this.request('com.webos.service.update/getCurrentSWInformation');
+  // }
 
   /**
    * Launches the app with the specified ID.
@@ -459,133 +540,41 @@ export class TV {
    * @param target - The target URL to open
    * @returns A promise that resolves to the session ID of the tab opened in the browser
    */
-  public async openURL(target: string): Promise<string> {
-    const { sessionId } = await this.request('ssap://system.launcher/open', {
-      target,
-    });
-    return sessionId;
-  }
-
-  /**
-   * Gets the list of the channels on the webOS TV.
-   * @returns The list of the channels on the webOS TV
-   */
-  public async channelList(): Promise<
-    Array<{
-      channelId: string;
-      programId: string;
-      signalChannelId: string;
-      chanCode: string;
-      channelMode: string;
-      channelModeId: number;
-      channelType: string;
-      channelTypeId: number;
-      channelNumber: string;
-      majorNumber: number;
-      minorNumber: number;
-      channelName: string;
-      skipped: boolean;
-      locked: boolean;
-      descrambled: boolean;
-      scrambled: boolean;
-      serviceType: number;
-      favoriteGroup: any[];
-      imgUrl: string;
-      display: number;
-      satelliteName: string;
-      fineTuned: boolean;
-      Frequency: number;
-      shortCut: number;
-      Bandwidth: number;
-      HDTV: boolean;
-      Invisible: boolean;
-      TV: boolean;
-      DTV: boolean;
-      ATV: boolean;
-      Data: boolean;
-      Radio: boolean;
-      Numeric: boolean;
-      PrimaryCh: boolean;
-      specialService: boolean;
-      CASystemIDList: any;
-      CASystemIDListCount: number;
-      groupIdList: any[][];
-      channelGenreCode: string;
-      favoriteIdxA: number;
-      favoriteIdxB: number;
-      favoriteIdxC: number;
-      favoriteIdxD: number;
-      imgUrl2: string;
-      channelLogoSize: string;
-      ipChanServerUrl: string;
-      payChan: boolean;
-      IPChannelCode: string;
-      ipCallNumber: string;
-      otuFlag: boolean;
-    }>
-  > {
-    return this.request('ssap://tv/getChannelList');
-  }
-
-  /**
-   * Gets the current channel from the webOS TV.
-   * @returns A promise that resolves to the currently active channel on the webOS TV
-   */
-  public async currentChannel(): Promise<{
-    returnValue: boolean;
-    channelId: string;
-    signalChannelId: string;
-    channelModeId: number;
-    channelModeName: string;
-    channelTypeId: number;
-    channelTypeName: string;
-    channelNumber: string;
-    channelName: string;
-    physicalNumber: number;
-    isSkipped: boolean;
-    isLocked: boolean;
-    isDescrambled: boolean;
-    isScrambled: boolean;
-    isFineTuned: boolean;
-    isInvisible: boolean;
-    isHEVCChannel: boolean;
-    favoriteGroup: any;
-    hybridtvType: any;
-    dualChannel: {
-      dualChannelId: any;
-      dualChannelTypeId: any;
-      dualChannelTypeName: any;
-      dualChannelNumber: any;
-    };
-  }> {
-    return this.request('ssap://tv/getCurrentChannel');
+  public async openURL(target: string): Promise<Model.OpenURLResult> {
+    return this.request<Model.OpenURLTVResponse>(
+      'ssap://system.launcher/open',
+      {
+        target,
+      },
+    );
   }
 
   /**
    * Enables 3D on the webOS TV.
    * @returns A promise that resolves to the new state of the 3D of the webOS TV (always true)
    */
-  public async enable3D() {
-    return this.request('ssap://com.webos.service.tv.display/set3DOn');
+  public async enable3D(): Promise<Model.Enable3DResult> {
+    await this.request<Model.Enable3DTVResponse>(
+      'ssap://com.webos.service.tv.display/set3DOn',
+    );
+    return true;
   }
 
   /**
    * Disables 3D on the webOS TV.
    * @returns A promise that resolves to the new state of the 3D of the webOS TV (always false)
    */
-  public disable3D() {
-    return this.request('ssap://com.webos.service.tv.display/set3DOff');
+  public async disable3D() {
+    await this.request('ssap://com.webos.service.tv.display/set3DOff');
+    return false;
   }
 
   /**
    * Checks whether the 3D is currently enabled or not on the webOS TV.
    * @returns A promise that resolves to the status of the 3D on the webOS TV
    */
-  public async check3DStatus(): Promise<{
-    status: boolean;
-    pattern: '2d' | '2dto3d' | 'side_side_half' | 'top_bottom';
-  }> {
-    const { status3D } = await this.request(
+  public async check3DStatus(): Promise<Model.Check3DStatusResult> {
+    const { status3D } = await this.request<Model.Check3DStatusTVResponse>(
       'ssap://com.webos.service.tv.display/get3DStatus',
     );
     return status3D;
@@ -596,20 +585,16 @@ export class TV {
    * @param message - The message to show in the toast
    * @returns A promise that resolves to the ID of the shown toast notification.
    */
-  public async showNotification(message: string): Promise<string> {
-    const { toastId } = await this.request(
+  public async showNotification(
+    message: string,
+  ): Promise<Model.ShowNotificationResult> {
+    const { toastId } = await this.request<Model.ShowNotificationTVResponse>(
       'ssap://system.notifications/createToast',
-      { message },
+      {
+        message,
+      },
     );
     return toastId;
-  }
-
-  /**
-   * Gets the current SW information
-   * @returns A promise
-   */
-  public async getCurrentSWInformation() {
-    return this.request('com.webos.service.update/getCurrentSWInformation');
   }
 
   /**
@@ -617,20 +602,20 @@ export class TV {
    * @param uri The URI of the action to ask the specialized socket for
    * @param SocketClass - The class of the specialized socket to instantiate. It should be a SpecializedWebSocket or a class that extends it.
    */
-  public async getSocket(
+  public async getSocket<T extends SpecializedWebSocket>(
     uri: string,
-    SocketClass: typeof SpecializedWebSocket,
-  ): Promise<SpecializedWebSocket> {
+    SocketClass: { new (...args: any[]): T },
+  ): Promise<T> {
     if (this.specializedSockets[uri]) {
-      return this.specializedSockets[uri];
+      return this.specializedSockets[uri] as T;
     }
-    const { socketPath } = await this.request(uri);
+    const { socketPath } = await this.request<Model.InputSocketTVResponse>(uri);
     this.specializedSockets[uri] = new SocketClass(socketPath);
     this.specializedSockets[uri].addEventListener(
       'close',
       () => delete this.specializedSockets[uri],
     );
-    return this.specializedSockets[uri];
+    return this.specializedSockets[uri] as T;
   }
 
   /**
@@ -641,7 +626,7 @@ export class TV {
     return this.getSocket(
       'ssap://com.webos.service.networkinput/getPointerInputSocket',
       PointerInputSocket,
-    ) as Promise<PointerInputSocket>;
+    );
   }
 
   /**
@@ -652,16 +637,16 @@ export class TV {
     return this.getSocket(
       'ssap://com.webos.service.ime/registerRemoteKeyboard',
       RemoteKeyboardSocket,
-    ) as Promise<RemoteKeyboardSocket>;
+    );
   }
 
   /**
    * Writes the given text on the webOS TV.
    * @param text - The text to write on the webOS TV
    * @param replace - Whether to replace the text or to append to it. Defaults to false
-   * @returns A promise
+   * @returns A promise that resolves when the request is fulfilled
    */
-  public async writeText(text: string, replace = false): Promise<any> {
+  public async writeText(text: string, replace = false): Promise<void> {
     return this.request('ssap://com.webos.service.ime/insertText', {
       text,
       replace: replace ? 1 : 0,
@@ -673,7 +658,7 @@ export class TV {
    * @param count The number of characters to delete
    * @returns A promise
    */
-  public async deleteText(count: number): Promise<any> {
+  public async deleteText(count: number): Promise<void> {
     return this.request('ssap://com.webos.service.ime/deleteCharacters', {
       count,
     });
@@ -683,7 +668,7 @@ export class TV {
    * Sends an enter key to the webOS TV.
    * @returns A promise
    */
-  public async sendEnter() {
+  public async sendEnter(): Promise<void> {
     return this.request('ssap://com.webos.service.ime/sendEnterKey');
   }
 

@@ -1,25 +1,4 @@
-export interface Config {
-  forcePairing: boolean;
-  pairingType: string;
-  manifest: {
-    manifestVersion: number;
-    appVersion: string;
-    signed: {
-      created: string;
-      appId: string;
-      vendorId: string;
-      localizedAppNames: Record<string, string>;
-      localizedVendorNames: Record<string, string>;
-      permissions: string[];
-      serial: string;
-    };
-    permissions: string[];
-    signatures: {
-      signatureVersion: number;
-      signature: string;
-    }[];
-  };
-}
+import type { Config } from './model';
 
 const defaultConfig: Config = {
   forcePairing: false,
