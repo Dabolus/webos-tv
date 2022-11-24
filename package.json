@@ -58,5 +58,6 @@
   "bugs": {
     "url": "https://github.com/Dabolus/webos-tv/issues"
   },
-  "homepage": "https://github.com/Dabolus/webos-tv#readme"
+  "homepage": "https://github.com/Dabolus/webos-tv#readme",
+  "packageManager": "yarn@3.3.0"
 }

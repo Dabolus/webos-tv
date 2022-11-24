@@ -5,3 +5,10 @@ coverage/
 .rpt2_cache/
 *.log
 api/
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
