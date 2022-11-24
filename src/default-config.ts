@@ -10,8 +10,14 @@ const defaultConfig: Config = {
       created: '20140509',
       appId: 'com.lge.test',
       vendorId: 'com.lge',
-      localizedAppNames: {},
-      localizedVendorNames: {},
+      localizedAppNames: {
+        '': 'LG Remote App',
+        'ko-KR': '리모컨 앱',
+        'zxx-XX': 'ЛГ Rэмotэ AПП',
+      },
+      localizedVendorNames: {
+        '': 'LG Electronics',
+      },
       permissions: [
         'TEST_SECURE',
         'CONTROL_INPUT_TEXT',

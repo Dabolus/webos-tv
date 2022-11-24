@@ -31,11 +31,6 @@ export enum Button {
   THREED_MODE = '3D_MODE',
 }
 
-export interface TVOptions {
-  appName?: string;
-  vendorName?: string;
-}
-
 export interface AuthenticationTVResponse {
   'client-key': string;
 }

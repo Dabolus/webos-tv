@@ -64,21 +64,10 @@ export class TV {
   /**
    * Connects to a webOS TV to the given hostname.
    * @param hostname - The hostname of the webOS TV to connect to
-   * @param config - Other configuration options
-   * @param config.appName - The app name to send to the webOS TV. Defaults to 'webOS TV Control'
-   * @param config.vendorName - The vendor name to send to the webOS TV. Defaults to 'JavaScript'
    * @constructor
    */
-  public constructor(
-    hostname: string,
-    {
-      appName = 'webOS TV Control',
-      vendorName = 'JavaScript',
-    }: Model.TVOptions = {},
-  ) {
+  public constructor(hostname: string) {
     this.config = defaultConfig;
-    this.config.manifest.signed.localizedAppNames[''] = appName;
-    this.config.manifest.signed.localizedVendorNames[''] = vendorName;
     const { origin } = TV.getTVURL(hostname);
     this.connection = new WebSocket(origin);
     this.connection.addEventListener('message', ({ data }) =>
