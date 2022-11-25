@@ -1,3 +1,4 @@
+import replace from '@rollup/plugin-replace';
 import virtual from '@rollup/plugin-virtual';
 import typescript from '@rollup/plugin-typescript';
 import commonjs from '@rollup/plugin-commonjs';
@@ -21,12 +22,19 @@ const browserConfig = {
     },
   ],
   plugins: [
+    replace({
+      preventAssignment: true,
+      './readfile-node': './readfile-browser',
+    }),
     virtual({
-      ws: 'export default WebSocket',
-      url: 'export const URL = window.URL',
-      undici: 'export const fetch = window.fetch',
-      './wol':
-        'export const wake = () => { throw new Error("Wake on LAN is not supported on browsers") }',
+      ws: 'export default WebSocket;',
+      url: 'export const URL = window.URL;',
+      undici: 'export const fetch = window.fetch;',
+      './wol': `
+        export const wake = () => {
+          throw new Error("Wake on LAN is not supported on browsers");
+        };
+      `,
     }),
     typescript({
       tsconfig: './tsconfig.json',

@@ -1,4 +1,6 @@
 import { URL } from 'url';
+import { fetch } from 'undici';
+import { readFile } from './readfile-node';
 import WebSocket from 'ws';
 import defaultConfig from './default-config';
 import {
@@ -579,15 +581,23 @@ export class TV {
   /**
    * Shows a toast notification on the webOS TV.
    * @param message - The message to show in the toast
+   * @param iconUrl - The optional URL of the icon to show in the toast. It must be a valid (fetchable) URL to an image file (either HTTP(S), data URI, or file URI)
+   * @param iconExtension - The extension of the icon, automatically detected from the icon URL by default. You can provide it explicitly in case automatic detection fails
    * @returns A promise that resolves to the ID of the shown toast notification.
    */
   public async showNotification(
     message: string,
-  ): Promise<Model.ShowNotificationResult> {
+    iconUrl?: string,
+    iconExtension?: string,
+  ): Promise<string> {
+    const iconData = iconUrl
+      ? await this.loadIcon(iconUrl, iconExtension)
+      : undefined;
     const { toastId } = await this.request<Model.ShowNotificationTVResponse>(
       'ssap://system.notifications/createToast',
       {
         message,
+        ...iconData,
       },
     );
     return toastId;
@@ -689,5 +699,19 @@ export class TV {
       // TODO: do something
     }
     this.callbacks[id].resolve(payload);
+  }
+
+  private async loadIcon(
+    url: string,
+    extension?: string,
+  ): Promise<{ iconData: string; iconExtension: string }> {
+    const res = await fetch(url, { mode: 'no-cors' });
+    const blob = await res.blob();
+    const base64 = await readFile(blob);
+    return {
+      iconData: base64.slice(base64.indexOf(',') + 1),
+      iconExtension:
+        extension || blob.type.replace(/^\w+\/(?:x-)?([\w-]+).*$/i, '$1'),
+    };
   }
 }
