@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "A promise-based package to control WebOS based TVs with JavaScript.",
   "main": "lib/webos-tv.js",
-  "module": "lib/webos-tv.js",
+  "module": "lib/webos-tv.esm.js",
   "browser": "lib/webos-tv.iife.js",
   "types": "lib/webos-tv.d.ts",
   "type": "module",
@@ -17,8 +17,13 @@
     "generate-docs": "typedoc src/*.ts --out api --name 'webOS' --theme markdown",
     "prepublishOnly": "yarn build"
   },
-  "dependencies": {
+  "peerDependencies": {
     "ws": "^8.11.0"
+  },
+  "peerDependenciesMeta": {
+    "ws": {
+      "optional": true
+    }
   },
   "optionalDependencies": {
     "bufferutil": "^4.0.7",
@@ -28,6 +33,7 @@
     "@rollup/plugin-commonjs": "^23.0.2",
     "@rollup/plugin-node-resolve": "^15.0.1",
     "@rollup/plugin-typescript": "^9.0.2",
+    "@rollup/plugin-virtual": "^3.0.1",
     "@types/jest": "^29.2.3",
     "@types/node": "^18.11.9",
     "@types/ws": "^8.5.3",
