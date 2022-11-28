@@ -67,7 +67,7 @@
     "type": "git",
     "url": "git+https://github.com/Dabolus/webos-tv.git"
   },
-  "author": "Giorgio Garasto <giorgio@garasto.it>",
+  "author": "Giorgio Garasto <giorgio@garasto.me>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/Dabolus/webos-tv/issues"
