@@ -4379,6 +4379,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"rollup-plugin-node-externals@npm:^5.0.2":
+  version: 5.0.2
+  resolution: "rollup-plugin-node-externals@npm:5.0.2"
+  peerDependencies:
+    rollup: ^2.60.0 || ^3.0.0
+  checksum: 5afefcccb37a2c54e836d7b5b97e0b9ab47a187cf9341fda22e580f84d2f87de2b1938c8005a8d38794cab6acfcf49c9121b30431641ac53928139ad020e3160
+  languageName: node
+  linkType: hard
+
 "rollup-plugin-node-globals@npm:^1.4.0":
   version: 1.4.0
   resolution: "rollup-plugin-node-globals@npm:1.4.0"
@@ -5117,6 +5126,7 @@ __metadata:
     prettier: ^2.8.0
     rollup: ^3.4.0
     rollup-plugin-commonjs: ^10.1.0
+    rollup-plugin-node-externals: ^5.0.2
     rollup-plugin-node-globals: ^1.4.0
     rollup-plugin-typescript2: ^0.34.1
     ts-jest: ^29.0.3

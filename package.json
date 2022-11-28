@@ -52,6 +52,7 @@
     "prettier": "^2.8.0",
     "rollup": "^3.4.0",
     "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-node-externals": "^5.0.2",
     "rollup-plugin-node-globals": "^1.4.0",
     "rollup-plugin-typescript2": "^0.34.1",
     "ts-jest": "^29.0.3",
