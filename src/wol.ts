@@ -1,5 +1,5 @@
-import { createSocket } from 'dgram';
-import { isIPv6 } from 'net';
+import { createSocket } from 'node:dgram';
+import { isIPv6 } from 'node:net';
 
 const MAC_BYTES = 6;
 
