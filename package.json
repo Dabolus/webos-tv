@@ -1,6 +1,6 @@
 {
   "name": "webos-tv",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "A promise-based package to control WebOS based TVs with JavaScript.",
   "main": "lib/webos-tv.js",
   "module": "lib/webos-tv.esm.js",
