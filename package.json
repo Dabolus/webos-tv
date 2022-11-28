@@ -17,6 +17,9 @@
     "generate-docs": "typedoc src/*.ts --out api --name 'webOS' --theme markdown",
     "prepublishOnly": "yarn build"
   },
+  "files": [
+    "lib"
+  ],
   "peerDependencies": {
     "undici": "^5.12.0",
     "ws": "^8.11.0"
