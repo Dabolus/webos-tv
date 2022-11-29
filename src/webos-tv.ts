@@ -418,48 +418,52 @@ export class TV {
    * Sends the play command to the webOS TV.
    * @returns A promise
    */
-  public async play(): Promise<void> {
-    await this.request('ssap://media.controls/play');
+  public async play(): Promise<Model.PlayResult> {
+    await this.request<Model.PlayTVResponse>('ssap://media.controls/play');
   }
 
   /**
    * Sends the stop command to the webOS TV.
    * @returns A promise
    */
-  public async stop(): Promise<void> {
-    return this.request('ssap://media.controls/stop');
+  public async stop(): Promise<Model.StopResult> {
+    await this.request<Model.StopTVResponse>('ssap://media.controls/stop');
   }
 
   /**
    * Sends the pause command to the webOS TV.
    * @returns A promise
    */
-  public async pause(): Promise<void> {
-    return this.request('ssap://media.controls/pause');
+  public async pause(): Promise<Model.PauseResult> {
+    await this.request<Model.PauseTVResponse>('ssap://media.controls/pause');
   }
 
   /**
    * Sends the rewind command to the webOS TV.
    * @returns A promise
    */
-  public async rewind(): Promise<void> {
-    return this.request('ssap://media.controls/rewind');
+  public async rewind(): Promise<Model.RewindResult> {
+    await this.request<Model.RewindTVResponse>('ssap://media.controls/rewind');
   }
 
   /**
    * Sends the fast forward command to the webOS TV.
    * @returns A promise
    */
-  public async fastForward(): Promise<void> {
-    return this.request('ssap://media.controls/fastForward');
+  public async fastForward(): Promise<Model.FastForwardResult> {
+    await this.request<Model.FastForwardTVResponse>(
+      'ssap://media.controls/fastForward',
+    );
   }
 
   /**
    * Closes the media viewer.
    * @returns A promise
    */
-  public async closeMediaViewer(): Promise<void> {
-    return this.request('ssap://media.viewer/close');
+  public async closeMediaViewer(): Promise<Model.CloseMediaViewerResult> {
+    await this.request<Model.CloseMediaViewerTVResponse>(
+      'ssap://media.viewer/close',
+    );
   }
 
   /**
@@ -523,8 +527,11 @@ export class TV {
    * @param id - The ID of the app to launch
    * @returns A promise
    */
-  public async launchApp(id: string) {
-    return this.request('ssap://system.launcher/launch', { id });
+  public async launchApp(id: string): Promise<Model.LaunchAppResult> {
+    return this.request<Model.LaunchAppTVResponse>(
+      'ssap://system.launcher/launch',
+      { id },
+    );
   }
 
   /**
@@ -532,8 +539,11 @@ export class TV {
    * @param id - The ID of the app to close
    * @returns A promise
    */
-  public async closeApp(id: string) {
-    return this.request('ssap://system.launcher/close', { id });
+  public async closeApp(id: string): Promise<Model.CloseAppResult> {
+    await this.request<Model.CloseAppTVResponse>(
+      'ssap://system.launcher/close',
+      { id },
+    );
   }
 
   /**
@@ -668,8 +678,11 @@ export class TV {
    * @param replace - Whether to replace the text or to append to it. Defaults to false
    * @returns A promise that resolves when the request is fulfilled
    */
-  public async writeText(text: string, replace = false): Promise<void> {
-    await this.request<Model.EmptyResponse>(
+  public async writeText(
+    text: string,
+    replace = false,
+  ): Promise<Model.WriteTextResult> {
+    await this.request<Model.WriteTextTVResponse>(
       'ssap://com.webos.service.ime/insertText',
       {
         text,
@@ -683,8 +696,8 @@ export class TV {
    * @param count The number of characters to delete
    * @returns A promise
    */
-  public async deleteText(count: number): Promise<void> {
-    await this.request<Model.EmptyResponse>(
+  public async deleteText(count: number): Promise<Model.DeleteTextResult> {
+    await this.request<Model.DeleteTextTVResponse>(
       'ssap://com.webos.service.ime/deleteCharacters',
       {
         count,
@@ -696,8 +709,8 @@ export class TV {
    * Sends an enter key to the webOS TV.
    * @returns A promise
    */
-  public async sendEnter(): Promise<void> {
-    await this.request<Model.EmptyResponse>(
+  public async sendEnter(): Promise<Model.SendEnterResult> {
+    await this.request<Model.SendEnterTVResponse>(
       'ssap://com.webos.service.ime/sendEnterKey',
     );
   }

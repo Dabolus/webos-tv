@@ -205,6 +205,30 @@ export type UnmuteResult = boolean;
 
 export type ToggleMuteResult = boolean;
 
+export type PlayTVResponse = EmptyResponse;
+
+export type PlayResult = void;
+
+export type StopTVResponse = EmptyResponse;
+
+export type StopResult = void;
+
+export type PauseTVResponse = EmptyResponse;
+
+export type PauseResult = void;
+
+export type RewindTVResponse = EmptyResponse;
+
+export type RewindResult = void;
+
+export type FastForwardTVResponse = EmptyResponse;
+
+export type FastForwardResult = void;
+
+export type CloseMediaViewerTVResponse = EmptyResponse;
+
+export type CloseMediaViewerResult = void;
+
 export interface ForegroundAppInfoTVResponse {
   appId: string;
   windowId: string;
@@ -212,6 +236,17 @@ export interface ForegroundAppInfoTVResponse {
 }
 
 export type ForegroundAppInfoResult = ForegroundAppInfoTVResponse;
+
+export interface LaunchAppTVResponse {
+  id: string;
+  sessionId: string;
+}
+
+export type LaunchAppResult = LaunchAppTVResponse;
+
+export type CloseAppTVResponse = EmptyResponse;
+
+export type CloseAppResult = void;
 
 export interface OpenURLTVResponse {
   id: string;
@@ -253,6 +288,18 @@ export interface ShowNotificationTVResponse {
 }
 
 export type ShowNotificationResult = string;
+
+export type WriteTextTVResponse = EmptyResponse;
+
+export type WriteTextResult = void;
+
+export type DeleteTextTVResponse = EmptyResponse;
+
+export type DeleteTextResult = void;
+
+export type SendEnterTVResponse = EmptyResponse;
+
+export type SendEnterResult = void;
 
 export interface InputSocketTVResponse {
   socketPath: string;
