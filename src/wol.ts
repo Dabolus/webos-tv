@@ -3,37 +3,58 @@ import { isIPv6 } from 'node:net';
 
 const MAC_BYTES = 6;
 
+export const chunk = <T extends string | unknown[]>(
+  arr: T,
+  size: number,
+): T[] =>
+  Array.from(
+    { length: Math.ceil(arr.length / size) },
+    (_, i) => arr.slice(i * size, i * size + size) as T,
+  );
+
 /**
  * Creates a WOL magic packet intended to wake the given MAC address.
  * @param {string} macAddress The MAC address of the device to wake
+ * @param {string} [password] The SecureOn password of the device to wake
  * @return {Buffer} The WOL magic packet
  */
-export const createMagicPacket = (macAddress: string): Buffer => {
-  const macBuffer = Buffer.alloc(MAC_BYTES);
+export const createMagicPacket = (
+  macAddress: string,
+  password?: string,
+): Buffer => {
   const numMacs = 16;
-  const buffer = Buffer.alloc((1 + numMacs) * MAC_BYTES);
-  if (macAddress.length === 2 * MAC_BYTES + (MAC_BYTES - 1)) {
-    macAddress = macAddress.replace(new RegExp(macAddress[2], 'g'), '');
-  }
+  const normalizedMacAddress =
+    macAddress.length === 2 * MAC_BYTES + (MAC_BYTES - 1)
+      ? // The MAC address uses separators - remove them
+        macAddress.replace(new RegExp(macAddress[2], 'g'), '')
+      : // The MAC address does not use separators - use it as it is
+        macAddress;
+
   if (
-    macAddress.length !== (2 * MAC_BYTES || macAddress.match(/[^a-fA-F0-9]/))
+    normalizedMacAddress.length !==
+    (2 * MAC_BYTES || macAddress.match(/[^a-fA-F0-9]/))
   ) {
     throw new Error(`Malformed MAC address '${macAddress}'`);
   }
-  let i;
-  for (i = 0; i < MAC_BYTES; ++i) {
-    macBuffer[i] = parseInt(macAddress.substr(2 * i, 2), 16);
+
+  if (password && password.length !== 4 && password.length !== 6) {
+    throw new Error(
+      `Malformed password '${password}' (must be either exaclty 4 or exactly 6 characters)`,
+    );
   }
 
-  for (i = 0; i < MAC_BYTES; ++i) {
-    buffer[i] = 0xff;
-  }
+  const resultArr = [
+    // Broadcast frame/synchronization stream (6 0xFF bytes)
+    ...Array.from({ length: MAC_BYTES }, () => 0xff),
+    // Target MAC address repeated 16 times
+    ...chunk(normalizedMacAddress.repeat(numMacs), 2).map((hex) =>
+      parseInt(hex, 16),
+    ),
+    // Password (if provided)
+    ...Array.from(password || '').map((char) => char.charCodeAt(0)),
+  ];
 
-  for (i = 0; i < numMacs; ++i) {
-    macBuffer.copy(buffer, (i + 1) * MAC_BYTES, 0, macBuffer.length);
-  }
-
-  return buffer;
+  return Buffer.from(resultArr);
 };
 
 /**
@@ -82,6 +103,7 @@ export const send = (
  * Creates and sends a magic packet intended to wake the given MAC address.
  * @param {string} macAddress The MAC address of the device to wake
  * @param {object} options An object containing some sending options
+ * @param {string} [options.password] The SecureOn password of the device to wake
  * @param {string} [options.address='255.255.255.255'] The address to send the magic packet to
  * @param {number} [options.port=9] The port to send the magic packet to
  * @return {Promise<Buffer>} A promise that returns the sent magic packet when resolved, or an error when rejected
@@ -89,10 +111,11 @@ export const send = (
 export const wake = async (
   macAddress: string,
   options?: {
+    password?: string;
     address?: string;
     port?: number;
   },
 ): Promise<Buffer> => {
-  const magicPacket = createMagicPacket(macAddress);
+  const magicPacket = createMagicPacket(macAddress, options?.password);
   return send(magicPacket, options);
 };
