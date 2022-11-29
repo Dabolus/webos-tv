@@ -101,7 +101,7 @@ export class TV {
    */
   public async send<T = unknown>(
     type: string,
-    uri: string,
+    uri?: string,
     payload: Record<string, unknown> = {},
   ): Promise<T> {
     await this.connectionOpened;
@@ -129,14 +129,10 @@ export class TV {
     clientKey?: string,
   ): Promise<Model.AuthenticateResult> {
     await this.connectionOpened;
-    const payload = await this.send<Model.AuthenticationTVResponse>(
-      'register',
-      undefined,
-      {
-        ...defaultConfig,
-        'client-key': clientKey,
-      },
-    );
+    const payload = await this.send<Model.Config>('register', undefined, {
+      ...defaultConfig,
+      'client-key': clientKey,
+    });
     return payload['client-key'];
   }
 

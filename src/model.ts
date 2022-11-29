@@ -19,6 +19,7 @@ export interface Config {
       signature: string;
     }[];
   };
+  'client-key'?: string;
 }
 
 export enum Button {
@@ -35,10 +36,6 @@ export type EmptyResponse = Record<string, never>;
 
 export interface BaseTVResponse {
   returnValue: boolean;
-}
-
-export interface AuthenticationTVResponse {
-  'client-key': string;
 }
 
 export type AuthenticateResult = string;
