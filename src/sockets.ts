@@ -8,10 +8,17 @@ export class SpecializedWebSocket extends WebSocket {
   public send(type: string, payload: any = {}): void {
     super.send(
       Object.entries(payload).reduce(
-        (str, [key, val]) => `${str}\n${key}: ${val}`,
+        (str, [key, val]) => `${str}\n${key}: ${this.serializeValue(val)}`,
         `type: ${type}`,
       ),
     );
+  }
+
+  private serializeValue(value: unknown): string | number {
+    if (typeof value === 'boolean') {
+      return value ? 1 : 0;
+    }
+    return `${value}`;
   }
 }
 
