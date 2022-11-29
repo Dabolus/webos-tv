@@ -147,11 +147,19 @@ export class TV {
    * @param payload The optional payload of the action
    * @returns A promise that resolves to the response from the webOS TV
    */
-  public request<T = unknown>(
+  public async request<T = unknown>(
     uri: string,
     payload?: Record<string, unknown>,
   ): Promise<T> {
-    return this.send<T>('request', uri, payload);
+    const { returnValue, ...rest } = await this.send<T & Model.BaseTVResponse>(
+      'request',
+      uri,
+      payload,
+    );
+    if (!returnValue) {
+      throw new Error('Request failed.');
+    }
+    return rest as T;
   }
 
   /**
@@ -170,13 +178,10 @@ export class TV {
 
   /**
    * Turns off the webOS TV.
-   * @returns A promise that resolves to the return value of the TV (`true`/`false`)
+   * @returns A promise
    */
   public async turnOff(): Promise<Model.TurnOffResult> {
-    const { returnValue } = await this.request<Model.TurnOffTVResponse>(
-      'ssap://system/turnOff',
-    );
-    return returnValue;
+    await this.request<Model.TurnOffTVResponse>('ssap://system/turnOff');
   }
 
   /**
@@ -553,7 +558,8 @@ export class TV {
     await this.request<Model.Enable3DTVResponse>(
       'ssap://com.webos.service.tv.display/set3DOn',
     );
-    return true;
+    const new3DStatus = await this.check3DStatus();
+    return new3DStatus.status;
   }
 
   /**
@@ -564,7 +570,17 @@ export class TV {
     await this.request<Model.Disable3DTVResponse>(
       'ssap://com.webos.service.tv.display/set3DOff',
     );
-    return false;
+    const new3DStatus = await this.check3DStatus();
+    return new3DStatus.status;
+  }
+
+  /**
+   * Toggles the 3D state of the webOS TV.
+   * @returns A promise that resolves to the 3D state of the webOS TV (always the opposite of the previous state)
+   */
+  public async toggle3D(): Promise<Model.Toggle3DResult> {
+    const threeDStatus = await this.check3DStatus();
+    return threeDStatus.status ? this.disable3D() : this.enable3D();
   }
 
   /**
@@ -653,7 +669,7 @@ export class TV {
    * @returns A promise that resolves when the request is fulfilled
    */
   public async writeText(text: string, replace = false): Promise<void> {
-    await this.request<Model.BaseTVResponse>(
+    await this.request<Model.EmptyResponse>(
       'ssap://com.webos.service.ime/insertText',
       {
         text,
@@ -668,7 +684,7 @@ export class TV {
    * @returns A promise
    */
   public async deleteText(count: number): Promise<void> {
-    await this.request<Model.BaseTVResponse>(
+    await this.request<Model.EmptyResponse>(
       'ssap://com.webos.service.ime/deleteCharacters',
       {
         count,
@@ -681,7 +697,7 @@ export class TV {
    * @returns A promise
    */
   public async sendEnter(): Promise<void> {
-    await this.request<Model.BaseTVResponse>(
+    await this.request<Model.EmptyResponse>(
       'ssap://com.webos.service.ime/sendEnterKey',
     );
   }

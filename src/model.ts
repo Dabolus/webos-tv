@@ -31,32 +31,34 @@ export enum Button {
   THREED_MODE = '3D_MODE',
 }
 
+export type EmptyResponse = Record<string, never>;
+
+export interface BaseTVResponse {
+  returnValue: boolean;
+}
+
 export interface AuthenticationTVResponse {
   'client-key': string;
 }
 
 export type AuthenticateResult = string;
 
-export interface BaseTVResponse {
-  returnValue: boolean;
-}
+export type TurnOffTVResponse = EmptyResponse;
 
-export type TurnOffTVResponse = BaseTVResponse;
-
-export type TurnOffResult = boolean;
+export type TurnOffResult = void;
 
 export interface TVService {
   name: string;
   version: number;
 }
 
-export interface GetServiceListTVResponse extends BaseTVResponse {
+export interface GetServiceListTVResponse {
   services: TVService[];
 }
 
 export type GetServiceListResult = TVService[];
 
-export interface GetChannelListTVResponse extends BaseTVResponse {
+export interface GetChannelListTVResponse {
   valueList: string;
   dataSource: number;
   dataType: number;
@@ -127,7 +129,7 @@ export interface GetChannelListTVResponse extends BaseTVResponse {
 
 export type GetChannelListResult = GetChannelListTVResponse;
 
-export interface GetCurrentChannelTVResponse extends BaseTVResponse {
+export interface GetCurrentChannelTVResponse {
   returnValue: boolean;
   channelId: string;
   signalChannelId: string;
@@ -157,15 +159,15 @@ export interface GetCurrentChannelTVResponse extends BaseTVResponse {
 
 export type GetCurrentChannelResult = GetCurrentChannelTVResponse;
 
-export type ChannelUpTVResponse = BaseTVResponse;
+export type ChannelUpTVResponse = EmptyResponse;
 
 export type ChannelUpResult = GetCurrentChannelResult;
 
-export type ChannelDownTVResponse = BaseTVResponse;
+export type ChannelDownTVResponse = EmptyResponse;
 
 export type ChannelDownResult = GetCurrentChannelResult;
 
-export interface GetVolumeTVResponse extends BaseTVResponse {
+export interface GetVolumeTVResponse {
   scenario: string;
   volume: number;
   muted: boolean;
@@ -183,7 +185,7 @@ export type VolumeUpResult = GetVolumeTVResponse;
 
 export type VolumeDownResult = GetVolumeTVResponse;
 
-export interface GetAudioStatusTVResponse extends BaseTVResponse {
+export interface GetAudioStatusTVResponse {
   scenario: string;
   volume: number;
   mute: boolean;
@@ -193,7 +195,7 @@ export type GetAudioStatusResult = GetAudioStatusTVResponse;
 
 export type IsMutedResult = boolean;
 
-export type SetMuteTVResponse = BaseTVResponse;
+export type SetMuteTVResponse = EmptyResponse;
 
 export type SetMuteResult = boolean;
 
@@ -203,7 +205,7 @@ export type UnmuteResult = boolean;
 
 export type ToggleMuteResult = boolean;
 
-export interface ForegroundAppInfoTVResponse extends BaseTVResponse {
+export interface ForegroundAppInfoTVResponse {
   appId: string;
   windowId: string;
   processId: string;
@@ -211,20 +213,22 @@ export interface ForegroundAppInfoTVResponse extends BaseTVResponse {
 
 export type ForegroundAppInfoResult = ForegroundAppInfoTVResponse;
 
-export interface OpenURLTVResponse extends BaseTVResponse {
+export interface OpenURLTVResponse {
   id: string;
   sessionId: string;
 }
 
 export type OpenURLResult = OpenURLTVResponse;
 
-export type Enable3DTVResponse = BaseTVResponse;
+export type Enable3DTVResponse = EmptyResponse;
 
 export type Enable3DResult = boolean;
 
-export type Disable3DTVResponse = BaseTVResponse;
+export type Disable3DTVResponse = EmptyResponse;
 
 export type Disable3DResult = boolean;
+
+export type Toggle3DResult = boolean;
 
 export enum TV3DStatusPattern {
   TWOD = '2d',
@@ -238,19 +242,19 @@ export interface TV3DStatus {
   pattern: TV3DStatusPattern;
 }
 
-export interface Check3DStatusTVResponse extends BaseTVResponse {
+export interface Check3DStatusTVResponse {
   status3D: TV3DStatus;
 }
 
 export type Check3DStatusResult = TV3DStatus;
 
-export interface ShowNotificationTVResponse extends BaseTVResponse {
+export interface ShowNotificationTVResponse {
   toastId: string;
 }
 
 export type ShowNotificationResult = string;
 
-export interface InputSocketTVResponse extends BaseTVResponse {
+export interface InputSocketTVResponse {
   socketPath: string;
 }
 
@@ -299,7 +303,7 @@ export interface TVAppInfo {
   appsize: number;
 }
 
-export interface AppListTVResponse extends BaseTVResponse {
+export interface AppListTVResponse {
   apps: TVAppInfo[];
 }
 
@@ -324,7 +328,7 @@ export interface TVLaunchPoint {
   imageForRecents: string;
 }
 
-export interface LaunchPointsTVResponse extends BaseTVResponse {
+export interface LaunchPointsTVResponse {
   subscribed: boolean;
   launchPoints: TVLaunchPoint[];
   caseDetail: {
