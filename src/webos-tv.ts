@@ -88,7 +88,7 @@ export class TV {
   public async disconnect(): Promise<WebSocket.CloseEvent> {
     return new Promise<WebSocket.CloseEvent>((resolve) => {
       this.connection.addEventListener('close', resolve);
-      this.connection.close();
+      this.connection.close(1000);
     });
   }
 
