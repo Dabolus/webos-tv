@@ -29,8 +29,8 @@ const browserConfig = {
     }),
     virtual({
       ws: 'export default WebSocket;',
-      url: 'export const URL = window.URL;',
       undici: 'export const fetch = window.fetch;',
+      'node:url': 'export const URL = window.URL;',
       './wol': `
         export const wake = () => {
           throw new Error("Wake on LAN is not supported on browsers");
