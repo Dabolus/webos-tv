@@ -78,7 +78,7 @@ export const send = (
   new Promise((resolve, reject) => {
     const protocol = isIPv6(options.address) ? 'udp6' : 'udp4';
     const socket = createSocket(protocol);
-    socket.on('error', (err) => {
+    socket.once('error', (err) => {
       socket.close();
       reject(err);
     });
@@ -90,6 +90,7 @@ export const send = (
       options.port,
       options.address,
       (err) => {
+        socket.close();
         if (err) {
           reject(err);
         } else {
