@@ -45,7 +45,8 @@ jobs:
           # Push the docs to the gh-pages branch
           git config user.name "${GH_NAME}"
           git config user.email "${GH_EMAIL}"
-          git commit -am "docs: automatic generation"
+          git add -A
+          git commit -m "docs: automatic generation"
           echo "Pushing to gh-pages branch..."
           git push -q origin gh-pages
         env:
