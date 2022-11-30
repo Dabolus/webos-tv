@@ -40,6 +40,7 @@ MIT
 ### Methods
 
 - [appList](webos_tv.TV.md#applist)
+- [appState](webos_tv.TV.md#appstate)
 - [authenticate](webos_tv.TV.md#authenticate)
 - [channelDown](webos_tv.TV.md#channeldown)
 - [channelUp](webos_tv.TV.md#channelup)
@@ -56,6 +57,7 @@ MIT
 - [getAudioStatus](webos_tv.TV.md#getaudiostatus)
 - [getChannelList](webos_tv.TV.md#getchannellist)
 - [getCurrentChannel](webos_tv.TV.md#getcurrentchannel)
+- [getCurrentSWInformation](webos_tv.TV.md#getcurrentswinformation)
 - [getPointerInputSocket](webos_tv.TV.md#getpointerinputsocket)
 - [getRemoteKeyboardSocket](webos_tv.TV.md#getremotekeyboardsocket)
 - [getServiceList](webos_tv.TV.md#getservicelist)
@@ -109,7 +111,7 @@ Connects to a webOS TV to the given hostname.
 
 #### Defined in
 
-[src/webos-tv.ts:71](https://github.com/Dabolus/webos-tv/blob/77db811/src/webos-tv.ts#L71)
+[src/webos-tv.ts:71](https://github.com/Dabolus/webos-tv/blob/db77d18/src/webos-tv.ts#L71)
 
 ## Properties
 
@@ -119,7 +121,7 @@ Connects to a webOS TV to the given hostname.
 
 #### Defined in
 
-[src/webos-tv.ts:57](https://github.com/Dabolus/webos-tv/blob/77db811/src/webos-tv.ts#L57)
+[src/webos-tv.ts:57](https://github.com/Dabolus/webos-tv/blob/db77d18/src/webos-tv.ts#L57)
 
 ___
 
@@ -129,7 +131,7 @@ ___
 
 #### Defined in
 
-[src/webos-tv.ts:53](https://github.com/Dabolus/webos-tv/blob/77db811/src/webos-tv.ts#L53)
+[src/webos-tv.ts:53](https://github.com/Dabolus/webos-tv/blob/db77d18/src/webos-tv.ts#L53)
 
 ___
 
@@ -139,7 +141,7 @@ ___
 
 #### Defined in
 
-[src/webos-tv.ts:52](https://github.com/Dabolus/webos-tv/blob/77db811/src/webos-tv.ts#L52)
+[src/webos-tv.ts:52](https://github.com/Dabolus/webos-tv/blob/db77d18/src/webos-tv.ts#L52)
 
 ___
 
@@ -149,7 +151,7 @@ ___
 
 #### Defined in
 
-[src/webos-tv.ts:54](https://github.com/Dabolus/webos-tv/blob/77db811/src/webos-tv.ts#L54)
+[src/webos-tv.ts:54](https://github.com/Dabolus/webos-tv/blob/db77d18/src/webos-tv.ts#L54)
 
 ___
 
@@ -159,7 +161,7 @@ ___
 
 #### Defined in
 
-[src/webos-tv.ts:56](https://github.com/Dabolus/webos-tv/blob/77db811/src/webos-tv.ts#L56)
+[src/webos-tv.ts:56](https://github.com/Dabolus/webos-tv/blob/db77d18/src/webos-tv.ts#L56)
 
 ___
 
@@ -169,7 +171,7 @@ ___
 
 #### Defined in
 
-[src/webos-tv.ts:64](https://github.com/Dabolus/webos-tv/blob/77db811/src/webos-tv.ts#L64)
+[src/webos-tv.ts:64](https://github.com/Dabolus/webos-tv/blob/db77d18/src/webos-tv.ts#L64)
 
 ## Accessors
 
@@ -183,7 +185,7 @@ ___
 
 #### Defined in
 
-[src/webos-tv.ts:22](https://github.com/Dabolus/webos-tv/blob/77db811/src/webos-tv.ts#L22)
+[src/webos-tv.ts:22](https://github.com/Dabolus/webos-tv/blob/db77d18/src/webos-tv.ts#L22)
 
 ## Methods
 
@@ -201,7 +203,32 @@ A promise that resolves to the list of the available apps
 
 #### Defined in
 
-[src/webos-tv.ts:504](https://github.com/Dabolus/webos-tv/blob/77db811/src/webos-tv.ts#L504)
+[src/webos-tv.ts:504](https://github.com/Dabolus/webos-tv/blob/db77d18/src/webos-tv.ts#L504)
+
+___
+
+### appState
+
+▸ **appState**(`id`, `sessionId`): `Promise`<[`AppStateTVResponse`](../interfaces/model.AppStateTVResponse.md)\>
+
+Gets the app state.
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `id` | `string` | The ID of the app |
+| `sessionId` | `string` | The ID of the session |
+
+#### Returns
+
+`Promise`<[`AppStateTVResponse`](../interfaces/model.AppStateTVResponse.md)\>
+
+A promise that resolves to the specified app state
+
+#### Defined in
+
+[src/webos-tv.ts:477](https://github.com/Dabolus/webos-tv/blob/db77d18/src/webos-tv.ts#L477)
 
 ___
 
@@ -225,7 +252,7 @@ A promise that resolves to an auth key. Remember to store the auth key somewhere
 
 #### Defined in
 
-[src/webos-tv.ts:128](https://github.com/Dabolus/webos-tv/blob/77db811/src/webos-tv.ts#L128)
+[src/webos-tv.ts:128](https://github.com/Dabolus/webos-tv/blob/db77d18/src/webos-tv.ts#L128)
 
 ___
 
@@ -243,7 +270,7 @@ A promise that resolves to the new channel of the webOS TV
 
 #### Defined in
 
-[src/webos-tv.ts:227](https://github.com/Dabolus/webos-tv/blob/77db811/src/webos-tv.ts#L227)
+[src/webos-tv.ts:227](https://github.com/Dabolus/webos-tv/blob/db77d18/src/webos-tv.ts#L227)
 
 ___
 
@@ -261,7 +288,7 @@ A promise that resolves to the new channel of the webOS TV
 
 #### Defined in
 
-[src/webos-tv.ts:218](https://github.com/Dabolus/webos-tv/blob/77db811/src/webos-tv.ts#L218)
+[src/webos-tv.ts:218](https://github.com/Dabolus/webos-tv/blob/db77d18/src/webos-tv.ts#L218)
 
 ___
 
@@ -279,7 +306,7 @@ A promise that resolves to the status of the 3D on the webOS TV
 
 #### Defined in
 
-[src/webos-tv.ts:596](https://github.com/Dabolus/webos-tv/blob/77db811/src/webos-tv.ts#L596)
+[src/webos-tv.ts:591](https://github.com/Dabolus/webos-tv/blob/db77d18/src/webos-tv.ts#L591)
 
 ___
 
@@ -303,7 +330,7 @@ A promise
 
 #### Defined in
 
-[src/webos-tv.ts:538](https://github.com/Dabolus/webos-tv/blob/77db811/src/webos-tv.ts#L538)
+[src/webos-tv.ts:537](https://github.com/Dabolus/webos-tv/blob/db77d18/src/webos-tv.ts#L537)
 
 ___
 
@@ -321,7 +348,7 @@ A promise
 
 #### Defined in
 
-[src/webos-tv.ts:459](https://github.com/Dabolus/webos-tv/blob/77db811/src/webos-tv.ts#L459)
+[src/webos-tv.ts:457](https://github.com/Dabolus/webos-tv/blob/db77d18/src/webos-tv.ts#L457)
 
 ___
 
@@ -345,7 +372,7 @@ A promise that resolves to the new volume of the webOS TV
 
 #### Defined in
 
-[src/webos-tv.ts:328](https://github.com/Dabolus/webos-tv/blob/77db811/src/webos-tv.ts#L328)
+[src/webos-tv.ts:328](https://github.com/Dabolus/webos-tv/blob/db77d18/src/webos-tv.ts#L328)
 
 ___
 
@@ -369,7 +396,7 @@ A promise
 
 #### Defined in
 
-[src/webos-tv.ts:695](https://github.com/Dabolus/webos-tv/blob/77db811/src/webos-tv.ts#L695)
+[src/webos-tv.ts:690](https://github.com/Dabolus/webos-tv/blob/db77d18/src/webos-tv.ts#L690)
 
 ___
 
@@ -387,7 +414,7 @@ A promise that resolves to the new state of the 3D of the webOS TV (always false
 
 #### Defined in
 
-[src/webos-tv.ts:575](https://github.com/Dabolus/webos-tv/blob/77db811/src/webos-tv.ts#L575)
+[src/webos-tv.ts:570](https://github.com/Dabolus/webos-tv/blob/db77d18/src/webos-tv.ts#L570)
 
 ___
 
@@ -405,7 +432,7 @@ A promise that resolves to the connection close event when the connection is clo
 
 #### Defined in
 
-[src/webos-tv.ts:88](https://github.com/Dabolus/webos-tv/blob/77db811/src/webos-tv.ts#L88)
+[src/webos-tv.ts:88](https://github.com/Dabolus/webos-tv/blob/db77d18/src/webos-tv.ts#L88)
 
 ___
 
@@ -423,7 +450,7 @@ A promise that resolves to the new state of the 3D of the webOS TV (always true)
 
 #### Defined in
 
-[src/webos-tv.ts:563](https://github.com/Dabolus/webos-tv/blob/77db811/src/webos-tv.ts#L563)
+[src/webos-tv.ts:558](https://github.com/Dabolus/webos-tv/blob/db77d18/src/webos-tv.ts#L558)
 
 ___
 
@@ -441,7 +468,7 @@ A promise
 
 #### Defined in
 
-[src/webos-tv.ts:449](https://github.com/Dabolus/webos-tv/blob/77db811/src/webos-tv.ts#L449)
+[src/webos-tv.ts:447](https://github.com/Dabolus/webos-tv/blob/db77d18/src/webos-tv.ts#L447)
 
 ___
 
@@ -459,7 +486,7 @@ A promise that resolves to the info of the foreground app
 
 #### Defined in
 
-[src/webos-tv.ts:469](https://github.com/Dabolus/webos-tv/blob/77db811/src/webos-tv.ts#L469)
+[src/webos-tv.ts:465](https://github.com/Dabolus/webos-tv/blob/db77d18/src/webos-tv.ts#L465)
 
 ___
 
@@ -477,7 +504,7 @@ A promise that resolves to the current audio status of the webOS TV
 
 #### Defined in
 
-[src/webos-tv.ts:362](https://github.com/Dabolus/webos-tv/blob/77db811/src/webos-tv.ts#L362)
+[src/webos-tv.ts:362](https://github.com/Dabolus/webos-tv/blob/db77d18/src/webos-tv.ts#L362)
 
 ___
 
@@ -495,7 +522,7 @@ The list of the channels on the webOS TV
 
 #### Defined in
 
-[src/webos-tv.ts:198](https://github.com/Dabolus/webos-tv/blob/77db811/src/webos-tv.ts#L198)
+[src/webos-tv.ts:200](https://github.com/Dabolus/webos-tv/blob/db77d18/src/webos-tv.ts#L200)
 
 ___
 
@@ -513,7 +540,25 @@ A promise that resolves to the currently active channel on the webOS TV
 
 #### Defined in
 
-[src/webos-tv.ts:208](https://github.com/Dabolus/webos-tv/blob/77db811/src/webos-tv.ts#L208)
+[src/webos-tv.ts:208](https://github.com/Dabolus/webos-tv/blob/db77d18/src/webos-tv.ts#L208)
+
+___
+
+### getCurrentSWInformation
+
+▸ **getCurrentSWInformation**(): `Promise`<[`GetCurrentSWInformationTVResponse`](../interfaces/model.GetCurrentSWInformationTVResponse.md)\>
+
+Gets the current SW information
+
+#### Returns
+
+`Promise`<[`GetCurrentSWInformationTVResponse`](../interfaces/model.GetCurrentSWInformationTVResponse.md)\>
+
+A promise that resolves to the current software information
+
+#### Defined in
+
+[src/webos-tv.ts:494](https://github.com/Dabolus/webos-tv/blob/db77d18/src/webos-tv.ts#L494)
 
 ___
 
@@ -531,7 +576,7 @@ A promise that resolves to a specialized pointer input socket
 
 #### Defined in
 
-[src/webos-tv.ts:653](https://github.com/Dabolus/webos-tv/blob/77db811/src/webos-tv.ts#L653)
+[src/webos-tv.ts:648](https://github.com/Dabolus/webos-tv/blob/db77d18/src/webos-tv.ts#L648)
 
 ___
 
@@ -549,7 +594,7 @@ A promise that resolves to a specialized remote keyboard socket
 
 #### Defined in
 
-[src/webos-tv.ts:664](https://github.com/Dabolus/webos-tv/blob/77db811/src/webos-tv.ts#L664)
+[src/webos-tv.ts:659](https://github.com/Dabolus/webos-tv/blob/db77d18/src/webos-tv.ts#L659)
 
 ___
 
@@ -567,7 +612,7 @@ A promise that resolves to the list of services of the webOS TV
 
 #### Defined in
 
-[src/webos-tv.ts:187](https://github.com/Dabolus/webos-tv/blob/77db811/src/webos-tv.ts#L187)
+[src/webos-tv.ts:189](https://github.com/Dabolus/webos-tv/blob/db77d18/src/webos-tv.ts#L189)
 
 ___
 
@@ -596,7 +641,7 @@ Requests a specialized socket to the webOS TV.
 
 #### Defined in
 
-[src/webos-tv.ts:633](https://github.com/Dabolus/webos-tv/blob/77db811/src/webos-tv.ts#L633)
+[src/webos-tv.ts:628](https://github.com/Dabolus/webos-tv/blob/db77d18/src/webos-tv.ts#L628)
 
 ___
 
@@ -614,7 +659,7 @@ A promise that resolves to the current volume information of the webOS TV
 
 #### Defined in
 
-[src/webos-tv.ts:274](https://github.com/Dabolus/webos-tv/blob/77db811/src/webos-tv.ts#L274)
+[src/webos-tv.ts:274](https://github.com/Dabolus/webos-tv/blob/db77d18/src/webos-tv.ts#L274)
 
 ___
 
@@ -634,7 +679,7 @@ ___
 
 #### Defined in
 
-[src/webos-tv.ts:714](https://github.com/Dabolus/webos-tv/blob/77db811/src/webos-tv.ts#L714)
+[src/webos-tv.ts:709](https://github.com/Dabolus/webos-tv/blob/db77d18/src/webos-tv.ts#L709)
 
 ___
 
@@ -658,7 +703,7 @@ A promise that resolves to the new volume of the webOS TV
 
 #### Defined in
 
-[src/webos-tv.ts:311](https://github.com/Dabolus/webos-tv/blob/77db811/src/webos-tv.ts#L311)
+[src/webos-tv.ts:311](https://github.com/Dabolus/webos-tv/blob/db77d18/src/webos-tv.ts#L311)
 
 ___
 
@@ -676,7 +721,7 @@ A promise that resolves to the current mute status of the webOS TV
 
 #### Defined in
 
-[src/webos-tv.ts:372](https://github.com/Dabolus/webos-tv/blob/77db811/src/webos-tv.ts#L372)
+[src/webos-tv.ts:370](https://github.com/Dabolus/webos-tv/blob/db77d18/src/webos-tv.ts#L370)
 
 ___
 
@@ -700,7 +745,7 @@ A promise
 
 #### Defined in
 
-[src/webos-tv.ts:526](https://github.com/Dabolus/webos-tv/blob/77db811/src/webos-tv.ts#L526)
+[src/webos-tv.ts:526](https://github.com/Dabolus/webos-tv/blob/db77d18/src/webos-tv.ts#L526)
 
 ___
 
@@ -718,7 +763,7 @@ A promise that resolves to the list of the available launch points
 
 #### Defined in
 
-[src/webos-tv.ts:515](https://github.com/Dabolus/webos-tv/blob/77db811/src/webos-tv.ts#L515)
+[src/webos-tv.ts:515](https://github.com/Dabolus/webos-tv/blob/db77d18/src/webos-tv.ts#L515)
 
 ___
 
@@ -739,7 +784,7 @@ ___
 
 #### Defined in
 
-[src/webos-tv.ts:729](https://github.com/Dabolus/webos-tv/blob/77db811/src/webos-tv.ts#L729)
+[src/webos-tv.ts:724](https://github.com/Dabolus/webos-tv/blob/db77d18/src/webos-tv.ts#L724)
 
 ___
 
@@ -757,7 +802,7 @@ A promise that resolves to the new mute state of the webOS TV (always true)
 
 #### Defined in
 
-[src/webos-tv.ts:392](https://github.com/Dabolus/webos-tv/blob/77db811/src/webos-tv.ts#L392)
+[src/webos-tv.ts:390](https://github.com/Dabolus/webos-tv/blob/db77d18/src/webos-tv.ts#L390)
 
 ___
 
@@ -781,7 +826,7 @@ A promise that resolves to the new channel of the webOS TV
 
 #### Defined in
 
-[src/webos-tv.ts:237](https://github.com/Dabolus/webos-tv/blob/77db811/src/webos-tv.ts#L237)
+[src/webos-tv.ts:237](https://github.com/Dabolus/webos-tv/blob/db77d18/src/webos-tv.ts#L237)
 
 ___
 
@@ -805,7 +850,7 @@ A promise that resolves to the new channel of the webOS TV
 
 #### Defined in
 
-[src/webos-tv.ts:262](https://github.com/Dabolus/webos-tv/blob/77db811/src/webos-tv.ts#L262)
+[src/webos-tv.ts:262](https://github.com/Dabolus/webos-tv/blob/db77d18/src/webos-tv.ts#L262)
 
 ___
 
@@ -829,7 +874,7 @@ A promise that resolves to the new channel of the webOS TV
 
 #### Defined in
 
-[src/webos-tv.ts:247](https://github.com/Dabolus/webos-tv/blob/77db811/src/webos-tv.ts#L247)
+[src/webos-tv.ts:247](https://github.com/Dabolus/webos-tv/blob/db77d18/src/webos-tv.ts#L247)
 
 ___
 
@@ -853,7 +898,7 @@ A promise that resolves to the session ID of the tab opened in the browser
 
 #### Defined in
 
-[src/webos-tv.ts:550](https://github.com/Dabolus/webos-tv/blob/77db811/src/webos-tv.ts#L550)
+[src/webos-tv.ts:548](https://github.com/Dabolus/webos-tv/blob/db77d18/src/webos-tv.ts#L548)
 
 ___
 
@@ -871,7 +916,7 @@ A promise
 
 #### Defined in
 
-[src/webos-tv.ts:433](https://github.com/Dabolus/webos-tv/blob/77db811/src/webos-tv.ts#L433)
+[src/webos-tv.ts:431](https://github.com/Dabolus/webos-tv/blob/db77d18/src/webos-tv.ts#L431)
 
 ___
 
@@ -889,7 +934,7 @@ A promise
 
 #### Defined in
 
-[src/webos-tv.ts:417](https://github.com/Dabolus/webos-tv/blob/77db811/src/webos-tv.ts#L417)
+[src/webos-tv.ts:415](https://github.com/Dabolus/webos-tv/blob/db77d18/src/webos-tv.ts#L415)
 
 ___
 
@@ -921,7 +966,7 @@ A promise that resolves to the response from the webOS TV
 
 #### Defined in
 
-[src/webos-tv.ts:146](https://github.com/Dabolus/webos-tv/blob/77db811/src/webos-tv.ts#L146)
+[src/webos-tv.ts:146](https://github.com/Dabolus/webos-tv/blob/db77d18/src/webos-tv.ts#L146)
 
 ___
 
@@ -939,7 +984,7 @@ A promise
 
 #### Defined in
 
-[src/webos-tv.ts:441](https://github.com/Dabolus/webos-tv/blob/77db811/src/webos-tv.ts#L441)
+[src/webos-tv.ts:439](https://github.com/Dabolus/webos-tv/blob/db77d18/src/webos-tv.ts#L439)
 
 ___
 
@@ -971,7 +1016,7 @@ A promise that resolves to the response from the webOS TV
 
 #### Defined in
 
-[src/webos-tv.ts:102](https://github.com/Dabolus/webos-tv/blob/77db811/src/webos-tv.ts#L102)
+[src/webos-tv.ts:102](https://github.com/Dabolus/webos-tv/blob/db77d18/src/webos-tv.ts#L102)
 
 ___
 
@@ -989,7 +1034,7 @@ A promise
 
 #### Defined in
 
-[src/webos-tv.ts:708](https://github.com/Dabolus/webos-tv/blob/77db811/src/webos-tv.ts#L708)
+[src/webos-tv.ts:703](https://github.com/Dabolus/webos-tv/blob/db77d18/src/webos-tv.ts#L703)
 
 ___
 
@@ -1013,7 +1058,7 @@ A promise that resolves to the new mute status of the webOS TV
 
 #### Defined in
 
-[src/webos-tv.ts:381](https://github.com/Dabolus/webos-tv/blob/77db811/src/webos-tv.ts#L381)
+[src/webos-tv.ts:379](https://github.com/Dabolus/webos-tv/blob/db77d18/src/webos-tv.ts#L379)
 
 ___
 
@@ -1037,7 +1082,7 @@ A promise that resolves to the new volume of the webOS TV
 
 #### Defined in
 
-[src/webos-tv.ts:283](https://github.com/Dabolus/webos-tv/blob/77db811/src/webos-tv.ts#L283)
+[src/webos-tv.ts:283](https://github.com/Dabolus/webos-tv/blob/db77d18/src/webos-tv.ts#L283)
 
 ___
 
@@ -1063,7 +1108,7 @@ A promise that resolves to the ID of the shown toast notification.
 
 #### Defined in
 
-[src/webos-tv.ts:610](https://github.com/Dabolus/webos-tv/blob/77db811/src/webos-tv.ts#L610)
+[src/webos-tv.ts:605](https://github.com/Dabolus/webos-tv/blob/db77d18/src/webos-tv.ts#L605)
 
 ___
 
@@ -1081,7 +1126,7 @@ A promise
 
 #### Defined in
 
-[src/webos-tv.ts:425](https://github.com/Dabolus/webos-tv/blob/77db811/src/webos-tv.ts#L425)
+[src/webos-tv.ts:423](https://github.com/Dabolus/webos-tv/blob/db77d18/src/webos-tv.ts#L423)
 
 ___
 
@@ -1113,7 +1158,7 @@ A promise that resolves to the response from the webOS TV
 
 #### Defined in
 
-[src/webos-tv.ts:168](https://github.com/Dabolus/webos-tv/blob/77db811/src/webos-tv.ts#L168)
+[src/webos-tv.ts:170](https://github.com/Dabolus/webos-tv/blob/db77d18/src/webos-tv.ts#L170)
 
 ___
 
@@ -1131,7 +1176,7 @@ A promise that resolves to the 3D state of the webOS TV (always the opposite of 
 
 #### Defined in
 
-[src/webos-tv.ts:587](https://github.com/Dabolus/webos-tv/blob/77db811/src/webos-tv.ts#L587)
+[src/webos-tv.ts:582](https://github.com/Dabolus/webos-tv/blob/db77d18/src/webos-tv.ts#L582)
 
 ___
 
@@ -1149,7 +1194,7 @@ A promise that resolves to the new mute state of the webOS TV (always the opposi
 
 #### Defined in
 
-[src/webos-tv.ts:408](https://github.com/Dabolus/webos-tv/blob/77db811/src/webos-tv.ts#L408)
+[src/webos-tv.ts:406](https://github.com/Dabolus/webos-tv/blob/db77d18/src/webos-tv.ts#L406)
 
 ___
 
@@ -1167,7 +1212,7 @@ A promise
 
 #### Defined in
 
-[src/webos-tv.ts:179](https://github.com/Dabolus/webos-tv/blob/77db811/src/webos-tv.ts#L179)
+[src/webos-tv.ts:181](https://github.com/Dabolus/webos-tv/blob/db77d18/src/webos-tv.ts#L181)
 
 ___
 
@@ -1185,7 +1230,7 @@ A promise that resolves to the new mute state of the webOS TV (always false)
 
 #### Defined in
 
-[src/webos-tv.ts:400](https://github.com/Dabolus/webos-tv/blob/77db811/src/webos-tv.ts#L400)
+[src/webos-tv.ts:398](https://github.com/Dabolus/webos-tv/blob/db77d18/src/webos-tv.ts#L398)
 
 ___
 
@@ -1203,7 +1248,7 @@ A promise that resolves to the new volume of the webOS TV
 
 #### Defined in
 
-[src/webos-tv.ts:353](https://github.com/Dabolus/webos-tv/blob/77db811/src/webos-tv.ts#L353)
+[src/webos-tv.ts:353](https://github.com/Dabolus/webos-tv/blob/db77d18/src/webos-tv.ts#L353)
 
 ___
 
@@ -1221,7 +1266,7 @@ A promise that resolves to the new volume of the webOS TV
 
 #### Defined in
 
-[src/webos-tv.ts:344](https://github.com/Dabolus/webos-tv/blob/77db811/src/webos-tv.ts#L344)
+[src/webos-tv.ts:344](https://github.com/Dabolus/webos-tv/blob/db77d18/src/webos-tv.ts#L344)
 
 ___
 
@@ -1246,7 +1291,7 @@ A promise that resolves when the request is fulfilled
 
 #### Defined in
 
-[src/webos-tv.ts:677](https://github.com/Dabolus/webos-tv/blob/77db811/src/webos-tv.ts#L677)
+[src/webos-tv.ts:672](https://github.com/Dabolus/webos-tv/blob/db77d18/src/webos-tv.ts#L672)
 
 ___
 
@@ -1270,7 +1315,7 @@ The URL object corresponding to the TV hostname
 
 #### Defined in
 
-[src/webos-tv.ts:31](https://github.com/Dabolus/webos-tv/blob/77db811/src/webos-tv.ts#L31)
+[src/webos-tv.ts:31](https://github.com/Dabolus/webos-tv/blob/db77d18/src/webos-tv.ts#L31)
 
 ___
 
@@ -1295,4 +1340,4 @@ A promise that resolves with the magic packet sent to the webOS TV
 
 #### Defined in
 
-[src/webos-tv.ts:47](https://github.com/Dabolus/webos-tv/blob/77db811/src/webos-tv.ts#L47)
+[src/webos-tv.ts:47](https://github.com/Dabolus/webos-tv/blob/db77d18/src/webos-tv.ts#L47)

@@ -97,7 +97,7 @@
 
 #### Defined in
 
-[src/sockets.ts:4](https://github.com/Dabolus/webos-tv/blob/77db811/src/sockets.ts#L4)
+[src/sockets.ts:4](https://github.com/Dabolus/webos-tv/blob/db77d18/src/sockets.ts#L4)
 
 ## Properties
 
@@ -783,7 +783,7 @@ ___
 
 #### Defined in
 
-[src/sockets.ts:26](https://github.com/Dabolus/webos-tv/blob/77db811/src/sockets.ts#L26)
+[src/sockets.ts:26](https://github.com/Dabolus/webos-tv/blob/db77d18/src/sockets.ts#L26)
 
 ___
 
@@ -1028,7 +1028,7 @@ ___
 
 #### Defined in
 
-[src/sockets.ts:34](https://github.com/Dabolus/webos-tv/blob/77db811/src/sockets.ts#L34)
+[src/sockets.ts:34](https://github.com/Dabolus/webos-tv/blob/db77d18/src/sockets.ts#L34)
 
 ___
 
@@ -1720,7 +1720,7 @@ ___
 
 #### Defined in
 
-[src/sockets.ts:30](https://github.com/Dabolus/webos-tv/blob/77db811/src/sockets.ts#L30)
+[src/sockets.ts:30](https://github.com/Dabolus/webos-tv/blob/db77d18/src/sockets.ts#L30)
 
 ___
 
@@ -2113,7 +2113,7 @@ ___
 
 #### Defined in
 
-[src/sockets.ts:38](https://github.com/Dabolus/webos-tv/blob/77db811/src/sockets.ts#L38)
+[src/sockets.ts:38](https://github.com/Dabolus/webos-tv/blob/db77d18/src/sockets.ts#L38)
 
 ___
 
@@ -2138,7 +2138,7 @@ ___
 
 #### Defined in
 
-[src/sockets.ts:8](https://github.com/Dabolus/webos-tv/blob/77db811/src/sockets.ts#L8)
+[src/sockets.ts:8](https://github.com/Dabolus/webos-tv/blob/db77d18/src/sockets.ts#L8)
 
 ___
 

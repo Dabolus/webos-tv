@@ -18,4 +18,4 @@
 
 #### Defined in
 
-[src/model.ts:53](https://github.com/Dabolus/webos-tv/blob/77db811/src/model.ts#L53)
+[src/model.ts:85](https://github.com/Dabolus/webos-tv/blob/db77d18/src/model.ts#L85)

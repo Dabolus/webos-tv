@@ -36,7 +36,7 @@
 
 #### Defined in
 
-[src/wol.ts:6](https://github.com/Dabolus/webos-tv/blob/77db811/src/wol.ts#L6)
+[src/wol.ts:6](https://github.com/Dabolus/webos-tv/blob/db77d18/src/wol.ts#L6)
 
 ___
 
@@ -61,7 +61,7 @@ The WOL magic packet
 
 #### Defined in
 
-[src/wol.ts:21](https://github.com/Dabolus/webos-tv/blob/77db811/src/wol.ts#L21)
+[src/wol.ts:21](https://github.com/Dabolus/webos-tv/blob/db77d18/src/wol.ts#L21)
 
 ___
 
@@ -88,7 +88,7 @@ A promise that returns the sent magic packet when resolved, or an error when rej
 
 #### Defined in
 
-[src/wol.ts:68](https://github.com/Dabolus/webos-tv/blob/77db811/src/wol.ts#L68)
+[src/wol.ts:68](https://github.com/Dabolus/webos-tv/blob/db77d18/src/wol.ts#L68)
 
 ___
 
@@ -116,4 +116,4 @@ A promise that returns the sent magic packet when resolved, or an error when rej
 
 #### Defined in
 
-[src/wol.ts:112](https://github.com/Dabolus/webos-tv/blob/77db811/src/wol.ts#L112)
+[src/wol.ts:112](https://github.com/Dabolus/webos-tv/blob/db77d18/src/wol.ts#L112)
