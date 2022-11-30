@@ -26,4 +26,4 @@
 
 #### Defined in
 
-[src/readfile-node.ts:3](https://github.com/Dabolus/webos-tv/blob/a44bbc5/src/readfile-node.ts#L3)
+[src/readfile-node.ts:3](https://github.com/Dabolus/webos-tv/blob/77db811/src/readfile-node.ts#L3)

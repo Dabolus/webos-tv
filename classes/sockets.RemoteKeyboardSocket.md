@@ -93,7 +93,7 @@
 
 #### Defined in
 
-[src/sockets.ts:4](https://github.com/Dabolus/webos-tv/blob/a44bbc5/src/sockets.ts#L4)
+[src/sockets.ts:4](https://github.com/Dabolus/webos-tv/blob/77db811/src/sockets.ts#L4)
 
 ## Properties
 
@@ -2057,7 +2057,7 @@ ___
 
 #### Defined in
 
-[src/sockets.ts:8](https://github.com/Dabolus/webos-tv/blob/a44bbc5/src/sockets.ts#L8)
+[src/sockets.ts:8](https://github.com/Dabolus/webos-tv/blob/77db811/src/sockets.ts#L8)
 
 ___
 
