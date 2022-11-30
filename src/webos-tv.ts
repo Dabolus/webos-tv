@@ -149,7 +149,7 @@ export class TV {
   ): Promise<T> {
     const { returnValue, ...rest } = await this.send<T & Model.BaseTVResponse>(
       'request',
-      uri,
+      uri.startsWith('ssap://') ? uri : `ssap://${uri}`,
       payload,
     );
     if (!returnValue) {
@@ -179,7 +179,7 @@ export class TV {
    * @returns A promise
    */
   public async turnOff(): Promise<Model.TurnOffResult> {
-    await this.request<Model.TurnOffTVResponse>('ssap://system/turnOff');
+    await this.request<Model.TurnOffTVResponse>('system/turnOff');
   }
 
   /**
@@ -188,7 +188,7 @@ export class TV {
    */
   public async getServiceList(): Promise<Model.GetServiceListResult> {
     const { services } = await this.request<Model.GetServiceListTVResponse>(
-      'ssap://api/getServiceList',
+      'api/getServiceList',
     );
     return services;
   }
@@ -198,9 +198,7 @@ export class TV {
    * @returns The list of the channels on the webOS TV
    */
   public async getChannelList(): Promise<Model.GetChannelListResult> {
-    return this.request<Model.GetChannelListTVResponse>(
-      'ssap://tv/getChannelList',
-    );
+    return this.request<Model.GetChannelListTVResponse>('tv/getChannelList');
   }
 
   /**
@@ -209,7 +207,7 @@ export class TV {
    */
   public async getCurrentChannel(): Promise<Model.GetCurrentChannelResult> {
     return this.request<Model.GetCurrentChannelTVResponse>(
-      'ssap://tv/getCurrentChannel',
+      'tv/getCurrentChannel',
     );
   }
 
@@ -218,7 +216,7 @@ export class TV {
    * @returns A promise that resolves to the new channel of the webOS TV
    */
   public async channelUp(): Promise<Model.ChannelUpResult> {
-    await this.request<Model.ChannelUpTVResponse>('ssap://tv/channelUp');
+    await this.request<Model.ChannelUpTVResponse>('tv/channelUp');
     return this.getCurrentChannel();
   }
 
@@ -227,7 +225,7 @@ export class TV {
    * @returns A promise that resolves to the new channel of the webOS TV
    */
   public async channelDown(): Promise<Model.ChannelDownResult> {
-    await this.request<Model.ChannelDownTVResponse>('ssap://tv/channelDown');
+    await this.request<Model.ChannelDownTVResponse>('tv/channelDown');
     return this.getCurrentChannel();
   }
 
@@ -237,7 +235,7 @@ export class TV {
    * @returns A promise that resolves to the new channel of the webOS TV
    */
   public async openChannel(channelId: string) {
-    await this.request('ssap://tv/openChannel', { channelId });
+    await this.request('tv/openChannel', { channelId });
     return this.getCurrentChannel();
   }
 
@@ -274,7 +272,7 @@ export class TV {
    * @returns A promise that resolves to the current volume information of the webOS TV
    */
   public async getVolume(): Promise<Model.GetVolumeResult> {
-    return this.request<Model.GetVolumeTVResponse>('ssap://audio/getVolume');
+    return this.request<Model.GetVolumeTVResponse>('audio/getVolume');
   }
 
   /**
@@ -301,7 +299,7 @@ export class TV {
         ),
       );
     }
-    await this.request('ssap://audio/setVolume', { volume });
+    await this.request('audio/setVolume', { volume });
     return this.getVolume();
   }
 
@@ -344,7 +342,7 @@ export class TV {
    * @returns A promise that resolves to the new volume of the webOS TV
    */
   public async volumeUp(): Promise<Model.VolumeUpResult> {
-    await this.request('ssap://audio/volumeUp');
+    await this.request('audio/volumeUp');
     return this.getVolume();
   }
 
@@ -353,7 +351,7 @@ export class TV {
    * @returns A promise that resolves to the new volume of the webOS TV
    */
   public async volumeDown(): Promise<Model.VolumeDownResult> {
-    await this.request('ssap://audio/volumeDown');
+    await this.request('audio/volumeDown');
     return this.getVolume();
   }
 
@@ -362,9 +360,7 @@ export class TV {
    * @returns A promise that resolves to the current audio status of the webOS TV
    */
   public async getAudioStatus(): Promise<Model.GetAudioStatusResult> {
-    return this.request<Model.GetAudioStatusTVResponse>(
-      'ssap://audio/getStatus',
-    );
+    return this.request<Model.GetAudioStatusTVResponse>('audio/getStatus');
   }
 
   /**
@@ -381,7 +377,7 @@ export class TV {
    * @returns A promise that resolves to the new mute status of the webOS TV
    */
   public async setMute(mute: boolean): Promise<Model.SetMuteResult> {
-    await this.request<Model.SetMuteTVResponse>('ssap://audio/setMute', {
+    await this.request<Model.SetMuteTVResponse>('audio/setMute', {
       mute,
     });
     return mute;
@@ -417,7 +413,7 @@ export class TV {
    * @returns A promise
    */
   public async play(): Promise<Model.PlayResult> {
-    await this.request<Model.PlayTVResponse>('ssap://media.controls/play');
+    await this.request<Model.PlayTVResponse>('media.controls/play');
   }
 
   /**
@@ -425,7 +421,7 @@ export class TV {
    * @returns A promise
    */
   public async stop(): Promise<Model.StopResult> {
-    await this.request<Model.StopTVResponse>('ssap://media.controls/stop');
+    await this.request<Model.StopTVResponse>('media.controls/stop');
   }
 
   /**
@@ -433,7 +429,7 @@ export class TV {
    * @returns A promise
    */
   public async pause(): Promise<Model.PauseResult> {
-    await this.request<Model.PauseTVResponse>('ssap://media.controls/pause');
+    await this.request<Model.PauseTVResponse>('media.controls/pause');
   }
 
   /**
@@ -441,7 +437,7 @@ export class TV {
    * @returns A promise
    */
   public async rewind(): Promise<Model.RewindResult> {
-    await this.request<Model.RewindTVResponse>('ssap://media.controls/rewind');
+    await this.request<Model.RewindTVResponse>('media.controls/rewind');
   }
 
   /**
@@ -450,7 +446,7 @@ export class TV {
    */
   public async fastForward(): Promise<Model.FastForwardResult> {
     await this.request<Model.FastForwardTVResponse>(
-      'ssap://media.controls/fastForward',
+      'media.controls/fastForward',
     );
   }
 
@@ -459,9 +455,7 @@ export class TV {
    * @returns A promise
    */
   public async closeMediaViewer(): Promise<Model.CloseMediaViewerResult> {
-    await this.request<Model.CloseMediaViewerTVResponse>(
-      'ssap://media.viewer/close',
-    );
+    await this.request<Model.CloseMediaViewerTVResponse>('media.viewer/close');
   }
 
   /**
@@ -470,7 +464,7 @@ export class TV {
    */
   public async foregroundAppInfo(): Promise<Model.ForegroundAppInfoResult> {
     return this.request<Model.ForegroundAppInfoTVResponse>(
-      'ssap://com.webos.applicationManager/getForegroundAppInfo',
+      'com.webos.applicationManager/getForegroundAppInfo',
     );
   }
 
@@ -485,7 +479,7 @@ export class TV {
     sessionId: string,
   ): Promise<Model.AppStateResult> {
     return this.request<Model.AppStateTVResponse>(
-      'ssap://system.launcher/getAppState',
+      'system.launcher/getAppState',
       {
         id,
         sessionId,
@@ -499,7 +493,7 @@ export class TV {
    */
   public async getCurrentSWInformation(): Promise<Model.GetCurrentSWInformationResult> {
     return this.request<Model.GetCurrentSWInformationTVResponse>(
-      'ssap://com.webos.service.update/getCurrentSWInformation',
+      'com.webos.service.update/getCurrentSWInformation',
     );
   }
 
@@ -509,7 +503,7 @@ export class TV {
    */
   public async appList(): Promise<Model.AppListResult> {
     const { apps } = await this.request<Model.AppListTVResponse>(
-      'ssap://com.webos.applicationManager/listApps',
+      'com.webos.applicationManager/listApps',
     );
     return apps;
   }
@@ -520,7 +514,7 @@ export class TV {
    */
   public async launchPoints(): Promise<Model.LaunchPointsResult> {
     return this.request<Model.LaunchPointsTVResponse>(
-      'ssap://com.webos.applicationManager/listLaunchPoints',
+      'com.webos.applicationManager/listLaunchPoints',
     );
   }
 
@@ -530,10 +524,9 @@ export class TV {
    * @returns A promise
    */
   public async launchApp(id: string): Promise<Model.LaunchAppResult> {
-    return this.request<Model.LaunchAppTVResponse>(
-      'ssap://system.launcher/launch',
-      { id },
-    );
+    return this.request<Model.LaunchAppTVResponse>('system.launcher/launch', {
+      id,
+    });
   }
 
   /**
@@ -542,10 +535,9 @@ export class TV {
    * @returns A promise
    */
   public async closeApp(id: string): Promise<Model.CloseAppResult> {
-    await this.request<Model.CloseAppTVResponse>(
-      'ssap://system.launcher/close',
-      { id },
-    );
+    await this.request<Model.CloseAppTVResponse>('system.launcher/close', {
+      id,
+    });
   }
 
   /**
@@ -554,12 +546,9 @@ export class TV {
    * @returns A promise that resolves to the session ID of the tab opened in the browser
    */
   public async openURL(target: string): Promise<Model.OpenURLResult> {
-    return this.request<Model.OpenURLTVResponse>(
-      'ssap://system.launcher/open',
-      {
-        target,
-      },
-    );
+    return this.request<Model.OpenURLTVResponse>('system.launcher/open', {
+      target,
+    });
   }
 
   /**
@@ -568,7 +557,7 @@ export class TV {
    */
   public async enable3D(): Promise<Model.Enable3DResult> {
     await this.request<Model.Enable3DTVResponse>(
-      'ssap://com.webos.service.tv.display/set3DOn',
+      'com.webos.service.tv.display/set3DOn',
     );
     const new3DStatus = await this.check3DStatus();
     return new3DStatus.status;
@@ -580,7 +569,7 @@ export class TV {
    */
   public async disable3D(): Promise<Model.Disable3DResult> {
     await this.request<Model.Disable3DTVResponse>(
-      'ssap://com.webos.service.tv.display/set3DOff',
+      'com.webos.service.tv.display/set3DOff',
     );
     const new3DStatus = await this.check3DStatus();
     return new3DStatus.status;
@@ -601,7 +590,7 @@ export class TV {
    */
   public async check3DStatus(): Promise<Model.Check3DStatusResult> {
     const { status3D } = await this.request<Model.Check3DStatusTVResponse>(
-      'ssap://com.webos.service.tv.display/get3DStatus',
+      'com.webos.service.tv.display/get3DStatus',
     );
     return status3D;
   }
@@ -622,7 +611,7 @@ export class TV {
       ? await this.loadIcon(iconUrl, iconExtension)
       : undefined;
     const { toastId } = await this.request<Model.ShowNotificationTVResponse>(
-      'ssap://system.notifications/createToast',
+      'system.notifications/createToast',
       {
         message,
         ...iconData,
@@ -658,7 +647,7 @@ export class TV {
    */
   public async getPointerInputSocket(): Promise<PointerInputSocket> {
     return this.getSocket(
-      'ssap://com.webos.service.networkinput/getPointerInputSocket',
+      'com.webos.service.networkinput/getPointerInputSocket',
       PointerInputSocket,
     );
   }
@@ -669,7 +658,7 @@ export class TV {
    */
   public async getRemoteKeyboardSocket(): Promise<RemoteKeyboardSocket> {
     return this.getSocket(
-      'ssap://com.webos.service.ime/registerRemoteKeyboard',
+      'com.webos.service.ime/registerRemoteKeyboard',
       RemoteKeyboardSocket,
     );
   }
@@ -685,7 +674,7 @@ export class TV {
     replace = false,
   ): Promise<Model.WriteTextResult> {
     await this.request<Model.WriteTextTVResponse>(
-      'ssap://com.webos.service.ime/insertText',
+      'com.webos.service.ime/insertText',
       {
         text,
         replace: replace ? 1 : 0,
@@ -700,7 +689,7 @@ export class TV {
    */
   public async deleteText(count: number): Promise<Model.DeleteTextResult> {
     await this.request<Model.DeleteTextTVResponse>(
-      'ssap://com.webos.service.ime/deleteCharacters',
+      'com.webos.service.ime/deleteCharacters',
       {
         count,
       },
@@ -713,7 +702,7 @@ export class TV {
    */
   public async sendEnter(): Promise<Model.SendEnterResult> {
     await this.request<Model.SendEnterTVResponse>(
-      'ssap://com.webos.service.ime/sendEnterKey',
+      'com.webos.service.ime/sendEnterKey',
     );
   }
 
