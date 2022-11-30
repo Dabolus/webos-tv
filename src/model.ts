@@ -234,6 +234,30 @@ export interface ForegroundAppInfoTVResponse {
 
 export type ForegroundAppInfoResult = ForegroundAppInfoTVResponse;
 
+export interface AppStateTVResponse {
+  running: boolean;
+  visible: boolean;
+}
+
+export type AppStateResult = AppStateTVResponse;
+
+export interface GetCurrentSWInformationTVResponse {
+  product_name: string;
+  model_name: string;
+  sw_type: string;
+  major_ver: string;
+  minor_ver: string;
+  country: string;
+  device_id: string;
+  auth_flag: string;
+  ignore_disable: string;
+  eco_info: string;
+  config_key: string;
+  language_code: string;
+}
+
+export type GetCurrentSWInformationResult = GetCurrentSWInformationTVResponse;
+
 export interface LaunchAppTVResponse {
   id: string;
   sessionId: string;

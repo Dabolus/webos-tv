@@ -472,30 +472,34 @@ export class TV {
     );
   }
 
-  // TODO: re-enable these methods once they get fixed
-  /**
-   * Gets the app status.
-   * @returns The app status
-   */
-  // public async appStatus() {
-  //   return this.request('ssap://com.webos.service.appstatus/getAppStatus');
-  // }
-
   /**
    * Gets the app state.
-   * @returns The app state
+   * @param id - The ID of the app
+   * @param sessionId - The ID of the session
+   * @returns A promise that resolves to the specified app state
    */
-  // public async appState() {
-  //   return this.request('ssap://system.launcher/getAppState');
-  // }
+  public async appState(
+    id: string,
+    sessionId: string,
+  ): Promise<Model.AppStateResult> {
+    return this.request<Model.AppStateTVResponse>(
+      'ssap://system.launcher/getAppState',
+      {
+        id,
+        sessionId,
+      },
+    );
+  }
 
   /**
    * Gets the current SW information
-   * @returns A promise
+   * @returns A promise that resolves to the current software information
    */
-  //  public async getCurrentSWInformation() {
-  //   return this.request('com.webos.service.update/getCurrentSWInformation');
-  // }
+  public async getCurrentSWInformation(): Promise<Model.GetCurrentSWInformationResult> {
+    return this.request<Model.GetCurrentSWInformationTVResponse>(
+      'ssap://com.webos.service.update/getCurrentSWInformation',
+    );
+  }
 
   /**
    * Gets the list of the available apps.

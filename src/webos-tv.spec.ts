@@ -176,6 +176,33 @@ describe('TV instance methods', () => {
       },
     },
     {
+      methodName: 'appState',
+      uri: 'ssap://system.launcher/getAppState',
+      input: {
+        parameters: ['testAppId', 'testSessionId'],
+        payload: {
+          id: 'testAppId',
+          sessionId: 'testSessionId',
+        },
+      },
+      output: {
+        payload: {
+          running: true,
+          visible: false,
+        },
+      },
+    },
+    {
+      methodName: 'getCurrentSWInformation',
+      uri: 'ssap://com.webos.service.update/getCurrentSWInformation',
+      output: {
+        payload: {
+          product_name: 'LGTV',
+          model_name: 'Test Model',
+        },
+      },
+    },
+    {
       methodName: 'appList',
       uri: 'ssap://com.webos.applicationManager/listApps',
       output: {
