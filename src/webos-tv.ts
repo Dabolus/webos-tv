@@ -12,7 +12,7 @@ import { wake } from './wol';
 import * as Model from './model';
 
 /**
- * A promise-based package to control WebOS based TVs with JavaScript.
+ * A promise-based package to control webOS based TVs with JavaScript.
  * @author Giorgio Garasto <giorgio@garasto.me>
  * @link https://github.com/Dabolus/webos-tv
  * @license MIT
