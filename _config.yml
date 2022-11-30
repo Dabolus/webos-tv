@@ -1,2 +1,4 @@
+title: webOS TV
+description: A promise-based package to control webOS based TVs with JavaScript.
 theme: jekyll-theme-merlot
 include: CODE_OF_CONDUCT.md, CONTRIBUTING.md
