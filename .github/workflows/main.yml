@@ -40,8 +40,6 @@ jobs:
           shopt -s extglob
           rm -rf !(.|..|.git|_config.yml)
           mv /tmp/webos-tv/* .
-          sed -i '/.*\.spec.*_spec.*/d' modules.md
-          rm -rf **/*_spec.*
           # Push the docs to the gh-pages branch
           git config user.name "${GH_NAME}"
           git config user.email "${GH_EMAIL}"

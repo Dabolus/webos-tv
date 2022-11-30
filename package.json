@@ -8,8 +8,8 @@
   "types": "lib/webos-tv.d.ts",
   "type": "module",
   "scripts": {
-    "start": "rollup -w -c rollup.config.js",
-    "build": "rollup -c rollup.config.js",
+    "start": "rollup -w -c rollup.config.ts --configPlugin typescript",
+    "build": "rollup -c rollup.config.ts --configPlugin typescript",
     "lint": "eslint '**/*.ts'",
     "format": "prettier --write '**/*.ts'",
     "test": "yarn node --experimental-vm-modules $(yarn bin jest)",
@@ -63,6 +63,7 @@
     "rollup-plugin-node-globals": "^1.4.0",
     "rollup-plugin-typescript2": "^0.34.1",
     "ts-jest": "^29.0.3",
+    "ts-node": "^10.9.1",
     "tslib": "^2.4.1",
     "typedoc": "^0.23.21",
     "typedoc-plugin-markdown": "^3.13.6",

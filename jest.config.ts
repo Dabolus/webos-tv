@@ -1,4 +1,6 @@
-const baseConfig = {
+import type { Config } from 'jest';
+
+const baseProjectOptions: NonNullable<Config['projects']>[number] = {
   preset: 'ts-jest',
   moduleFileExtensions: ['ts', 'js', 'json'],
   transform: {
@@ -6,7 +8,7 @@ const baseConfig = {
   },
 };
 
-export default {
+const config: Config = {
   coverageDirectory: 'coverage',
   coverageThreshold: {
     global: {
@@ -21,13 +23,15 @@ export default {
       displayName: 'NODE',
       testEnvironment: 'node',
       testMatch: ['**/*.spec.ts', '!**/*-browser.spec.ts'],
-      ...baseConfig,
+      ...baseProjectOptions,
     },
     {
       displayName: 'BROWSER',
       testEnvironment: 'jsdom',
       testMatch: ['**/*-browser.spec.ts'],
-      ...baseConfig,
+      ...baseProjectOptions,
     },
   ],
 };
+
+export default config;
