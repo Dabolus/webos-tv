@@ -153,7 +153,9 @@ export class TV {
       payload,
     );
     if (!returnValue) {
-      throw new Error('Request failed.');
+      throw new Error(
+        (rest as Model.ErrorTVResponse).errorText || 'request failed',
+      );
     }
     return rest as T;
   }

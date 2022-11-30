@@ -38,6 +38,12 @@ export interface BaseTVResponse {
   returnValue: boolean;
 }
 
+export interface ErrorTVResponse {
+  returnValue?: false;
+  errorCode?: number;
+  errorText?: string;
+}
+
 export type AuthenticateResult = string;
 
 export type TurnOffTVResponse = EmptyResponse;
