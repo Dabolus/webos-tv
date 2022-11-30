@@ -26,10 +26,9 @@ jobs:
       - name: Generate docs
         run: |
           yarn generate-docs
-          mkdir /tmp/webos-tv
           mv api /tmp/webos-tv
           git reset --hard
-          cp {README.md,CODE_OF_CONDUCT.md} /tmp/webos-tv
+          cp CODE_OF_CONDUCT.md /tmp/webos-tv
       - name: Checkout GitHub Pages branch
         uses: actions/checkout@v3
         with:
@@ -41,7 +40,6 @@ jobs:
           shopt -s extglob
           rm -rf !(.|..|.git|_config.yml)
           mv /tmp/webos-tv/* .
-          sed -nie '/## Index/,$p' api/README.md && rm api/README.mde
           # Push the docs to the gh-pages branch
           git config user.name "${GH_NAME}"
           git config user.email "${GH_EMAIL}"
