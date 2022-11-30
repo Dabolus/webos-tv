@@ -3,6 +3,6 @@
   "out": "api",
   "name": "webOS",
   "theme": "markdown",
-  "entryPoints": ["src/**/*.ts"],
-  "exclude": ["**/*.spec.*", "**/__mocks__/**"]
+  "entryPoints": ["src/*.ts"],
+  "exclude": ["src/*.spec.*", "src/__mocks__/*"]
 }
