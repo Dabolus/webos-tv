@@ -21,20 +21,24 @@
     "lib"
   ],
   "peerDependencies": {
+    "bufferutil": "^4.0.7",
     "undici": "^5.12.0",
+    "utf-8-validate": "^5.0.10",
     "ws": "^8.11.0"
   },
   "peerDependenciesMeta": {
+    "bufferutil": {
+      "optional": true
+    },
     "undici": {
+      "optional": true
+    },
+    "utf-8-validate": {
       "optional": true
     },
     "ws": {
       "optional": true
     }
-  },
-  "optionalDependencies": {
-    "bufferutil": "^4.0.7",
-    "utf-8-validate": "^5.0.10"
   },
   "devDependencies": {
     "@jest/globals": "^29.3.1",
