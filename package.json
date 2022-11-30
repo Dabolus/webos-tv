@@ -14,7 +14,7 @@
     "format": "prettier --write '**/*.ts'",
     "test": "yarn node --experimental-vm-modules $(yarn bin jest)",
     "posttest": "codecov",
-    "generate-docs": "typedoc src/*.ts --out api --name 'webOS' --theme markdown",
+    "generate-docs": "typedoc",
     "prepublishOnly": "yarn build"
   },
   "files": [

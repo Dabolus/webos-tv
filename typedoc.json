@@ -1,0 +1,8 @@
+{
+  "$schema": "https://typedoc.org/schema.json",
+  "out": "api",
+  "name": "webOS",
+  "theme": "markdown",
+  "entryPoints": ["src/**/*.ts"],
+  "exclude": ["**/*.spec.*", "**/__mocks__/**"]
+}
