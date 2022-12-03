@@ -29,9 +29,10 @@ export class TV {
    * @returns The URL object corresponding to the TV hostname
    */
   public static getTVURL(hostname: string): URL {
-    const [, host, port] = hostname.match(
-      /^(?:(?:https?|s?ftps?|wss?|ssap):\/)?\/?([^:/?#\s]+):?(\d+)?/i,
-    );
+    const [, host, port] =
+      hostname.match(
+        /^(?:(?:https?|s?ftps?|wss?|ssap):\/)?\/?([^:/?#\s]+):?(\d+)?/i,
+      ) || [];
     if (!host) {
       throw new Error('Invalid hostname.');
     }
