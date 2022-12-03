@@ -31,8 +31,8 @@ export const createMagicPacket = (
         macAddress;
 
   if (
-    normalizedMacAddress.length !==
-    (2 * MAC_BYTES || macAddress.match(/[^a-fA-F0-9]/))
+    normalizedMacAddress.length !== 2 * MAC_BYTES ||
+    normalizedMacAddress.match(/[^a-fA-F0-9]/)
   ) {
     throw new Error(`Malformed MAC address '${macAddress}'`);
   }
