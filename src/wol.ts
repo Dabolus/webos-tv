@@ -67,37 +67,30 @@ export const createMagicPacket = (
  */
 export const send = (
   magicPacket: Buffer,
-  options: {
+  {
+    address = '255.255.255.255',
+    port = 9,
+  }: {
     address?: string;
     port?: number;
-  } = {
-    address: '255.255.255.255',
-    port: 9,
-  },
+  } = {},
 ): Promise<Buffer> =>
   new Promise((resolve, reject) => {
-    const protocol = isIPv6(options.address) ? 'udp6' : 'udp4';
+    const protocol = isIPv6(address) ? 'udp6' : 'udp4';
     const socket = createSocket(protocol);
     socket.once('error', (err) => {
       socket.close();
       reject(err);
     });
     socket.once('listening', () => socket.setBroadcast(true));
-    socket.send(
-      magicPacket,
-      0,
-      magicPacket.length,
-      options.port,
-      options.address,
-      (err) => {
-        socket.close();
-        if (err) {
-          reject(err);
-        } else {
-          resolve(magicPacket);
-        }
-      },
-    );
+    socket.send(magicPacket, 0, magicPacket.length, port, address, (err) => {
+      socket.close();
+      if (err) {
+        reject(err);
+      } else {
+        resolve(magicPacket);
+      }
+    });
   });
 
 /**
