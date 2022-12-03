@@ -250,9 +250,10 @@ export class TV {
     const channel = channelList.find(
       (c) => c.channelNumber === channelNumber.toString(),
     );
-    return channel
-      ? this.openChannel(channel.channelId)
-      : this.getCurrentChannel();
+    if (!channel) {
+      throw new Error('invalid channel number');
+    }
+    return this.openChannel(channel.channelId);
   }
 
   /**
@@ -263,9 +264,10 @@ export class TV {
   public async openChannelByName(channelName: string | number) {
     const { channelList } = await this.getChannelList();
     const channel = channelList.find((c) => c.channelName === channelName);
-    return channel
-      ? this.openChannel(channel.channelId)
-      : this.getCurrentChannel();
+    if (!channel) {
+      throw new Error('invalid channel name');
+    }
+    return this.openChannel(channel.channelId);
   }
 
   /**
