@@ -159,7 +159,6 @@ export interface GetChannelListTVResponse {
 export type GetChannelListResult = GetChannelListTVResponse;
 
 export interface GetCurrentChannelTVResponse {
-  returnValue: boolean;
   channelId: string;
   signalChannelId: string;
   channelModeId: number;
