@@ -33,7 +33,7 @@
 
 #### Defined in
 
-[src/model.ts:421](https://github.com/Dabolus/webos-tv/blob/60076f0/src/model.ts#L421)
+[src/model.ts:420](https://github.com/Dabolus/webos-tv/blob/5769651/src/model.ts#L420)
 
 ___
 
@@ -43,7 +43,7 @@ ___
 
 #### Defined in
 
-[src/model.ts:419](https://github.com/Dabolus/webos-tv/blob/60076f0/src/model.ts#L419)
+[src/model.ts:418](https://github.com/Dabolus/webos-tv/blob/5769651/src/model.ts#L418)
 
 ___
 
@@ -53,7 +53,7 @@ ___
 
 #### Defined in
 
-[src/model.ts:424](https://github.com/Dabolus/webos-tv/blob/60076f0/src/model.ts#L424)
+[src/model.ts:423](https://github.com/Dabolus/webos-tv/blob/5769651/src/model.ts#L423)
 
 ___
 
@@ -63,7 +63,7 @@ ___
 
 #### Defined in
 
-[src/model.ts:427](https://github.com/Dabolus/webos-tv/blob/60076f0/src/model.ts#L427)
+[src/model.ts:426](https://github.com/Dabolus/webos-tv/blob/5769651/src/model.ts#L426)
 
 ___
 
@@ -73,7 +73,7 @@ ___
 
 #### Defined in
 
-[src/model.ts:425](https://github.com/Dabolus/webos-tv/blob/60076f0/src/model.ts#L425)
+[src/model.ts:424](https://github.com/Dabolus/webos-tv/blob/5769651/src/model.ts#L424)
 
 ___
 
@@ -83,7 +83,7 @@ ___
 
 #### Defined in
 
-[src/model.ts:420](https://github.com/Dabolus/webos-tv/blob/60076f0/src/model.ts#L420)
+[src/model.ts:419](https://github.com/Dabolus/webos-tv/blob/5769651/src/model.ts#L419)
 
 ___
 
@@ -93,7 +93,7 @@ ___
 
 #### Defined in
 
-[src/model.ts:417](https://github.com/Dabolus/webos-tv/blob/60076f0/src/model.ts#L417)
+[src/model.ts:416](https://github.com/Dabolus/webos-tv/blob/5769651/src/model.ts#L416)
 
 ___
 
@@ -103,7 +103,7 @@ ___
 
 #### Defined in
 
-[src/model.ts:428](https://github.com/Dabolus/webos-tv/blob/60076f0/src/model.ts#L428)
+[src/model.ts:427](https://github.com/Dabolus/webos-tv/blob/5769651/src/model.ts#L427)
 
 ___
 
@@ -113,7 +113,7 @@ ___
 
 #### Defined in
 
-[src/model.ts:416](https://github.com/Dabolus/webos-tv/blob/60076f0/src/model.ts#L416)
+[src/model.ts:415](https://github.com/Dabolus/webos-tv/blob/5769651/src/model.ts#L415)
 
 ___
 
@@ -123,7 +123,7 @@ ___
 
 #### Defined in
 
-[src/model.ts:426](https://github.com/Dabolus/webos-tv/blob/60076f0/src/model.ts#L426)
+[src/model.ts:425](https://github.com/Dabolus/webos-tv/blob/5769651/src/model.ts#L425)
 
 ___
 
@@ -133,7 +133,7 @@ ___
 
 #### Defined in
 
-[src/model.ts:422](https://github.com/Dabolus/webos-tv/blob/60076f0/src/model.ts#L422)
+[src/model.ts:421](https://github.com/Dabolus/webos-tv/blob/5769651/src/model.ts#L421)
 
 ___
 
@@ -143,7 +143,7 @@ ___
 
 #### Defined in
 
-[src/model.ts:423](https://github.com/Dabolus/webos-tv/blob/60076f0/src/model.ts#L423)
+[src/model.ts:422](https://github.com/Dabolus/webos-tv/blob/5769651/src/model.ts#L422)
 
 ___
 
@@ -153,7 +153,7 @@ ___
 
 #### Defined in
 
-[src/model.ts:415](https://github.com/Dabolus/webos-tv/blob/60076f0/src/model.ts#L415)
+[src/model.ts:414](https://github.com/Dabolus/webos-tv/blob/5769651/src/model.ts#L414)
 
 ___
 
@@ -163,7 +163,7 @@ ___
 
 #### Defined in
 
-[src/model.ts:414](https://github.com/Dabolus/webos-tv/blob/60076f0/src/model.ts#L414)
+[src/model.ts:413](https://github.com/Dabolus/webos-tv/blob/5769651/src/model.ts#L413)
 
 ___
 
@@ -173,7 +173,7 @@ ___
 
 #### Defined in
 
-[src/model.ts:413](https://github.com/Dabolus/webos-tv/blob/60076f0/src/model.ts#L413)
+[src/model.ts:412](https://github.com/Dabolus/webos-tv/blob/5769651/src/model.ts#L412)
 
 ___
 
@@ -183,4 +183,4 @@ ___
 
 #### Defined in
 
-[src/model.ts:418](https://github.com/Dabolus/webos-tv/blob/60076f0/src/model.ts#L418)
+[src/model.ts:417](https://github.com/Dabolus/webos-tv/blob/5769651/src/model.ts#L417)

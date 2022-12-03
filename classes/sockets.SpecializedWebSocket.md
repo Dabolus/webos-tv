@@ -98,7 +98,7 @@ WebSocket.constructor
 
 #### Defined in
 
-[src/sockets.ts:4](https://github.com/Dabolus/webos-tv/blob/60076f0/src/sockets.ts#L4)
+[src/sockets.ts:4](https://github.com/Dabolus/webos-tv/blob/5769651/src/sockets.ts#L4)
 
 ## Properties
 
@@ -2062,7 +2062,7 @@ WebSocket.send
 
 #### Defined in
 
-[src/sockets.ts:8](https://github.com/Dabolus/webos-tv/blob/60076f0/src/sockets.ts#L8)
+[src/sockets.ts:8](https://github.com/Dabolus/webos-tv/blob/5769651/src/sockets.ts#L8)
 
 ___
 
@@ -2082,7 +2082,7 @@ ___
 
 #### Defined in
 
-[src/sockets.ts:17](https://github.com/Dabolus/webos-tv/blob/60076f0/src/sockets.ts#L17)
+[src/sockets.ts:17](https://github.com/Dabolus/webos-tv/blob/5769651/src/sockets.ts#L17)
 
 ___
 
