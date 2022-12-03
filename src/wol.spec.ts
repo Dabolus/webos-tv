@@ -58,8 +58,16 @@ describe('createMagicPacket', () => {
     );
   });
 
-  it('throws an error if the MAC address is malformed', () => {
+  it('throws an error if the MAC address has the wrong length', () => {
     const macAddress = '01:23:45:67:89:ab:cd';
+
+    expect(() => createMagicPacket(macAddress)).toThrowError(
+      `Malformed MAC address '${macAddress}'`,
+    );
+  });
+
+  it('throws an error if the MAC address contains invalid characters', () => {
+    const macAddress = '01:23:45:67:89:gh';
 
     expect(() => createMagicPacket(macAddress)).toThrowError(
       `Malformed MAC address '${macAddress}'`,
@@ -95,6 +103,7 @@ describe('send', () => {
       close: mockClose,
     });
     await expect(send(magicPacket)).resolves.toEqual(magicPacket);
+    expect(dgram.createSocket).toHaveBeenCalledWith('udp4');
     expect(mockSetBroadcast).toHaveBeenCalledWith(true);
     expect(mockSend).toHaveBeenCalledWith(
       magicPacket,
@@ -102,6 +111,41 @@ describe('send', () => {
       magicPacket.length,
       9,
       '255.255.255.255',
+      expect.any(Function),
+    );
+    expect(mockClose).toHaveBeenCalled();
+  });
+
+  it('also works with IPv6 addresses', async () => {
+    const magicPacket = Buffer.from('test');
+    const mockSetBroadcast = jest.fn();
+    const mockSend = jest.fn((msg, offset, length, port, address, callback) => {
+      callback();
+    });
+    const mockClose = jest.fn();
+    (dgram.createSocket as jest.Mock).mockReturnValue({
+      once(event: string, callback: (err?: Error) => void) {
+        if (event === 'listening') {
+          callback();
+        }
+      },
+      send: mockSend,
+      setBroadcast: mockSetBroadcast,
+      close: mockClose,
+    });
+    await expect(
+      send(magicPacket, {
+        address: 'fe80::1',
+      }),
+    ).resolves.toEqual(magicPacket);
+    expect(dgram.createSocket).toHaveBeenCalledWith('udp6');
+    expect(mockSetBroadcast).toHaveBeenCalledWith(true);
+    expect(mockSend).toHaveBeenCalledWith(
+      magicPacket,
+      0,
+      magicPacket.length,
+      9,
+      'fe80::1',
       expect.any(Function),
     );
     expect(mockClose).toHaveBeenCalled();
