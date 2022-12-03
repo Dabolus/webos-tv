@@ -1,6 +1,9 @@
+jest.mock('./wol');
+
 import { describe, it, expect, afterEach } from '@jest/globals';
 import WS from 'jest-websocket-mock';
 import defaultConfig from './default-config';
+import * as wol from './wol';
 import { TV } from './webos-tv';
 
 describe('TV > Connection', () => {
@@ -37,6 +40,18 @@ describe('TV > Connection', () => {
 
   it('throws an error if a proper URL cannot be computed from the provided string', () => {
     expect(() => TV.getTVURL('')).toThrowError(new Error('Invalid hostname.'));
+  });
+
+  it('sends the WOL packet to the correct host and returns the sent packet', async () => {
+    const hostname = '127.0.0.1:3000';
+    const mac = '00:00:00:00:00:00';
+    const result = Buffer.from('test');
+    (wol.wake as jest.Mock).mockResolvedValueOnce(result);
+    await expect(TV.turnOn(hostname, mac)).resolves.toEqual(result);
+    expect(wol.wake).toHaveBeenCalledWith(mac, {
+      address: '127.0.0.1',
+      port: 3000,
+    });
   });
 
   it('authenticates with the correct payload', async () => {
