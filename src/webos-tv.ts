@@ -289,23 +289,15 @@ export class TV {
    * @returns A promise that resolves to the new volume of the webOS TV
    */
   public async setVolume(
-    volumeToSet: number | string,
+    volumeToSet: number | 'max' | 'min',
   ): Promise<Model.SetVolumeResult> {
-    let volume = 0;
+    let volume: number;
     if (volumeToSet === 'max') {
       volume = 100;
     } else if (volumeToSet === 'min') {
       volume = 0;
     } else {
-      volume = Math.min(
-        100,
-        Math.max(
-          0,
-          (typeof volumeToSet === 'string'
-            ? parseFloat(volumeToSet)
-            : volumeToSet) || 0,
-        ),
-      );
+      volume = Math.min(100, Math.max(0, volumeToSet));
     }
     await this.request('audio/setVolume', { volume });
     return this.getVolume();
@@ -317,15 +309,10 @@ export class TV {
    * @returns A promise that resolves to the new volume of the webOS TV
    */
   public async increaseVolume(
-    deltaVolume: number | string,
+    deltaVolume: number,
   ): Promise<Model.IncreaseVolumeResult> {
     const { volume: oldVolume } = await this.getVolume();
-    return this.setVolume(
-      oldVolume +
-        (typeof deltaVolume === 'string'
-          ? parseFloat(deltaVolume)
-          : deltaVolume),
-    );
+    return this.setVolume(oldVolume + deltaVolume);
   }
 
   /**
@@ -334,15 +321,10 @@ export class TV {
    * @returns A promise that resolves to the new volume of the webOS TV
    */
   public async decreaseVolume(
-    deltaVolume: number | string,
+    deltaVolume: number,
   ): Promise<Model.DecreaseVolumeResult> {
     const { volume: oldVolume } = await this.getVolume();
-    return this.setVolume(
-      oldVolume -
-        (typeof deltaVolume === 'string'
-          ? parseFloat(deltaVolume)
-          : deltaVolume),
-    );
+    return this.setVolume(oldVolume - deltaVolume);
   }
 
   /**
