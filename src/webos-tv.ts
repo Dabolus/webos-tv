@@ -723,9 +723,6 @@ export class TV {
     if (!id || !this.callbacks[id]) {
       throw new Error();
     }
-    if (payload.subscribed) {
-      // TODO: do something
-    }
     this.callbacks[id].resolve(payload);
   }
 
