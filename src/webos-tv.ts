@@ -43,11 +43,16 @@ export class TV {
    * Turns on the specified webOS TV.
    * @param hostname - The hostname of the webOS TV to wake. It can also be a broadcast address
    * @param mac - The MAC address of the webOS TV to wake
+   * @param [password] The SecureOn password of the device to wake
    * @returns A promise that resolves with the magic packet sent to the webOS TV
    */
-  public static turnOn(hostname: string, mac: string): Promise<Buffer> {
+  public static turnOn(
+    hostname: string,
+    mac: string,
+    password?: string,
+  ): Promise<Buffer> {
     const { hostname: address, port } = TV.getTVURL(hostname);
-    return wake(mac, { address, port: Number(port) });
+    return wake(mac, { address, port: Number(port), password });
   }
 
   private readonly connection: WebSocket;
