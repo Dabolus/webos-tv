@@ -31,7 +31,7 @@ export class PointerInputSocket extends SpecializedWebSocket {
     this.send('button', { name: button });
   }
 
-  public move(dx: number, dy: number, pressing: boolean): void {
+  public move(dx: number, dy: number, pressing?: boolean): void {
     this.send('move', { dx, dy, down: pressing ? 1 : 0 });
   }
 
