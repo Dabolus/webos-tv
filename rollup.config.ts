@@ -62,7 +62,7 @@ const nodeConfig = {
   },
   plugins: [
     externals(),
-    typescript({ tsconfig: './tsconfig.json' }),
+    typescript({ tsconfig: './tsconfig.json', noEmitOnError: true }),
     commonjs(),
     nodeResolve(),
   ],
