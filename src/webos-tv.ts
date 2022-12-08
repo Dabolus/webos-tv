@@ -369,7 +369,7 @@ export class TV {
     await this.request<Model.SetMuteTVResponse>('audio/setMute', {
       mute,
     });
-    return mute;
+    return this.isMuted();
   }
 
   /**
