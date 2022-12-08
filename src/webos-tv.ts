@@ -616,7 +616,7 @@ export class TV {
    */
   public async getSocket<T extends SpecializedWebSocket>(
     uri: string,
-    SocketClass: { new (...args: any[]): T },
+    SocketClass: Model.Constructor<T>,
   ): Promise<T> {
     if (this.specializedSockets[uri]) {
       return this.specializedSockets[uri] as T;
