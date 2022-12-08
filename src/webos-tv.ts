@@ -121,7 +121,6 @@ export class TV {
           uri,
           payload,
         }),
-        (err) => err && reject(err),
       );
     });
   }
