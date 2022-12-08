@@ -702,7 +702,7 @@ export class TV {
       return;
     }
     if (!id || !this.callbacks[id]) {
-      throw new Error();
+      throw new Error('unexpected message received from the TV');
     }
     this.callbacks[id].resolve(payload);
   }
