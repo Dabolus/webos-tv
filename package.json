@@ -10,8 +10,8 @@
   "scripts": {
     "start": "rollup -w -c rollup.config.ts --configPlugin typescript",
     "build": "rollup -c rollup.config.ts --configPlugin typescript",
-    "lint": "eslint '**/*.ts'",
-    "format": "prettier --write '**/*.ts'",
+    "lint": "prettier --check 'src/**/*.ts' && eslint 'src/**/*.ts'",
+    "format": "prettier --write 'src/**/*.ts'",
     "test": "yarn node --experimental-vm-modules $(yarn bin jest)",
     "posttest": "codecov",
     "generate-docs": "typedoc",
