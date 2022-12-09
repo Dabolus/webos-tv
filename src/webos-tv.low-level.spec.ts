@@ -268,7 +268,7 @@ describe('TV > Low-level methods', () => {
       (undici.fetch as jest.Mock).mockResolvedValue({
         blob: blobFn,
       });
-      await expect(tv['loadIcon']('file:/q//icon.png')).resolves.toEqual({
+      await expect(tv['loadIcon']('file:///icon.png')).resolves.toEqual({
         iconData: Buffer.from(icon).toString('base64'),
         iconExtension: 'png',
       });
