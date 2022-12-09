@@ -541,8 +541,17 @@ export class TV {
   }
 
   /**
+   * Checks whether the 3D on the webOS TV is currently enabled or not.
+   * @returns A promise that resolves to a boolean indicating whether the 3D is enabled or not
+   */
+  public async is3DEnabled(): Promise<Model.Is3DEnabledResult> {
+    const { status } = await this.check3DStatus();
+    return status;
+  }
+
+  /**
    * Enables 3D on the webOS TV.
-   * @returns A promise that resolves to the new state of the 3D of the webOS TV (always true)
+   * @returns A promise that resolves to the new status of the 3D of the webOS TV (always true)
    */
   public async enable3D(): Promise<Model.Enable3DResult> {
     await this.request<Model.Enable3DTVResponse>(
@@ -554,7 +563,7 @@ export class TV {
 
   /**
    * Disables 3D on the webOS TV.
-   * @returns A promise that resolves to the new state of the 3D of the webOS TV (always false)
+   * @returns A promise that resolves to the new status of the 3D of the webOS TV (always false)
    */
   public async disable3D(): Promise<Model.Disable3DResult> {
     await this.request<Model.Disable3DTVResponse>(
@@ -565,8 +574,8 @@ export class TV {
   }
 
   /**
-   * Toggles the 3D state of the webOS TV.
-   * @returns A promise that resolves to the 3D state of the webOS TV (always the opposite of the previous state)
+   * Toggles the 3D status of the webOS TV.
+   * @returns A promise that resolves to the 3D status of the webOS TV (always the opposite of the previous status)
    */
   public async toggle3D(): Promise<Model.Toggle3DResult> {
     const { status } = await this.check3DStatus();
@@ -574,7 +583,7 @@ export class TV {
   }
 
   /**
-   * Checks whether the 3D is currently enabled or not on the webOS TV.
+   * Returns the current 3D status of the webOS TV.
    * @returns A promise that resolves to the status of the 3D on the webOS TV
    */
   public async check3DStatus(): Promise<Model.Check3DStatusResult> {

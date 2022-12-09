@@ -310,6 +310,8 @@ export interface OpenURLTVResponse {
 
 export type OpenURLResult = OpenURLTVResponse;
 
+export type Is3DEnabledResult = boolean;
+
 export type Enable3DTVResponse = EmptyResponse;
 
 export type Enable3DResult = boolean;
