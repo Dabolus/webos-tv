@@ -20,7 +20,7 @@
 
 #### Defined in
 
-[src/model.ts:69](https://github.com/Dabolus/webos-tv/blob/5769651/src/model.ts#L69)
+[src/model.ts:72](https://github.com/Dabolus/webos-tv/blob/34d8c22/src/model.ts#L72)
 
 ___
 
@@ -30,7 +30,7 @@ ___
 
 #### Defined in
 
-[src/model.ts:70](https://github.com/Dabolus/webos-tv/blob/5769651/src/model.ts#L70)
+[src/model.ts:73](https://github.com/Dabolus/webos-tv/blob/34d8c22/src/model.ts#L73)
 
 ___
 
@@ -40,4 +40,4 @@ ___
 
 #### Defined in
 
-[src/model.ts:68](https://github.com/Dabolus/webos-tv/blob/5769651/src/model.ts#L68)
+[src/model.ts:71](https://github.com/Dabolus/webos-tv/blob/34d8c22/src/model.ts#L71)
