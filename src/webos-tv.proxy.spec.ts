@@ -71,7 +71,7 @@ describe('TV > Proxy methods', () => {
       methodName: 'getAudioStatus',
       uri: 'ssap://audio/getStatus',
       output: {
-        payload: { muted: false },
+        payload: { mute: false },
       },
     },
     {
