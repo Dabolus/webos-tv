@@ -557,8 +557,7 @@ export class TV {
     await this.request<Model.Enable3DTVResponse>(
       'com.webos.service.tv.display/set3DOn',
     );
-    const { status } = await this.check3DStatus();
-    return status;
+    return this.is3DEnabled();
   }
 
   /**
@@ -569,8 +568,7 @@ export class TV {
     await this.request<Model.Disable3DTVResponse>(
       'com.webos.service.tv.display/set3DOff',
     );
-    const { status } = await this.check3DStatus();
-    return status;
+    return this.is3DEnabled();
   }
 
   /**
@@ -578,8 +576,8 @@ export class TV {
    * @returns A promise that resolves to the 3D status of the webOS TV (always the opposite of the previous status)
    */
   public async toggle3D(): Promise<Model.Toggle3DResult> {
-    const { status } = await this.check3DStatus();
-    return status ? this.disable3D() : this.enable3D();
+    const is3DEnabled = await this.is3DEnabled();
+    return is3DEnabled ? this.disable3D() : this.enable3D();
   }
 
   /**
