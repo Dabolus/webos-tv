@@ -194,6 +194,14 @@ describe('TV > Proxy methods', () => {
       },
     },
     {
+      methodName: 'writeText',
+      uri: 'ssap://com.webos.service.ime/insertText',
+      input: {
+        parameters: ['text'],
+        payload: { text: 'text', replace: 0 },
+      },
+    },
+    {
       methodName: 'deleteText',
       uri: 'ssap://com.webos.service.ime/deleteCharacters',
       input: {
