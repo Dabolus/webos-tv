@@ -207,4 +207,105 @@ describe('TV > Volume-related methods', () => {
       });
     });
   });
+
+  describe('isMuted', () => {
+    it('returns the mute flag coming from the audio status request', async () => {
+      const isMutedPromise = tv.isMuted();
+      await expect(server.nextMessage).resolves.toEqual({
+        id: '2',
+        type: 'request',
+        uri: 'ssap://audio/getStatus',
+        payload: {},
+      });
+      server.send({
+        id: '2',
+        type: 'response',
+        payload: { returnValue: true, mute: true },
+      });
+      await expect(isMutedPromise).resolves.toEqual(true);
+    });
+  });
+
+  [
+    {
+      method: 'setMute',
+      payload: false,
+      expected: false,
+    },
+    {
+      method: 'mute',
+      expected: true,
+    },
+    {
+      method: 'unmute',
+      expected: false,
+    },
+  ].forEach(({ method, payload, expected }) => {
+    it('sends the correct request and resolves with the new TV mute status', async () => {
+      const methodPromise = (tv as any)[method](payload);
+      await expect(server.nextMessage).resolves.toEqual({
+        id: '2',
+        type: 'request',
+        uri: 'ssap://audio/setMute',
+        payload: { mute: expected },
+      });
+      server.send({
+        id: '2',
+        type: 'response',
+        payload: { returnValue: true },
+      });
+      await expect(server.nextMessage).resolves.toEqual({
+        id: '3',
+        type: 'request',
+        uri: 'ssap://audio/getStatus',
+        payload: {},
+      });
+      server.send({
+        id: '3',
+        type: 'response',
+        payload: { returnValue: true, mute: expected },
+      });
+      await expect(methodPromise).resolves.toEqual(expected);
+    });
+  });
+
+  describe('toggleMute', () => {
+    it('asks the TV for the current mute status and sets it to the opposite of it', async () => {
+      const toggleMutePromise = tv.toggleMute();
+      await expect(server.nextMessage).resolves.toEqual({
+        id: '2',
+        type: 'request',
+        uri: 'ssap://audio/getStatus',
+        payload: {},
+      });
+      server.send({
+        id: '2',
+        type: 'response',
+        payload: { returnValue: true, mute: true },
+      });
+      await expect(server.nextMessage).resolves.toEqual({
+        id: '3',
+        type: 'request',
+        uri: 'ssap://audio/setMute',
+        payload: { mute: false },
+      });
+      server.send({
+        id: '3',
+        type: 'response',
+        payload: { returnValue: true },
+      });
+      await expect(server.nextMessage).resolves.toEqual({
+        id: '4',
+        type: 'request',
+        uri: 'ssap://audio/getStatus',
+        payload: {},
+      });
+      server.send({
+        id: '4',
+        type: 'response',
+        payload: { returnValue: true, mute: false },
+      });
+      await expect(toggleMutePromise).resolves.toEqual(false);
+    });
+  });
 });
