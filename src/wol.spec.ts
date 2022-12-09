@@ -223,4 +223,34 @@ describe('wake', () => {
       expect.any(Function),
     );
   });
+
+  it('uses sane defaults when no optional option is provided', async () => {
+    const macAddress = '01:23:45:67:89:ab';
+    const expectedMagicPacket = createMagicPacket(macAddress);
+
+    const mockSetBroadcast = jest.fn();
+    const mockSend = jest.fn((msg, offset, length, port, address, callback) => {
+      callback();
+    });
+    const mockClose = jest.fn();
+    (dgram.createSocket as jest.Mock).mockReturnValue({
+      once(event: string, callback: (err?: Error) => void) {
+        if (event === 'listening') {
+          callback();
+        }
+      },
+      send: mockSend,
+      setBroadcast: mockSetBroadcast,
+      close: mockClose,
+    });
+    await expect(wake(macAddress)).resolves.toEqual(expectedMagicPacket);
+    expect(mockSend).toHaveBeenCalledWith(
+      expectedMagicPacket,
+      0,
+      expectedMagicPacket.length,
+      9,
+      '255.255.255.255',
+      expect.any(Function),
+    );
+  });
 });
