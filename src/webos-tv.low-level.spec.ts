@@ -1,7 +1,5 @@
 import { describe, it, expect, afterEach } from '@jest/globals';
 import WS from 'jest-websocket-mock';
-import * as undici from 'undici';
-import { Blob } from 'node:buffer';
 import { PointerInputSocket, RemoteKeyboardSocket } from './sockets';
 import { TV } from './webos-tv';
 
@@ -256,26 +254,6 @@ describe('TV > Low-level methods', () => {
         payload: { returnValue: true, pairingType: 'PROMPT' },
       });
       expect(() => tv['handleMessage'](message)).not.toThrow();
-    });
-  });
-
-  describe('loadIcon', () => {
-    it('loads an icon from the TV', async () => {
-      const icon = 'icon';
-      const blobFn = jest
-        .fn()
-        .mockResolvedValue(new Blob([icon], { type: 'image/png' }));
-      (undici.fetch as jest.Mock).mockResolvedValue({
-        blob: blobFn,
-      });
-      await expect(tv['loadIcon']('file:///icon.png')).resolves.toEqual({
-        iconData: Buffer.from(icon).toString('base64'),
-        iconExtension: 'png',
-      });
-      expect(undici.fetch).toHaveBeenCalledWith('file:///icon.png', {
-        mode: 'no-cors',
-      });
-      expect(blobFn).toHaveBeenCalled();
     });
   });
 });
