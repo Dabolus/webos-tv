@@ -306,7 +306,7 @@ export class TV {
    * @returns A promise that resolves to the new volume of the webOS TV
    */
   public async increaseVolume(
-    deltaVolume: number,
+    deltaVolume = 1,
   ): Promise<Model.IncreaseVolumeResult> {
     const { volume: oldVolume } = await this.getVolume();
     return this.setVolume(oldVolume + deltaVolume);
@@ -318,7 +318,7 @@ export class TV {
    * @returns A promise that resolves to the new volume of the webOS TV
    */
   public async decreaseVolume(
-    deltaVolume: number,
+    deltaVolume = 1,
   ): Promise<Model.DecreaseVolumeResult> {
     const { volume: oldVolume } = await this.getVolume();
     return this.setVolume(oldVolume - deltaVolume);
