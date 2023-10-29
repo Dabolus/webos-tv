@@ -29,7 +29,6 @@ const browserConfig = {
     }),
     virtual({
       ws: 'export default WebSocket;',
-      undici: 'export const fetch = window.fetch;',
       'node:url': 'export const URL = window.URL;',
       './wol': `
         export const wake = () => {

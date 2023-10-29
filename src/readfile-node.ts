@@ -1,5 +1,3 @@
-import type { Blob } from 'node:buffer';
-
 export const readFile = async (blob: Blob): Promise<string> => {
   const arrayBuffer = await blob.arrayBuffer();
   const buffer = Buffer.from(arrayBuffer);

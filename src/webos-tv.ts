@@ -1,5 +1,4 @@
 import { URL } from 'node:url';
-import { fetch } from 'undici';
 import WebSocket from 'ws';
 import { readFile } from './readfile-node';
 import defaultConfig from './default-config';

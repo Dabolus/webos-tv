@@ -1,8 +1,9 @@
 import { describe, it, expect, afterEach } from '@jest/globals';
 import WS from 'jest-websocket-mock';
-import * as undici from 'undici';
 import { Blob } from 'node:buffer';
 import { TV } from './webos-tv';
+
+globalThis.fetch = jest.fn();
 
 describe('TV > Notifications-related methods', () => {
   let server: WS;
@@ -41,7 +42,7 @@ describe('TV > Notifications-related methods', () => {
       const blobFn = jest
         .fn()
         .mockResolvedValue(new Blob([icon], { type: 'image/png' }));
-      (undici.fetch as jest.Mock).mockResolvedValue({
+      (globalThis.fetch as jest.Mock).mockResolvedValue({
         blob: blobFn,
       });
       tv.showNotification('Hello World!', 'file:///icon.png');
@@ -55,7 +56,7 @@ describe('TV > Notifications-related methods', () => {
           iconExtension: 'png',
         },
       });
-      expect(undici.fetch).toHaveBeenCalledWith('file:///icon.png', {
+      expect(globalThis.fetch).toHaveBeenCalledWith('file:///icon.png', {
         mode: 'no-cors',
       });
       expect(blobFn).toHaveBeenCalled();

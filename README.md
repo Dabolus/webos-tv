@@ -14,9 +14,9 @@ If you want to use the library in a Node.js environment, make
 sure to install also the optional peer dependencies:
 
 ```bash
-npm install undici ws
+npm install ws
 # or
-yarn add undici ws
+yarn add ws
 # plus the optional native peer dependencies for ws,
 # if you want to improve performance
 # see: https://npmjs.com/package/ws#user-content-opt-in-for-performance
