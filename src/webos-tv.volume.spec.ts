@@ -93,7 +93,7 @@ describe('TV > Volume-related methods', () => {
     });
   });
 
-  ['increaseVolume', 'decreaseVolume'].forEach((method) => {
+  ['increaseVolume' as const, 'decreaseVolume' as const].forEach((method) => {
     describe(method, () => {
       it('resolves with the new volume if everything goes fine', async () => {
         const originalVolume = 50;
@@ -102,7 +102,7 @@ describe('TV > Volume-related methods', () => {
           method === 'increaseVolume'
             ? originalVolume + deltaVolume
             : originalVolume - deltaVolume;
-        const methodPromise = (tv as any)[method](deltaVolume);
+        const methodPromise = tv[method](deltaVolume);
         await expect(server.nextMessage).resolves.toEqual({
           id: '2',
           type: 'request',
@@ -144,7 +144,7 @@ describe('TV > Volume-related methods', () => {
       });
 
       it('throws an error if something goes wrong', async () => {
-        const methodPromise = (tv as any)[method]();
+        const methodPromise = tv[method]();
         await expect(server.nextMessage).resolves.toEqual({
           id: '2',
           type: 'request',
@@ -161,10 +161,10 @@ describe('TV > Volume-related methods', () => {
     });
   });
 
-  ['volumeUp', 'volumeDown'].forEach((method) => {
+  ['volumeUp' as const, 'volumeDown' as const].forEach((method) => {
     describe(method, () => {
       it('resolves with the new volume if everything goes fine', async () => {
-        const methodPromise = (tv as any)[method]();
+        const methodPromise = tv[method]();
         await expect(server.nextMessage).resolves.toEqual({
           id: '2',
           type: 'request',
@@ -191,7 +191,7 @@ describe('TV > Volume-related methods', () => {
       });
 
       it('throws an error if something goes wrong', async () => {
-        const methodPromise = (tv as any)[method]();
+        const methodPromise = tv[method]();
         await expect(server.nextMessage).resolves.toEqual({
           id: '2',
           type: 'request',
@@ -228,21 +228,21 @@ describe('TV > Volume-related methods', () => {
 
   [
     {
-      method: 'setMute',
+      method: 'setMute' as const,
       payload: false,
       expected: false,
     },
     {
-      method: 'mute',
+      method: 'mute' as const,
       expected: true,
     },
     {
-      method: 'unmute',
+      method: 'unmute' as const,
       expected: false,
     },
   ].forEach(({ method, payload, expected }) => {
     it('sends the correct request and resolves with the new TV mute status', async () => {
-      const methodPromise = (tv as any)[method](payload);
+      const methodPromise = tv[method](payload!);
       await expect(server.nextMessage).resolves.toEqual({
         id: '2',
         type: 'request',

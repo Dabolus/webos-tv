@@ -5,7 +5,7 @@ export class SpecializedWebSocket extends WebSocket {
     super(address, options);
   }
 
-  public send(type: string, payload: any = {}): void {
+  public send(type: string, payload: unknown = {}): void {
     super.send(
       Object.entries(payload).reduce(
         (str, [key, val]) => `${str}\n${key}: ${this.serializeValue(val)}`,

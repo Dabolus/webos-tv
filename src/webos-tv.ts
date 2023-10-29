@@ -62,6 +62,7 @@ export class TV {
   private callbacks: Record<
     string,
     {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       resolve: (val: any) => void;
       reject: (err: Error) => void;
     }

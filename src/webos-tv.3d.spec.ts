@@ -37,18 +37,18 @@ describe('TV > Volume-related methods', () => {
 
   [
     {
-      method: 'enable3D',
-      tvMethod: 'set3DOn',
+      method: 'enable3D' as const,
+      tvMethod: 'set3DOn' as const,
       expected: true,
     },
     {
-      method: 'disable3D',
-      tvMethod: 'set3DOff',
+      method: 'disable3D' as const,
+      tvMethod: 'set3DOff' as const,
       expected: false,
     },
   ].forEach(({ method, tvMethod, expected }) => {
     it('sends the correct request and resolves with the new TV mute status', async () => {
-      const methodPromise = (tv as any)[method]();
+      const methodPromise = tv[method]();
       await expect(server.nextMessage).resolves.toEqual({
         id: '2',
         type: 'request',

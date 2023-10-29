@@ -124,7 +124,7 @@ export interface GetChannelListTVResponse {
     descrambled: boolean;
     scrambled: boolean;
     serviceType: number;
-    favoriteGroup: any[];
+    favoriteGroup: unknown[];
     imgUrl: string;
     display: number;
     satelliteName: string;
@@ -179,13 +179,13 @@ export interface GetCurrentChannelTVResponse {
   isFineTuned: boolean;
   isInvisible: boolean;
   isHEVCChannel: boolean;
-  favoriteGroup: any;
-  hybridtvType: any;
+  favoriteGroup: unknown;
+  hybridtvType: unknown;
   dualChannel: {
-    dualChannelId: any;
-    dualChannelTypeId: any;
-    dualChannelTypeName: any;
-    dualChannelNumber: any;
+    dualChannelId: unknown;
+    dualChannelTypeId: unknown;
+    dualChannelTypeName: unknown;
+    dualChannelNumber: unknown;
   };
 }
 

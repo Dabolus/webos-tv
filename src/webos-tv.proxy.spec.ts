@@ -230,7 +230,8 @@ describe('TV > Proxy methods', () => {
     }) => {
       describe(methodName, () => {
         it('resolves with the expected value if everything goes fine', async () => {
-          const methodPromise = (tv as any)[methodName](...inputParameters);
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          const methodPromise = (tv[methodName] as any)(...inputParameters);
           await expect(server.nextMessage).resolves.toEqual({
             id: '2',
             type: 'request',
@@ -255,7 +256,8 @@ describe('TV > Proxy methods', () => {
         });
 
         it('throws an error if something goes wrong', async () => {
-          const methodPromise = (tv as any)[methodName](...inputParameters);
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          const methodPromise = (tv[methodName] as any)(...inputParameters);
           await expect(server.nextMessage).resolves.toEqual({
             id: '2',
             type: 'request',

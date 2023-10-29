@@ -17,10 +17,15 @@ describe('TV > Channel-related methods', () => {
     WS.clean();
   });
 
-  ['channelUp', 'channelDown', 'openChannel'].forEach((method) => {
+  [
+    'channelUp' as const,
+    'channelDown' as const,
+    'openChannel' as const,
+  ].forEach((method) => {
     describe(method, () => {
       it('resolves with the new channel if everything goes fine', async () => {
-        const methodPromise = (tv as any)[method]();
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const methodPromise = (tv[method] as any)();
         await expect(server.nextMessage).resolves.toEqual({
           id: '2',
           type: 'request',
@@ -47,7 +52,8 @@ describe('TV > Channel-related methods', () => {
       });
 
       it('throws an error if something goes wrong', async () => {
-        const methodPromise = (tv as any)[method]();
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const methodPromise = (tv[method] as any)();
         await expect(server.nextMessage).resolves.toEqual({
           id: '2',
           type: 'request',
