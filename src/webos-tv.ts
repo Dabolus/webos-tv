@@ -191,9 +191,8 @@ export class TV {
    * @returns A promise that resolves to the list of services of the webOS TV
    */
   public async getServiceList(): Promise<Model.GetServiceListResult> {
-    const { services } = await this.request<Model.GetServiceListTVResponse>(
-      'api/getServiceList',
-    );
+    const { services } =
+      await this.request<Model.GetServiceListTVResponse>('api/getServiceList');
     return services;
   }
 
