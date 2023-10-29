@@ -34,6 +34,7 @@ export enum Button {
   RIGHT = 'RIGHT',
   THREED_MODE = '3D_MODE',
   ENTER = 'ENTER',
+  DELETE = 'DELETE',
   DASH = 'DASH',
   INFO = 'INFO',
   ASTERISK = 'ASTERISK',
@@ -141,9 +142,9 @@ export interface GetChannelListTVResponse {
     Numeric: boolean;
     PrimaryCh: boolean;
     specialService: boolean;
-    CASystemIDList: any;
+    CASystemIDList: Record<string, unknown>;
     CASystemIDListCount: number;
-    groupIdList: any[][];
+    groupIdList: number[];
     channelGenreCode: string;
     favoriteIdxA: number;
     favoriteIdxB: number;
@@ -365,6 +366,9 @@ export interface InputSocketTVResponse {
 export interface TVAppInfo {
   defaultWindowType: string;
   installedTime: number;
+  uiRevision?: number;
+  containerCSS?: string;
+  containerJS?: string;
   bgImage: string;
   version: string;
   systemApp: boolean;
@@ -372,6 +376,7 @@ export interface TVAppInfo {
   miniicon: string;
   hasPromotion: boolean;
   requestedWindowOrientation: string;
+  class?: { hidden: boolean };
   extraLargeIcon: string;
   largeIcon: string;
   lockable: boolean;
@@ -382,6 +387,7 @@ export interface TVAppInfo {
   launchinnewgroup: boolean;
   handlesRelaunch: boolean;
   id: string;
+  enyoVersion?: string;
   noSplashOnLaunch: boolean;
   inAppSetting: boolean;
   privilegedJail: boolean;
@@ -391,7 +397,7 @@ export interface TVAppInfo {
   binId: number;
   title: string;
   resolution: string;
-  hardwareFeaturesNeeded: any[];
+  hardwareFeaturesNeeded: unknown[];
   visible: boolean;
   deeplinkingParams: string;
   noWindow: boolean;
@@ -405,6 +411,16 @@ export interface TVAppInfo {
   disableBackHistoryAPI: boolean;
   removable: boolean;
   appsize: number;
+  windowGroup?: {
+    clientInfo?: { layer: string }[];
+    ownerInfo?: {
+      allowAnonymous: boolean;
+      layers: { z: number; name: string }[];
+    };
+    owner: boolean;
+    name: string;
+  };
+  onDeviceSource?: Record<string, string>;
 }
 
 export interface AppListTVResponse {
@@ -438,7 +454,7 @@ export interface LaunchPointsTVResponse {
   caseDetail: {
     serviceCountryCode: string;
     localeCode: string;
-    change: any[];
+    change: unknown[];
     broadcastCountryCode: string;
   };
 }
