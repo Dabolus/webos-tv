@@ -23,13 +23,13 @@
 | Name | Type |
 | :------ | :------ |
 | `broadcastCountryCode` | `string` |
-| `change` | `any`[] |
+| `change` | `unknown`[] |
 | `localeCode` | `string` |
 | `serviceCountryCode` | `string` |
 
 #### Defined in
 
-[src/model.ts:438](https://github.com/Dabolus/webos-tv/blob/34d8c22/src/model.ts#L438)
+[src/model.ts:454](https://github.com/Dabolus/webos-tv/blob/7abb5c9/src/model.ts#L454)
 
 ___
 
@@ -39,7 +39,7 @@ ___
 
 #### Defined in
 
-[src/model.ts:437](https://github.com/Dabolus/webos-tv/blob/34d8c22/src/model.ts#L437)
+[src/model.ts:453](https://github.com/Dabolus/webos-tv/blob/7abb5c9/src/model.ts#L453)
 
 ___
 
@@ -49,4 +49,4 @@ ___
 
 #### Defined in
 
-[src/model.ts:436](https://github.com/Dabolus/webos-tv/blob/34d8c22/src/model.ts#L436)
+[src/model.ts:452](https://github.com/Dabolus/webos-tv/blob/7abb5c9/src/model.ts#L452)

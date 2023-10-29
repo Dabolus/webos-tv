@@ -44,6 +44,7 @@
 
 ### Methods
 
+- [[captureRejectionSymbol]](sockets.RemoteKeyboardSocket.md#[capturerejectionsymbol])
 - [addEventListener](sockets.RemoteKeyboardSocket.md#addeventlistener)
 - [addListener](sockets.RemoteKeyboardSocket.md#addlistener)
 - [close](sockets.RemoteKeyboardSocket.md#close)
@@ -68,7 +69,9 @@
 - [send](sockets.RemoteKeyboardSocket.md#send)
 - [setMaxListeners](sockets.RemoteKeyboardSocket.md#setmaxlisteners)
 - [terminate](sockets.RemoteKeyboardSocket.md#terminate)
+- [addAbortListener](sockets.RemoteKeyboardSocket.md#addabortlistener)
 - [getEventListeners](sockets.RemoteKeyboardSocket.md#geteventlisteners)
+- [getMaxListeners](sockets.RemoteKeyboardSocket.md#getmaxlisteners-1)
 - [listenerCount](sockets.RemoteKeyboardSocket.md#listenercount-1)
 - [on](sockets.RemoteKeyboardSocket.md#on-1)
 - [once](sockets.RemoteKeyboardSocket.md#once-1)
@@ -93,7 +96,7 @@
 
 #### Defined in
 
-[src/sockets.ts:4](https://github.com/Dabolus/webos-tv/blob/34d8c22/src/sockets.ts#L4)
+[src/sockets.ts:4](https://github.com/Dabolus/webos-tv/blob/7abb5c9/src/sockets.ts#L4)
 
 ## Properties
 
@@ -109,7 +112,7 @@ The connection is closed.
 
 #### Defined in
 
-node_modules/@types/ws/index.d.ts:62
+node_modules/@types/ws/index.d.ts:70
 
 ___
 
@@ -125,7 +128,7 @@ The connection is in the process of closing.
 
 #### Defined in
 
-node_modules/@types/ws/index.d.ts:60
+node_modules/@types/ws/index.d.ts:68
 
 ___
 
@@ -141,7 +144,7 @@ The connection is not yet open.
 
 #### Defined in
 
-node_modules/@types/ws/index.d.ts:56
+node_modules/@types/ws/index.d.ts:64
 
 ___
 
@@ -157,7 +160,7 @@ The connection is open and ready to communicate.
 
 #### Defined in
 
-node_modules/@types/ws/index.d.ts:58
+node_modules/@types/ws/index.d.ts:66
 
 ___
 
@@ -171,7 +174,7 @@ ___
 
 #### Defined in
 
-node_modules/@types/ws/index.d.ts:41
+node_modules/@types/ws/index.d.ts:49
 
 ___
 
@@ -185,7 +188,7 @@ ___
 
 #### Defined in
 
-node_modules/@types/ws/index.d.ts:42
+node_modules/@types/ws/index.d.ts:50
 
 ___
 
@@ -199,7 +202,7 @@ ___
 
 #### Defined in
 
-node_modules/@types/ws/index.d.ts:43
+node_modules/@types/ws/index.d.ts:51
 
 ___
 
@@ -215,7 +218,7 @@ Indicates whether the websocket is paused
 
 #### Defined in
 
-node_modules/@types/ws/index.d.ts:45
+node_modules/@types/ws/index.d.ts:53
 
 ___
 
@@ -243,7 +246,7 @@ ___
 
 #### Defined in
 
-node_modules/@types/ws/index.d.ts:66
+node_modules/@types/ws/index.d.ts:74
 
 ___
 
@@ -271,7 +274,7 @@ ___
 
 #### Defined in
 
-node_modules/@types/ws/index.d.ts:65
+node_modules/@types/ws/index.d.ts:73
 
 ___
 
@@ -299,7 +302,7 @@ ___
 
 #### Defined in
 
-node_modules/@types/ws/index.d.ts:67
+node_modules/@types/ws/index.d.ts:75
 
 ___
 
@@ -327,7 +330,7 @@ ___
 
 #### Defined in
 
-node_modules/@types/ws/index.d.ts:64
+node_modules/@types/ws/index.d.ts:72
 
 ___
 
@@ -341,7 +344,7 @@ ___
 
 #### Defined in
 
-node_modules/@types/ws/index.d.ts:46
+node_modules/@types/ws/index.d.ts:54
 
 ___
 
@@ -357,7 +360,7 @@ The current state of the connection
 
 #### Defined in
 
-node_modules/@types/ws/index.d.ts:48
+node_modules/@types/ws/index.d.ts:56
 
 ___
 
@@ -371,7 +374,7 @@ ___
 
 #### Defined in
 
-node_modules/@types/ws/index.d.ts:53
+node_modules/@types/ws/index.d.ts:61
 
 ___
 
@@ -387,7 +390,7 @@ The connection is closed.
 
 #### Defined in
 
-node_modules/@types/ws/index.d.ts:39
+node_modules/@types/ws/index.d.ts:47
 
 ___
 
@@ -403,7 +406,7 @@ The connection is in the process of closing.
 
 #### Defined in
 
-node_modules/@types/ws/index.d.ts:37
+node_modules/@types/ws/index.d.ts:45
 
 ___
 
@@ -419,7 +422,7 @@ The connection is not yet open.
 
 #### Defined in
 
-node_modules/@types/ws/index.d.ts:33
+node_modules/@types/ws/index.d.ts:41
 
 ___
 
@@ -435,7 +438,7 @@ The connection is open and ready to communicate.
 
 #### Defined in
 
-node_modules/@types/ws/index.d.ts:35
+node_modules/@types/ws/index.d.ts:43
 
 ___
 
@@ -443,13 +446,21 @@ ___
 
 ▪ `Static` `Readonly` **captureRejectionSymbol**: typeof [`captureRejectionSymbol`](sockets.SpecializedWebSocket.md#capturerejectionsymbol)
 
+Value: `Symbol.for('nodejs.rejection')`
+
+See how to write a custom `rejection handler`.
+
+**`Since`**
+
+v13.4.0, v12.16.0
+
 #### Inherited from
 
 [SpecializedWebSocket](sockets.SpecializedWebSocket.md).[captureRejectionSymbol](sockets.SpecializedWebSocket.md#capturerejectionsymbol)
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:328
+node_modules/@types/node/events.d.ts:402
 
 ___
 
@@ -457,7 +468,13 @@ ___
 
 ▪ `Static` **captureRejections**: `boolean`
 
-Sets or gets the default captureRejection value for all emitters.
+Value: [boolean](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Boolean_type)
+
+Change the default `captureRejections` option on all new `EventEmitter` objects.
+
+**`Since`**
+
+v13.4.0, v12.16.0
 
 #### Inherited from
 
@@ -465,7 +482,7 @@ Sets or gets the default captureRejection value for all emitters.
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:333
+node_modules/@types/node/events.d.ts:409
 
 ___
 
@@ -473,13 +490,51 @@ ___
 
 ▪ `Static` **defaultMaxListeners**: `number`
 
+By default, a maximum of `10` listeners can be registered for any single
+event. This limit can be changed for individual `EventEmitter` instances
+using the `emitter.setMaxListeners(n)` method. To change the default
+for _all_`EventEmitter` instances, the `events.defaultMaxListeners`property can be used. If this value is not a positive number, a `RangeError`is thrown.
+
+Take caution when setting the `events.defaultMaxListeners` because the
+change affects _all_`EventEmitter` instances, including those created before
+the change is made. However, calling `emitter.setMaxListeners(n)` still has
+precedence over `events.defaultMaxListeners`.
+
+This is not a hard limit. The `EventEmitter` instance will allow
+more listeners to be added but will output a trace warning to stderr indicating
+that a "possible EventEmitter memory leak" has been detected. For any single`EventEmitter`, the `emitter.getMaxListeners()` and `emitter.setMaxListeners()`methods can be used to
+temporarily avoid this warning:
+
+```js
+import { EventEmitter } from 'node:events';
+const emitter = new EventEmitter();
+emitter.setMaxListeners(emitter.getMaxListeners() + 1);
+emitter.once('event', () => {
+  // do stuff
+  emitter.setMaxListeners(Math.max(emitter.getMaxListeners() - 1, 0));
+});
+```
+
+The `--trace-warnings` command-line flag can be used to display the
+stack trace for such warnings.
+
+The emitted warning can be inspected with `process.on('warning')` and will
+have the additional `emitter`, `type`, and `count` properties, referring to
+the event emitter instance, the event's name and the number of attached
+listeners, respectively.
+Its `name` property is set to `'MaxListenersExceededWarning'`.
+
+**`Since`**
+
+v0.11.2
+
 #### Inherited from
 
 [SpecializedWebSocket](sockets.SpecializedWebSocket.md).[defaultMaxListeners](sockets.SpecializedWebSocket.md#defaultmaxlisteners)
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:334
+node_modules/@types/node/events.d.ts:446
 
 ___
 
@@ -487,13 +542,14 @@ ___
 
 ▪ `Static` `Readonly` **errorMonitor**: typeof [`errorMonitor`](sockets.SpecializedWebSocket.md#errormonitor)
 
-This symbol shall be used to install a listener for only monitoring `'error'`
-events. Listeners installed using this symbol are called before the regular
-`'error'` listeners are called.
+This symbol shall be used to install a listener for only monitoring `'error'`events. Listeners installed using this symbol are called before the regular`'error'` listeners are called.
 
-Installing a listener using this symbol does not change the behavior once an
-`'error'` event is emitted, therefore the process will still crash if no
+Installing a listener using this symbol does not change the behavior once an`'error'` event is emitted. Therefore, the process will still crash if no
 regular `'error'` listener is installed.
+
+**`Since`**
+
+v13.6.0, v12.17.0
 
 #### Inherited from
 
@@ -501,9 +557,35 @@ regular `'error'` listener is installed.
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:327
+node_modules/@types/node/events.d.ts:395
 
 ## Methods
+
+### [captureRejectionSymbol]
+
+▸ `Optional` **[captureRejectionSymbol]**(`error`, `event`, `...args`): `void`
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `error` | `Error` |
+| `event` | `string` |
+| `...args` | `any`[] |
+
+#### Returns
+
+`void`
+
+#### Inherited from
+
+[SpecializedWebSocket](sockets.SpecializedWebSocket.md).[[captureRejectionSymbol]](sockets.SpecializedWebSocket.md#[capturerejectionsymbol])
+
+#### Defined in
+
+node_modules/@types/node/events.d.ts:112
+
+___
 
 ### addEventListener
 
@@ -527,7 +609,7 @@ node_modules/@types/node/events.d.ts:327
 
 #### Defined in
 
-node_modules/@types/ws/index.d.ts:101
+node_modules/@types/ws/index.d.ts:115
 
 ▸ **addEventListener**(`method`, `cb`, `options?`): `void`
 
@@ -549,7 +631,7 @@ node_modules/@types/ws/index.d.ts:101
 
 #### Defined in
 
-node_modules/@types/ws/index.d.ts:106
+node_modules/@types/ws/index.d.ts:120
 
 ▸ **addEventListener**(`method`, `cb`, `options?`): `void`
 
@@ -571,7 +653,7 @@ node_modules/@types/ws/index.d.ts:106
 
 #### Defined in
 
-node_modules/@types/ws/index.d.ts:111
+node_modules/@types/ws/index.d.ts:125
 
 ▸ **addEventListener**(`method`, `cb`, `options?`): `void`
 
@@ -593,7 +675,7 @@ node_modules/@types/ws/index.d.ts:111
 
 #### Defined in
 
-node_modules/@types/ws/index.d.ts:116
+node_modules/@types/ws/index.d.ts:130
 
 ___
 
@@ -618,7 +700,7 @@ ___
 
 #### Defined in
 
-node_modules/@types/ws/index.d.ts:164
+node_modules/@types/ws/index.d.ts:178
 
 ▸ **addListener**(`event`, `listener`): [`RemoteKeyboardSocket`](sockets.RemoteKeyboardSocket.md)
 
@@ -639,7 +721,7 @@ node_modules/@types/ws/index.d.ts:164
 
 #### Defined in
 
-node_modules/@types/ws/index.d.ts:165
+node_modules/@types/ws/index.d.ts:179
 
 ▸ **addListener**(`event`, `listener`): [`RemoteKeyboardSocket`](sockets.RemoteKeyboardSocket.md)
 
@@ -660,7 +742,7 @@ node_modules/@types/ws/index.d.ts:165
 
 #### Defined in
 
-node_modules/@types/ws/index.d.ts:166
+node_modules/@types/ws/index.d.ts:180
 
 ▸ **addListener**(`event`, `listener`): [`RemoteKeyboardSocket`](sockets.RemoteKeyboardSocket.md)
 
@@ -681,7 +763,7 @@ node_modules/@types/ws/index.d.ts:166
 
 #### Defined in
 
-node_modules/@types/ws/index.d.ts:167
+node_modules/@types/ws/index.d.ts:181
 
 ▸ **addListener**(`event`, `listener`): [`RemoteKeyboardSocket`](sockets.RemoteKeyboardSocket.md)
 
@@ -702,7 +784,7 @@ node_modules/@types/ws/index.d.ts:167
 
 #### Defined in
 
-node_modules/@types/ws/index.d.ts:168
+node_modules/@types/ws/index.d.ts:182
 
 ▸ **addListener**(`event`, `listener`): [`RemoteKeyboardSocket`](sockets.RemoteKeyboardSocket.md)
 
@@ -723,7 +805,7 @@ node_modules/@types/ws/index.d.ts:168
 
 #### Defined in
 
-node_modules/@types/ws/index.d.ts:169
+node_modules/@types/ws/index.d.ts:183
 
 ▸ **addListener**(`event`, `listener`): [`RemoteKeyboardSocket`](sockets.RemoteKeyboardSocket.md)
 
@@ -744,7 +826,7 @@ node_modules/@types/ws/index.d.ts:169
 
 #### Defined in
 
-node_modules/@types/ws/index.d.ts:170
+node_modules/@types/ws/index.d.ts:184
 
 ▸ **addListener**(`event`, `listener`): [`RemoteKeyboardSocket`](sockets.RemoteKeyboardSocket.md)
 
@@ -765,7 +847,7 @@ node_modules/@types/ws/index.d.ts:170
 
 #### Defined in
 
-node_modules/@types/ws/index.d.ts:174
+node_modules/@types/ws/index.d.ts:188
 
 ___
 
@@ -790,13 +872,13 @@ ___
 
 #### Defined in
 
-node_modules/@types/ws/index.d.ts:77
+node_modules/@types/ws/index.d.ts:85
 
 ___
 
 ### emit
 
-▸ **emit**(`eventName`, ...`args`): `boolean`
+▸ **emit**(`eventName`, `...args`): `boolean`
 
 Synchronously calls each of the listeners registered for the event named`eventName`, in the order they were registered, passing the supplied arguments
 to each.
@@ -804,7 +886,7 @@ to each.
 Returns `true` if the event had listeners, `false` otherwise.
 
 ```js
-const EventEmitter = require('events');
+import { EventEmitter } from 'node:events';
 const myEmitter = new EventEmitter();
 
 // First listener
@@ -836,10 +918,6 @@ myEmitter.emit('event', 1, 2, 3, 4, 5);
 // event with parameters 1, 2, 3, 4, 5 in third listener
 ```
 
-**`Since`**
-
-v0.1.26
-
 #### Parameters
 
 | Name | Type |
@@ -851,13 +929,17 @@ v0.1.26
 
 `boolean`
 
+**`Since`**
+
+v0.1.26
+
 #### Inherited from
 
 [SpecializedWebSocket](sockets.SpecializedWebSocket.md).[emit](sockets.SpecializedWebSocket.md#emit)
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:610
+node_modules/@types/node/events.d.ts:772
 
 ___
 
@@ -869,7 +951,8 @@ Returns an array listing the events for which the emitter has registered
 listeners. The values in the array are strings or `Symbol`s.
 
 ```js
-const EventEmitter = require('events');
+import { EventEmitter } from 'node:events';
+
 const myEE = new EventEmitter();
 myEE.on('foo', () => {});
 myEE.on('bar', () => {});
@@ -881,13 +964,13 @@ console.log(myEE.eventNames());
 // Prints: [ 'foo', 'bar', Symbol(symbol) ]
 ```
 
-**`Since`**
-
-v6.0.0
-
 #### Returns
 
 (`string` \| `symbol`)[]
+
+**`Since`**
+
+v6.0.0
 
 #### Inherited from
 
@@ -895,7 +978,7 @@ v6.0.0
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:669
+node_modules/@types/node/events.d.ts:835
 
 ___
 
@@ -906,13 +989,13 @@ ___
 Returns the current max listener value for the `EventEmitter` which is either
 set by `emitter.setMaxListeners(n)` or defaults to [defaultMaxListeners](sockets.RemoteKeyboardSocket.md#defaultmaxlisteners).
 
-**`Since`**
-
-v1.0.0
-
 #### Returns
 
 `number`
+
+**`Since`**
+
+v1.0.0
 
 #### Inherited from
 
@@ -920,29 +1003,32 @@ v1.0.0
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:526
+node_modules/@types/node/events.d.ts:687
 
 ___
 
 ### listenerCount
 
-▸ **listenerCount**(`eventName`): `number`
+▸ **listenerCount**(`eventName`, `listener?`): `number`
 
-Returns the number of listeners listening to the event named `eventName`.
-
-**`Since`**
-
-v3.2.0
+Returns the number of listeners listening for the event named `eventName`.
+If `listener` is provided, it will return how many times the listener is found
+in the list of the listeners of the event.
 
 #### Parameters
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
 | `eventName` | `string` \| `symbol` | The name of the event being listened for |
+| `listener?` | `Function` | The event handler function |
 
 #### Returns
 
 `number`
+
+**`Since`**
+
+v3.2.0
 
 #### Inherited from
 
@@ -950,7 +1036,7 @@ v3.2.0
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:616
+node_modules/@types/node/events.d.ts:781
 
 ___
 
@@ -968,10 +1054,6 @@ console.log(util.inspect(server.listeners('connection')));
 // Prints: [ [Function] ]
 ```
 
-**`Since`**
-
-v0.1.26
-
 #### Parameters
 
 | Name | Type |
@@ -982,13 +1064,17 @@ v0.1.26
 
 `Function`[]
 
+**`Since`**
+
+v0.1.26
+
 #### Inherited from
 
 [SpecializedWebSocket](sockets.SpecializedWebSocket.md).[listeners](sockets.SpecializedWebSocket.md#listeners)
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:539
+node_modules/@types/node/events.d.ts:700
 
 ___
 
@@ -1013,7 +1099,7 @@ ___
 
 #### Defined in
 
-node_modules/@types/ws/index.d.ts:152
+node_modules/@types/ws/index.d.ts:166
 
 ▸ **off**(`event`, `listener`): [`RemoteKeyboardSocket`](sockets.RemoteKeyboardSocket.md)
 
@@ -1034,7 +1120,7 @@ node_modules/@types/ws/index.d.ts:152
 
 #### Defined in
 
-node_modules/@types/ws/index.d.ts:153
+node_modules/@types/ws/index.d.ts:167
 
 ▸ **off**(`event`, `listener`): [`RemoteKeyboardSocket`](sockets.RemoteKeyboardSocket.md)
 
@@ -1055,7 +1141,7 @@ node_modules/@types/ws/index.d.ts:153
 
 #### Defined in
 
-node_modules/@types/ws/index.d.ts:154
+node_modules/@types/ws/index.d.ts:168
 
 ▸ **off**(`event`, `listener`): [`RemoteKeyboardSocket`](sockets.RemoteKeyboardSocket.md)
 
@@ -1076,7 +1162,7 @@ node_modules/@types/ws/index.d.ts:154
 
 #### Defined in
 
-node_modules/@types/ws/index.d.ts:155
+node_modules/@types/ws/index.d.ts:169
 
 ▸ **off**(`event`, `listener`): [`RemoteKeyboardSocket`](sockets.RemoteKeyboardSocket.md)
 
@@ -1097,7 +1183,7 @@ node_modules/@types/ws/index.d.ts:155
 
 #### Defined in
 
-node_modules/@types/ws/index.d.ts:156
+node_modules/@types/ws/index.d.ts:170
 
 ▸ **off**(`event`, `listener`): [`RemoteKeyboardSocket`](sockets.RemoteKeyboardSocket.md)
 
@@ -1118,7 +1204,7 @@ node_modules/@types/ws/index.d.ts:156
 
 #### Defined in
 
-node_modules/@types/ws/index.d.ts:157
+node_modules/@types/ws/index.d.ts:171
 
 ▸ **off**(`event`, `listener`): [`RemoteKeyboardSocket`](sockets.RemoteKeyboardSocket.md)
 
@@ -1139,7 +1225,7 @@ node_modules/@types/ws/index.d.ts:157
 
 #### Defined in
 
-node_modules/@types/ws/index.d.ts:158
+node_modules/@types/ws/index.d.ts:172
 
 ▸ **off**(`event`, `listener`): [`RemoteKeyboardSocket`](sockets.RemoteKeyboardSocket.md)
 
@@ -1160,7 +1246,7 @@ node_modules/@types/ws/index.d.ts:158
 
 #### Defined in
 
-node_modules/@types/ws/index.d.ts:162
+node_modules/@types/ws/index.d.ts:176
 
 ___
 
@@ -1185,7 +1271,7 @@ ___
 
 #### Defined in
 
-node_modules/@types/ws/index.d.ts:128
+node_modules/@types/ws/index.d.ts:142
 
 ▸ **on**(`event`, `listener`): [`RemoteKeyboardSocket`](sockets.RemoteKeyboardSocket.md)
 
@@ -1206,7 +1292,7 @@ node_modules/@types/ws/index.d.ts:128
 
 #### Defined in
 
-node_modules/@types/ws/index.d.ts:129
+node_modules/@types/ws/index.d.ts:143
 
 ▸ **on**(`event`, `listener`): [`RemoteKeyboardSocket`](sockets.RemoteKeyboardSocket.md)
 
@@ -1227,7 +1313,7 @@ node_modules/@types/ws/index.d.ts:129
 
 #### Defined in
 
-node_modules/@types/ws/index.d.ts:130
+node_modules/@types/ws/index.d.ts:144
 
 ▸ **on**(`event`, `listener`): [`RemoteKeyboardSocket`](sockets.RemoteKeyboardSocket.md)
 
@@ -1248,7 +1334,7 @@ node_modules/@types/ws/index.d.ts:130
 
 #### Defined in
 
-node_modules/@types/ws/index.d.ts:131
+node_modules/@types/ws/index.d.ts:145
 
 ▸ **on**(`event`, `listener`): [`RemoteKeyboardSocket`](sockets.RemoteKeyboardSocket.md)
 
@@ -1269,7 +1355,7 @@ node_modules/@types/ws/index.d.ts:131
 
 #### Defined in
 
-node_modules/@types/ws/index.d.ts:132
+node_modules/@types/ws/index.d.ts:146
 
 ▸ **on**(`event`, `listener`): [`RemoteKeyboardSocket`](sockets.RemoteKeyboardSocket.md)
 
@@ -1290,7 +1376,7 @@ node_modules/@types/ws/index.d.ts:132
 
 #### Defined in
 
-node_modules/@types/ws/index.d.ts:133
+node_modules/@types/ws/index.d.ts:147
 
 ▸ **on**(`event`, `listener`): [`RemoteKeyboardSocket`](sockets.RemoteKeyboardSocket.md)
 
@@ -1311,7 +1397,7 @@ node_modules/@types/ws/index.d.ts:133
 
 #### Defined in
 
-node_modules/@types/ws/index.d.ts:134
+node_modules/@types/ws/index.d.ts:148
 
 ▸ **on**(`event`, `listener`): [`RemoteKeyboardSocket`](sockets.RemoteKeyboardSocket.md)
 
@@ -1332,7 +1418,7 @@ node_modules/@types/ws/index.d.ts:134
 
 #### Defined in
 
-node_modules/@types/ws/index.d.ts:138
+node_modules/@types/ws/index.d.ts:152
 
 ___
 
@@ -1357,7 +1443,7 @@ ___
 
 #### Defined in
 
-node_modules/@types/ws/index.d.ts:140
+node_modules/@types/ws/index.d.ts:154
 
 ▸ **once**(`event`, `listener`): [`RemoteKeyboardSocket`](sockets.RemoteKeyboardSocket.md)
 
@@ -1378,7 +1464,7 @@ node_modules/@types/ws/index.d.ts:140
 
 #### Defined in
 
-node_modules/@types/ws/index.d.ts:141
+node_modules/@types/ws/index.d.ts:155
 
 ▸ **once**(`event`, `listener`): [`RemoteKeyboardSocket`](sockets.RemoteKeyboardSocket.md)
 
@@ -1399,7 +1485,7 @@ node_modules/@types/ws/index.d.ts:141
 
 #### Defined in
 
-node_modules/@types/ws/index.d.ts:142
+node_modules/@types/ws/index.d.ts:156
 
 ▸ **once**(`event`, `listener`): [`RemoteKeyboardSocket`](sockets.RemoteKeyboardSocket.md)
 
@@ -1420,7 +1506,7 @@ node_modules/@types/ws/index.d.ts:142
 
 #### Defined in
 
-node_modules/@types/ws/index.d.ts:143
+node_modules/@types/ws/index.d.ts:157
 
 ▸ **once**(`event`, `listener`): [`RemoteKeyboardSocket`](sockets.RemoteKeyboardSocket.md)
 
@@ -1441,7 +1527,7 @@ node_modules/@types/ws/index.d.ts:143
 
 #### Defined in
 
-node_modules/@types/ws/index.d.ts:144
+node_modules/@types/ws/index.d.ts:158
 
 ▸ **once**(`event`, `listener`): [`RemoteKeyboardSocket`](sockets.RemoteKeyboardSocket.md)
 
@@ -1462,7 +1548,7 @@ node_modules/@types/ws/index.d.ts:144
 
 #### Defined in
 
-node_modules/@types/ws/index.d.ts:145
+node_modules/@types/ws/index.d.ts:159
 
 ▸ **once**(`event`, `listener`): [`RemoteKeyboardSocket`](sockets.RemoteKeyboardSocket.md)
 
@@ -1483,7 +1569,7 @@ node_modules/@types/ws/index.d.ts:145
 
 #### Defined in
 
-node_modules/@types/ws/index.d.ts:146
+node_modules/@types/ws/index.d.ts:160
 
 ▸ **once**(`event`, `listener`): [`RemoteKeyboardSocket`](sockets.RemoteKeyboardSocket.md)
 
@@ -1504,7 +1590,7 @@ node_modules/@types/ws/index.d.ts:146
 
 #### Defined in
 
-node_modules/@types/ws/index.d.ts:150
+node_modules/@types/ws/index.d.ts:164
 
 ___
 
@@ -1526,7 +1612,7 @@ is a noop if the ready state is `CONNECTING` or `CLOSED`.
 
 #### Defined in
 
-node_modules/@types/ws/index.d.ts:93
+node_modules/@types/ws/index.d.ts:107
 
 ___
 
@@ -1552,7 +1638,7 @@ ___
 
 #### Defined in
 
-node_modules/@types/ws/index.d.ts:78
+node_modules/@types/ws/index.d.ts:86
 
 ___
 
@@ -1578,7 +1664,7 @@ ___
 
 #### Defined in
 
-node_modules/@types/ws/index.d.ts:79
+node_modules/@types/ws/index.d.ts:87
 
 ___
 
@@ -1599,10 +1685,6 @@ server.prependListener('connection', (stream) => {
 
 Returns a reference to the `EventEmitter`, so that calls can be chained.
 
-**`Since`**
-
-v6.0.0
-
 #### Parameters
 
 | Name | Type | Description |
@@ -1614,13 +1696,17 @@ v6.0.0
 
 [`RemoteKeyboardSocket`](sockets.RemoteKeyboardSocket.md)
 
+**`Since`**
+
+v6.0.0
+
 #### Inherited from
 
 [SpecializedWebSocket](sockets.SpecializedWebSocket.md).[prependListener](sockets.SpecializedWebSocket.md#prependlistener)
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:634
+node_modules/@types/node/events.d.ts:799
 
 ___
 
@@ -1639,10 +1725,6 @@ server.prependOnceListener('connection', (stream) => {
 
 Returns a reference to the `EventEmitter`, so that calls can be chained.
 
-**`Since`**
-
-v6.0.0
-
 #### Parameters
 
 | Name | Type | Description |
@@ -1654,13 +1736,17 @@ v6.0.0
 
 [`RemoteKeyboardSocket`](sockets.RemoteKeyboardSocket.md)
 
+**`Since`**
+
+v6.0.0
+
 #### Inherited from
 
 [SpecializedWebSocket](sockets.SpecializedWebSocket.md).[prependOnceListener](sockets.SpecializedWebSocket.md#prependoncelistener)
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:650
+node_modules/@types/node/events.d.ts:815
 
 ___
 
@@ -1672,6 +1758,7 @@ Returns a copy of the array of listeners for the event named `eventName`,
 including any wrappers (such as those created by `.once()`).
 
 ```js
+import { EventEmitter } from 'node:events';
 const emitter = new EventEmitter();
 emitter.once('log', () => console.log('log once'));
 
@@ -1695,10 +1782,6 @@ newListeners[0]();
 emitter.emit('log');
 ```
 
-**`Since`**
-
-v9.4.0
-
 #### Parameters
 
 | Name | Type |
@@ -1709,13 +1792,17 @@ v9.4.0
 
 `Function`[]
 
+**`Since`**
+
+v9.4.0
+
 #### Inherited from
 
 [SpecializedWebSocket](sockets.SpecializedWebSocket.md).[rawListeners](sockets.SpecializedWebSocket.md#rawlisteners)
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:569
+node_modules/@types/node/events.d.ts:731
 
 ___
 
@@ -1731,10 +1818,6 @@ component or module (e.g. sockets or file streams).
 
 Returns a reference to the `EventEmitter`, so that calls can be chained.
 
-**`Since`**
-
-v0.1.26
-
 #### Parameters
 
 | Name | Type |
@@ -1745,13 +1828,17 @@ v0.1.26
 
 [`RemoteKeyboardSocket`](sockets.RemoteKeyboardSocket.md)
 
+**`Since`**
+
+v0.1.26
+
 #### Inherited from
 
 [SpecializedWebSocket](sockets.SpecializedWebSocket.md).[removeAllListeners](sockets.SpecializedWebSocket.md#removealllisteners)
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:510
+node_modules/@types/node/events.d.ts:671
 
 ___
 
@@ -1776,7 +1863,7 @@ ___
 
 #### Defined in
 
-node_modules/@types/ws/index.d.ts:122
+node_modules/@types/ws/index.d.ts:136
 
 ▸ **removeEventListener**(`method`, `cb`): `void`
 
@@ -1797,7 +1884,7 @@ node_modules/@types/ws/index.d.ts:122
 
 #### Defined in
 
-node_modules/@types/ws/index.d.ts:123
+node_modules/@types/ws/index.d.ts:137
 
 ▸ **removeEventListener**(`method`, `cb`): `void`
 
@@ -1818,7 +1905,7 @@ node_modules/@types/ws/index.d.ts:123
 
 #### Defined in
 
-node_modules/@types/ws/index.d.ts:124
+node_modules/@types/ws/index.d.ts:138
 
 ▸ **removeEventListener**(`method`, `cb`): `void`
 
@@ -1839,7 +1926,7 @@ node_modules/@types/ws/index.d.ts:124
 
 #### Defined in
 
-node_modules/@types/ws/index.d.ts:125
+node_modules/@types/ws/index.d.ts:139
 
 ___
 
@@ -1864,7 +1951,7 @@ ___
 
 #### Defined in
 
-node_modules/@types/ws/index.d.ts:176
+node_modules/@types/ws/index.d.ts:190
 
 ▸ **removeListener**(`event`, `listener`): [`RemoteKeyboardSocket`](sockets.RemoteKeyboardSocket.md)
 
@@ -1885,7 +1972,7 @@ node_modules/@types/ws/index.d.ts:176
 
 #### Defined in
 
-node_modules/@types/ws/index.d.ts:177
+node_modules/@types/ws/index.d.ts:191
 
 ▸ **removeListener**(`event`, `listener`): [`RemoteKeyboardSocket`](sockets.RemoteKeyboardSocket.md)
 
@@ -1906,7 +1993,7 @@ node_modules/@types/ws/index.d.ts:177
 
 #### Defined in
 
-node_modules/@types/ws/index.d.ts:178
+node_modules/@types/ws/index.d.ts:192
 
 ▸ **removeListener**(`event`, `listener`): [`RemoteKeyboardSocket`](sockets.RemoteKeyboardSocket.md)
 
@@ -1927,7 +2014,7 @@ node_modules/@types/ws/index.d.ts:178
 
 #### Defined in
 
-node_modules/@types/ws/index.d.ts:179
+node_modules/@types/ws/index.d.ts:193
 
 ▸ **removeListener**(`event`, `listener`): [`RemoteKeyboardSocket`](sockets.RemoteKeyboardSocket.md)
 
@@ -1948,7 +2035,7 @@ node_modules/@types/ws/index.d.ts:179
 
 #### Defined in
 
-node_modules/@types/ws/index.d.ts:180
+node_modules/@types/ws/index.d.ts:194
 
 ▸ **removeListener**(`event`, `listener`): [`RemoteKeyboardSocket`](sockets.RemoteKeyboardSocket.md)
 
@@ -1969,7 +2056,7 @@ node_modules/@types/ws/index.d.ts:180
 
 #### Defined in
 
-node_modules/@types/ws/index.d.ts:181
+node_modules/@types/ws/index.d.ts:195
 
 ▸ **removeListener**(`event`, `listener`): [`RemoteKeyboardSocket`](sockets.RemoteKeyboardSocket.md)
 
@@ -1990,7 +2077,7 @@ node_modules/@types/ws/index.d.ts:181
 
 #### Defined in
 
-node_modules/@types/ws/index.d.ts:182
+node_modules/@types/ws/index.d.ts:196
 
 ▸ **removeListener**(`event`, `listener`): [`RemoteKeyboardSocket`](sockets.RemoteKeyboardSocket.md)
 
@@ -2011,7 +2098,7 @@ node_modules/@types/ws/index.d.ts:182
 
 #### Defined in
 
-node_modules/@types/ws/index.d.ts:186
+node_modules/@types/ws/index.d.ts:200
 
 ___
 
@@ -2032,7 +2119,7 @@ state is `CONNECTING` or `CLOSED`.
 
 #### Defined in
 
-node_modules/@types/ws/index.d.ts:98
+node_modules/@types/ws/index.d.ts:112
 
 ___
 
@@ -2045,7 +2132,7 @@ ___
 | Name | Type |
 | :------ | :------ |
 | `type` | `string` |
-| `payload` | `any` |
+| `payload` | `unknown` |
 
 #### Returns
 
@@ -2057,7 +2144,7 @@ ___
 
 #### Defined in
 
-[src/sockets.ts:8](https://github.com/Dabolus/webos-tv/blob/34d8c22/src/sockets.ts#L8)
+[src/sockets.ts:8](https://github.com/Dabolus/webos-tv/blob/7abb5c9/src/sockets.ts#L8)
 
 ___
 
@@ -2072,10 +2159,6 @@ modified for this specific `EventEmitter` instance. The value can be set to`Infi
 
 Returns a reference to the `EventEmitter`, so that calls can be chained.
 
-**`Since`**
-
-v0.3.5
-
 #### Parameters
 
 | Name | Type |
@@ -2086,13 +2169,17 @@ v0.3.5
 
 [`RemoteKeyboardSocket`](sockets.RemoteKeyboardSocket.md)
 
+**`Since`**
+
+v0.3.5
+
 #### Inherited from
 
 [SpecializedWebSocket](sockets.SpecializedWebSocket.md).[setMaxListeners](sockets.SpecializedWebSocket.md#setmaxlisteners)
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:520
+node_modules/@types/node/events.d.ts:681
 
 ___
 
@@ -2110,7 +2197,68 @@ ___
 
 #### Defined in
 
-node_modules/@types/ws/index.d.ts:86
+node_modules/@types/ws/index.d.ts:100
+
+___
+
+### addAbortListener
+
+▸ `Static` **addAbortListener**(`signal`, `resource`): `Disposable`
+
+Listens once to the `abort` event on the provided `signal`.
+
+Listening to the `abort` event on abort signals is unsafe and may
+lead to resource leaks since another third party with the signal can
+call `e.stopImmediatePropagation()`. Unfortunately Node.js cannot change
+this since it would violate the web standard. Additionally, the original
+API makes it easy to forget to remove listeners.
+
+This API allows safely using `AbortSignal`s in Node.js APIs by solving these
+two issues by listening to the event such that `stopImmediatePropagation` does
+not prevent the listener from running.
+
+Returns a disposable so that it may be unsubscribed from more easily.
+
+```js
+import { addAbortListener } from 'node:events';
+
+function example(signal) {
+  let disposable;
+  try {
+    signal.addEventListener('abort', (e) => e.stopImmediatePropagation());
+    disposable = addAbortListener(signal, (e) => {
+      // Do something when signal is aborted.
+    });
+  } finally {
+    disposable?.[Symbol.dispose]();
+  }
+}
+```
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `signal` | `AbortSignal` |
+| `resource` | (`event`: `Event`) => `void` |
+
+#### Returns
+
+`Disposable`
+
+Disposable that removes the `abort` listener.
+
+**`Since`**
+
+v20.5.0
+
+#### Inherited from
+
+[SpecializedWebSocket](sockets.SpecializedWebSocket.md).[addAbortListener](sockets.SpecializedWebSocket.md#addabortlistener)
+
+#### Defined in
+
+node_modules/@types/node/events.d.ts:387
 
 ___
 
@@ -2127,25 +2275,21 @@ For `EventTarget`s this is the only way to get the event listeners for the
 event target. This is useful for debugging and diagnostic purposes.
 
 ```js
-const { getEventListeners, EventEmitter } = require('events');
+import { getEventListeners, EventEmitter } from 'node:events';
 
 {
   const ee = new EventEmitter();
   const listener = () => console.log('Events are fun');
   ee.on('foo', listener);
-  getEventListeners(ee, 'foo'); // [listener]
+  console.log(getEventListeners(ee, 'foo')); // [ [Function: listener] ]
 }
 {
   const et = new EventTarget();
   const listener = () => console.log('Events are fun');
   et.addEventListener('foo', listener);
-  getEventListeners(et, 'foo'); // [listener]
+  console.log(getEventListeners(et, 'foo')); // [ [Function: listener] ]
 }
 ```
-
-**`Since`**
-
-v15.2.0, v14.17.0
 
 #### Parameters
 
@@ -2158,13 +2302,71 @@ v15.2.0, v14.17.0
 
 `Function`[]
 
+**`Since`**
+
+v15.2.0, v14.17.0
+
 #### Inherited from
 
 [SpecializedWebSocket](sockets.SpecializedWebSocket.md).[getEventListeners](sockets.SpecializedWebSocket.md#geteventlisteners)
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:299
+node_modules/@types/node/events.d.ts:308
+
+___
+
+### getMaxListeners
+
+▸ `Static` **getMaxListeners**(`emitter`): `number`
+
+Returns the currently set max amount of listeners.
+
+For `EventEmitter`s this behaves exactly the same as calling `.getMaxListeners` on
+the emitter.
+
+For `EventTarget`s this is the only way to get the max event listeners for the
+event target. If the number of event handlers on a single EventTarget exceeds
+the max set, the EventTarget will print a warning.
+
+```js
+import { getMaxListeners, setMaxListeners, EventEmitter } from 'node:events';
+
+{
+  const ee = new EventEmitter();
+  console.log(getMaxListeners(ee)); // 10
+  setMaxListeners(11, ee);
+  console.log(getMaxListeners(ee)); // 11
+}
+{
+  const et = new EventTarget();
+  console.log(getMaxListeners(et)); // 10
+  setMaxListeners(11, et);
+  console.log(getMaxListeners(et)); // 11
+}
+```
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `emitter` | `EventEmitter` \| `_DOMEventTarget` |
+
+#### Returns
+
+`number`
+
+**`Since`**
+
+v19.9.0
+
+#### Inherited from
+
+[SpecializedWebSocket](sockets.SpecializedWebSocket.md).[getMaxListeners](sockets.SpecializedWebSocket.md#getmaxlisteners-1)
+
+#### Defined in
+
+node_modules/@types/node/events.d.ts:337
 
 ___
 
@@ -2175,21 +2377,14 @@ ___
 A class method that returns the number of listeners for the given `eventName`registered on the given `emitter`.
 
 ```js
-const { EventEmitter, listenerCount } = require('events');
+import { EventEmitter, listenerCount } from 'node:events';
+
 const myEmitter = new EventEmitter();
 myEmitter.on('event', () => {});
 myEmitter.on('event', () => {});
 console.log(listenerCount(myEmitter, 'event'));
 // Prints: 2
 ```
-
-**`Since`**
-
-v0.9.12
-
-**`Deprecated`**
-
-Since v3.2.0 - Use `listenerCount` instead.
 
 #### Parameters
 
@@ -2202,13 +2397,21 @@ Since v3.2.0 - Use `listenerCount` instead.
 
 `number`
 
+**`Since`**
+
+v0.9.12
+
+**`Deprecated`**
+
+Since v3.2.0 - Use `listenerCount` instead.
+
 #### Inherited from
 
 [SpecializedWebSocket](sockets.SpecializedWebSocket.md).[listenerCount](sockets.SpecializedWebSocket.md#listenercount-1)
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:271
+node_modules/@types/node/events.d.ts:280
 
 ___
 
@@ -2217,25 +2420,24 @@ ___
 ▸ `Static` **on**(`emitter`, `eventName`, `options?`): `AsyncIterableIterator`<`any`\>
 
 ```js
-const { on, EventEmitter } = require('events');
+import { on, EventEmitter } from 'node:events';
+import process from 'node:process';
 
-(async () => {
-  const ee = new EventEmitter();
+const ee = new EventEmitter();
 
-  // Emit later on
-  process.nextTick(() => {
-    ee.emit('foo', 'bar');
-    ee.emit('foo', 42);
-  });
+// Emit later on
+process.nextTick(() => {
+  ee.emit('foo', 'bar');
+  ee.emit('foo', 42);
+});
 
-  for await (const event of on(ee, 'foo')) {
-    // The execution of this inner block is synchronous and it
-    // processes one event at a time (even with await). Do not use
-    // if concurrent execution is required.
-    console.log(event); // prints ['bar'] [42]
-  }
-  // Unreachable here
-})();
+for await (const event of on(ee, 'foo')) {
+  // The execution of this inner block is synchronous and it
+  // processes one event at a time (even with await). Do not use
+  // if concurrent execution is required.
+  console.log(event); // prints ['bar'] [42]
+}
+// Unreachable here
 ```
 
 Returns an `AsyncIterator` that iterates `eventName` events. It will throw
@@ -2246,7 +2448,9 @@ composed of the emitted event arguments.
 An `AbortSignal` can be used to cancel waiting on events:
 
 ```js
-const { on, EventEmitter } = require('events');
+import { on, EventEmitter } from 'node:events';
+import process from 'node:process';
+
 const ac = new AbortController();
 
 (async () => {
@@ -2270,10 +2474,6 @@ const ac = new AbortController();
 process.nextTick(() => ac.abort());
 ```
 
-**`Since`**
-
-v13.6.0, v12.16.0
-
 #### Parameters
 
 | Name | Type | Description |
@@ -2288,13 +2488,17 @@ v13.6.0, v12.16.0
 
 that iterates `eventName` events emitted by the `emitter`
 
+**`Since`**
+
+v13.6.0, v12.16.0
+
 #### Inherited from
 
 [SpecializedWebSocket](sockets.SpecializedWebSocket.md).[on](sockets.SpecializedWebSocket.md#on-1)
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:254
+node_modules/@types/node/events.d.ts:258
 
 ___
 
@@ -2311,31 +2515,28 @@ This method is intentionally generic and works with the web platform [EventTarge
 semantics and does not listen to the `'error'` event.
 
 ```js
-const { once, EventEmitter } = require('events');
+import { once, EventEmitter } from 'node:events';
+import process from 'node:process';
 
-async function run() {
-  const ee = new EventEmitter();
+const ee = new EventEmitter();
 
-  process.nextTick(() => {
-    ee.emit('myevent', 42);
-  });
+process.nextTick(() => {
+  ee.emit('myevent', 42);
+});
 
-  const [value] = await once(ee, 'myevent');
-  console.log(value);
+const [value] = await once(ee, 'myevent');
+console.log(value);
 
-  const err = new Error('kaboom');
-  process.nextTick(() => {
-    ee.emit('error', err);
-  });
+const err = new Error('kaboom');
+process.nextTick(() => {
+  ee.emit('error', err);
+});
 
-  try {
-    await once(ee, 'myevent');
-  } catch (err) {
-    console.log('error happened', err);
-  }
+try {
+  await once(ee, 'myevent');
+} catch (err) {
+  console.error('error happened', err);
 }
-
-run();
 ```
 
 The special handling of the `'error'` event is only used when `events.once()`is used to wait for another event. If `events.once()` is used to wait for the
@@ -2343,13 +2544,13 @@ The special handling of the `'error'` event is only used when `events.once()`is 
 special handling:
 
 ```js
-const { EventEmitter, once } = require('events');
+import { EventEmitter, once } from 'node:events';
 
 const ee = new EventEmitter();
 
 once(ee, 'error')
   .then(([err]) => console.log('ok', err.message))
-  .catch((err) => console.log('error', err.message));
+  .catch((err) => console.error('error', err.message));
 
 ee.emit('error', new Error('boom'));
 
@@ -2359,7 +2560,7 @@ ee.emit('error', new Error('boom'));
 An `AbortSignal` can be used to cancel waiting for the event:
 
 ```js
-const { EventEmitter, once } = require('events');
+import { EventEmitter, once } from 'node:events';
 
 const ee = new EventEmitter();
 const ac = new AbortController();
@@ -2382,10 +2583,6 @@ ac.abort(); // Abort waiting for the event
 ee.emit('foo'); // Prints: Waiting for the event was canceled!
 ```
 
-**`Since`**
-
-v11.13.0, v10.16.0
-
 #### Parameters
 
 | Name | Type |
@@ -2398,13 +2595,17 @@ v11.13.0, v10.16.0
 
 `Promise`<`any`[]\>
 
+**`Since`**
+
+v11.13.0, v10.16.0
+
 #### Inherited from
 
 [SpecializedWebSocket](sockets.SpecializedWebSocket.md).[once](sockets.SpecializedWebSocket.md#once-1)
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:194
+node_modules/@types/node/events.d.ts:193
 
 ▸ `Static` **once**(`emitter`, `eventName`, `options?`): `Promise`<`any`[]\>
 
@@ -2426,29 +2627,22 @@ node_modules/@types/node/events.d.ts:194
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:195
+node_modules/@types/node/events.d.ts:198
 
 ___
 
 ### setMaxListeners
 
-▸ `Static` **setMaxListeners**(`n?`, ...`eventTargets`): `void`
+▸ `Static` **setMaxListeners**(`n?`, `...eventTargets`): `void`
 
 ```js
-const {
-  setMaxListeners,
-  EventEmitter
-} = require('events');
+import { setMaxListeners, EventEmitter } from 'node:events';
 
 const target = new EventTarget();
 const emitter = new EventEmitter();
 
 setMaxListeners(5, target, emitter);
 ```
-
-**`Since`**
-
-v15.4.0
 
 #### Parameters
 
@@ -2461,10 +2655,14 @@ v15.4.0
 
 `void`
 
+**`Since`**
+
+v15.4.0
+
 #### Inherited from
 
 [SpecializedWebSocket](sockets.SpecializedWebSocket.md).[setMaxListeners](sockets.SpecializedWebSocket.md#setmaxlisteners-1)
 
 #### Defined in
 
-node_modules/@types/node/events.d.ts:317
+node_modules/@types/node/events.d.ts:352

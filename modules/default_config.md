@@ -16,4 +16,4 @@
 
 #### Defined in
 
-[src/default-config.ts:3](https://github.com/Dabolus/webos-tv/blob/34d8c22/src/default-config.ts#L3)
+[src/default-config.ts:3](https://github.com/Dabolus/webos-tv/blob/7abb5c9/src/default-config.ts#L3)

@@ -19,7 +19,7 @@
 
 #### Defined in
 
-[src/model.ts:334](https://github.com/Dabolus/webos-tv/blob/34d8c22/src/model.ts#L334)
+[src/model.ts:335](https://github.com/Dabolus/webos-tv/blob/7abb5c9/src/model.ts#L335)
 
 ___
 
@@ -29,4 +29,4 @@ ___
 
 #### Defined in
 
-[src/model.ts:333](https://github.com/Dabolus/webos-tv/blob/34d8c22/src/model.ts#L333)
+[src/model.ts:334](https://github.com/Dabolus/webos-tv/blob/7abb5c9/src/model.ts#L334)
